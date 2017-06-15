@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.id.new_generator_mappings">false</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/perfumedb</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="current_session_context_class">thread</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">1111</property>
+        <property name="hibernate.connection.pool_size">100</property>
+        <property name="show_sql">false</property>
+        <property name="hibernate.connection.autocommit">true</property>
+
+        <!-- Assume test is the database name -->
+        <property name="hibernate.connection.url">
+            jdbc:mysql://localhost:3306/perfumedb
+        </property>
+        <!-- DB schema will be updated if needed -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <property name="hibernate.enable_lazy_load_no_trans">true</property>
+        <!-- mappings for annotated classes -->
+
+        <mapping class="com.softserve.edu.entity.Brand"/>
+        <mapping class="com.softserve.edu.entity.Cart"/>
+        <mapping class="com.softserve.edu.entity.Offer"/>
+        <mapping class="com.softserve.edu.entity.Perfume"/>
+        <mapping class="com.softserve.edu.entity.Sale"/>
+        <mapping class="com.softserve.edu.entity.User"/>
+
+
+    </session-factory>
+</hibernate-configuration>
