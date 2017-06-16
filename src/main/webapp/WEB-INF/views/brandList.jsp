@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Анастасія
@@ -13,7 +14,7 @@
 <body>
 
 <table>
-    <c:forEach items="${brands}" var="brand">
+    <c:forEach items="${brands}" var="brand" varStatus="count">
         <tr>
             <td>
                     ${brand.name}

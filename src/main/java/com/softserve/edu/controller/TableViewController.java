@@ -3,6 +3,7 @@ package com.softserve.edu.controller;
 import com.softserve.edu.entity.Brand;
 import com.softserve.edu.service.BrandService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,10 +17,10 @@ public class TableViewController {
     BrandService brandService = new BrandService();
 
 
-    @RequestMapping("/brandsList.html")
-    @ModelAttribute("brands")
-    public Collection<Brand> getBrands() {
+    @RequestMapping("/brands")
+    public String getBrands(Model model) {
         Collection<Brand> allBrands = brandService.getAllBrands();
-       return allBrands;
+        model.addAttribute("brands", allBrands);
+       return "/brandList";
     }
 }
