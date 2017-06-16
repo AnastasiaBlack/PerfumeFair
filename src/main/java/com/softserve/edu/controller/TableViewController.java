@@ -1,17 +1,25 @@
 package com.softserve.edu.controller;
+
+import com.softserve.edu.entity.Brand;
+import com.softserve.edu.service.BrandService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Collection;
+
 
 @Controller
-public class TableViewController  {
+public class TableViewController {
+    BrandService brandService = new BrandService();
 
-    @RequestMapping(value = "/table")
-    public ModelAndView welcomeMessage() {
-        // Name of your jsp file as parameter
-        ModelAndView view = new ModelAndView("table");
-        return view;
+
+    @RequestMapping("/brandsList.html")
+    @ModelAttribute("brands")
+    public Collection<Brand> getBrands() {
+        Collection<Brand> allBrands = brandService.getAllBrands();
+       return allBrands;
     }
 }

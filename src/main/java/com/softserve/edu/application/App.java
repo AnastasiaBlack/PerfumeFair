@@ -11,20 +11,21 @@ public class App {
     public static void main(String[] args) {
 
         UserSearchMode usearch = new UserSearchMode();
-//        SellerOfferOperation sellerOffer = new SellerOfferOperation();
+        SellerOfferOperation sellerOffer = new SellerOfferOperation();
 //        Offer offer1 = sellerOffer.createOffer("Lalique", "Commedia", "60",
 //                "26");
 //        Offer offer2 = sellerOffer.createOffer("Givenchy", "Ange ou Demon",
 //                "60",
 //                "10");
+        usearch.showOffers();
 //
 //
-        UserCartAction userCartAction = new UserCartAction();
+//        UserCartAction userCartAction = new UserCartAction();
 //        Sale sale1 = userCartAction.addToCart(offer1, "15");
 //        Sale sale2 = userCartAction.addToCart(offer2, "10");
-//
-//        userCartAction.showCartContent();
 
+//        userCartAction.showCartContent();
+//userCartAction.orderSalesFromCart();
 
 //        usearch.showOffersByBrand("sergio lutens");
 //        usearch.showOffersByPerfume("Le secret");
@@ -34,8 +35,8 @@ public class App {
 //        System.out.println("TOTAL PRICE: "+userCartAction.countTotalPrice());
 //        userCartAction.deletefromCart(sale1);
         //В базе обновление общего обьема не произошло
-        userCartAction.showCartContent();
-        usearch.showOffersByPerfume("ange ou demon");
+       // userCartAction.showCartContent();
+//        usearch.showOffersByPerfume("ange ou demon");
 
     }
 }
