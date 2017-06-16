@@ -57,13 +57,10 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
 
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<E> cq = cb.createQuery(elementClass);
-        Root<E> pet = cq.from(elementClass);
-        cq.select(pet);
+        Root<E> root = cq.from(elementClass);
+        cq.select(root);
         Query<E> q = session.createQuery(cq);
         allElements = q.getResultList();
-
-//        Query query = session.createQuery("from Offer");
-//        allElements = query.getResultList();
         transaction.commit();
         return allElements;
     }
