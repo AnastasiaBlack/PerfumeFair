@@ -9,11 +9,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Brands</title>
+
 </head>
 <body>
 
 <table>
+    <title>Brands</title>
+    <div>BRANDS</div>
     <c:forEach items="${brands}" var="brand" varStatus="count">
         <tr>
             <td>

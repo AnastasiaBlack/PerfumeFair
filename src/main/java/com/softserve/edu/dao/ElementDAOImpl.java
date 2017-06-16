@@ -54,7 +54,6 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         List<E> allElements = new ArrayList<E>();
-
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<E> cq = cb.createQuery(elementClass);
         Root<E> root = cq.from(elementClass);
