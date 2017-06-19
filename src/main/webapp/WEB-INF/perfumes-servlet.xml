@@ -11,7 +11,7 @@ http://www.springframework.org/schema/context/spring-context.xsd http://www.spri
     <context:component-scan base-package="com.softserve.edu.controller"/>
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
-    <mvc:view-controller path="/" view-name="hello"/>
+    <!--<mvc:view-controller path="/views" view-name="hello"/>-->
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">

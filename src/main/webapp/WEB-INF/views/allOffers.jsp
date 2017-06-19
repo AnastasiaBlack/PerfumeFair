@@ -37,7 +37,7 @@
     </c:forEach>
 </table>
 <p>
-<div style="text-align: end;"><a href="/hello">
+<div style="text-align: end;"><a href="/index.jsp">
     <button class="new"><b>Homepage:)</b></button>
 </a></div>
 </p>
