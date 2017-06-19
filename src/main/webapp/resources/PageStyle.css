@@ -1,0 +1,108 @@
+body {
+    width: 85%;
+    margin: 0 auto;}
+
+header {
+    position: relative;
+    margin: 0 auto;
+    background-color: #53C328;
+    width: 75%;
+    height: 100px;
+}
+
+h1 {
+    position: absolute;
+    font-size: 32pt;
+    color: white;
+    padding-left: 20px;
+    padding-bottom: 10px;
+
+}
+
+h2 {
+    margin: auto;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    width: 75%;}
+
+a {
+    text-decoration: none;
+    color: black;}
+p+h2 {
+    padding-top: 15px;
+    margin-left: 65px;
+    margin-right:65px;
+}
+
+img {
+    margin: auto;
+    margin-bottom: 10px;
+    display: block;
+    padding: 5px;
+    border: 2px solid gray;}
+
+
+button {
+    background-color: #77BE5B;
+    border: 2px solid #77BE5B;
+    border-radius: 10px 40px;
+    box-shadow: 4px 4px 4px gray;
+    margin: auto;
+    padding: 13px 130px;
+    color: white;
+    font-size: 20pt;
+    text-font: Aerial;
+}
+
+button:hover {
+    color: yellow;
+    background-color: #53C328;
+    cursor: pointer;}
+
+button:active {
+    background: radial-gradient(#94D454, #71923F);
+    box-shadow: 10px 10px 10px #684B1D;
+    transform: translateX(5px) translateY(5px);
+}
+
+:focus {
+    outline: none;
+}
+
+div.gallery {
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+}
+
+p {
+    margin: auto;
+    padding-top: 45px;
+    padding-bottom: 45px;
+    text-align: justify;
+    width: 75%;
+}
+
+footer {
+    float: right;
+    font-size: 11pt;
+    font-family: Aerial;
+}
+
+
+
+ul.hr {
+
+    text-align: right;
+    margin: 0;
+    margin-right: 20px;
+    padding-top: 45px; /* Значение полей */
+}
+
+ul.hr li {
+    display: inline;
+    border: 1px solid white; /* Рамка вокруг текста */
+    padding: 3px; /* Поля вокруг текста */
+    background-color: white;
+}

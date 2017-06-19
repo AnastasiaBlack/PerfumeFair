@@ -10,20 +10,29 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <title>Offers</title>
 
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/AllElementsTableStyle.css"/>
 
+
 </head>
 <body>
+<p>ALL OFFERS</p>
+
 
 <table class="center">
-    <title>Brands</title>
-    <div>BRANDS</div>
-    <c:forEach items="${brands}" var="brand" varStatus="count">
+    <tr>
+        <th>Perfume</th>
+        <th>Brand</th>
+        <th>Volume Available</th>
+        <th>Price per Ml</th>
+    </tr>
+    <c:forEach items="${offers}" var="offer" varStatus="status">
         <tr>
-            <td>
-                    ${brand.name}
-            </td>
+            <td>${offer.perfume.name}</td>
+            <td>${offer.perfume.brand.name}</td>
+            <td>${offer.volumeForSale}</td>
+            <td>${offer.pricePerMl}</td>
         </tr>
     </c:forEach>
 </table>
@@ -32,5 +41,6 @@
     <button class="new"><b>Homepage:)</b></button>
 </a></div>
 </p>
+
 </body>
 </html>

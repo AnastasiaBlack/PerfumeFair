@@ -12,11 +12,11 @@ public class App {
 
         UserSearchMode usearch = new UserSearchMode();
         SellerOfferOperation sellerOffer = new SellerOfferOperation();
-//        Offer offer1 = sellerOffer.createOffer("Lalique", "Commedia", "60",
-//                "26");
-//        Offer offer2 = sellerOffer.createOffer("Givenchy", "Ange ou Demon",
-//                "60",
-//                "10");
+        Offer offer1 = sellerOffer.createOffer("Lalique", "Commedia", "60",
+                "26");
+        Offer offer2 = sellerOffer.createOffer("Givenchy", "Ange ou Demon",
+                "60",
+                "10");
         usearch.showOffers();
 //
 //
