@@ -5,7 +5,10 @@ import com.softserve.edu.entity.Brand;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 @Service
 @Transactional
 public class BrandService {
@@ -29,8 +32,13 @@ public class BrandService {
         DAOFactory.getInstance().getBrandDAO().deleteElement(brand);
     }
 
+//    @Transactional
+//    public List<Brand> getAllBrands() {
+//        return DAOFactory.getInstance().getBrandDAO().getAllElements();
+//    }
+
     @Transactional
-    public List<Brand> getAllBrands() {
-        return DAOFactory.getInstance().getBrandDAO().getAllElements();
+    public HashSet<Brand> getAllBrands() {
+        return new HashSet<Brand>(DAOFactory.getInstance().getBrandDAO().getAllElements());
     }
 }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Controller
@@ -19,7 +21,7 @@ public class TableViewController {
 
     @RequestMapping("/brands")
     public String getBrands(Model model) {
-        Collection<Brand> allBrands = brandService.getAllBrands();
+        Set<Brand> allBrands = brandService.getAllBrands();
         model.addAttribute("brands", allBrands);
        return "/brandList";
     }
