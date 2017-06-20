@@ -6,33 +6,64 @@ button.new {
     margin-top: auto;
     margin-right: 100px;
     padding: 5px;
-    background: #7AB55A;
+    background: #963c90;
     font-size: 14pt;
     color: white;
     height: 50px;
     width: 180px;
-    border: 1px solid #6BA848;
+    border: 1px solid #71316b;
     border-radius: 10px 40px;
     box-shadow: 4px 4px 10px 1px gray;
     cursor: pointer;
 }
 
 button:hover {
-    color: #49681D;
+    color: #7a4671;
     transition: color 2s;
-    background: radial-gradient(#94D454, #71923F);
+    background: radial-gradient(#cb5cbc, #72396c);
 }
 
 button:active {
-    background-color: #95F014;
+    background-color: #c321b4;
+    box-shadow: 10px 10px 10px #684B1D;
+    transform: translateX(5px) translateY(5px);
+}
+
+button.menuButton {
+    display: inline;
+    /* Рамка вокруг текста */
+    margin: 4px;
+    /* Поля вокруг текста */
+    padding: 5px;
+    background: #963c90;
+    font-size: 8pt;
+    color: white;
+    height: auto;
+    width: auto;
+    border: 1px solid #71316b;
+    border-radius: 3px;
+    box-shadow: 4px 4px 10px 1px #4b2245;
+    cursor: pointer;
+}
+
+button.menuButton:hover {
+    color: #7a4671;
+    transition: color 2s;
+    background: radial-gradient(#cb5cbc, #72396c);
+}
+
+button.menuButton:active {
+    background-color: #c321b4;
     box-shadow: 10px 10px 10px #684B1D;
     transform: translateX(5px) translateY(5px);
 }
 
 table.center {
     margin-top: auto;
-    margin-left:auto;
-    margin-right:auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-body {text-align:center;}
+body {
+    text-align: center;
+}

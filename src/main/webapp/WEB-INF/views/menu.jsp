@@ -17,10 +17,10 @@
 <header>
     <h1>Perfume Fair</h1>
     <ul class="hr">
-        <li><a href="/index.jsp">[Home]</a></li>
-        <li id="about"><a href="/brands">[All Brands]</a></li>
-        <li><a href="/offers">[All Offers]</a></li>
-        <li><a href="/sales">[Cart]</a></li>
+        <li><a href="/index.jsp"><button class="menuButton">Home</button></a></li>
+        <li id="about"><a href="/brands"><button class="menuButton">All Brands</button></a></li>
+        <li><a href="/offers"><button class="menuButton">All Offers</button></a></li>
+        <li><a href="/sales"><button class="menuButton">Cart</button></a></li>
     </ul>
 </header>
 </body>
