@@ -15,10 +15,11 @@
 
 </head>
 <body>
+<%@ include file="menu.jsp" %>
 
-<table class="center">
+<table style="margin-top: 40px" class="center">
     <title>Brands</title>
-    <div>BRANDS</div>
+    <div style="margin-top: 20px">BRANDS</div>
     <c:forEach items="${brands}" var="brand" varStatus="count">
         <tr>
             <td>

@@ -32,10 +32,10 @@ public class UserCartAction {
         SaleService saleService = new SaleService();
         List<Sale> currentSalesList = saleService.getAllSales();
         System.out.println("-------------------------------------------------" +
-                "\nPerfume\t\t Brand\t\t Price per ml \t Volume Bought\n" +
+                "\nID\t\tPerfume\t\t Brand\t\t Price per ml \t Volume Bought\n" +
                 "-------------------------------------------------");
         for (Sale s : currentSalesList) {
-            System.out.print(s.getOffer().getPerfume().getName() + "\t " + s
+            System.out.print(s.getId()+"\t"+s.getOffer().getPerfume().getName() + "\t " + s
                     .getOffer().getPerfume().getBrand().getName() + "\t " +
                     s.getOffer().getPricePerMl() + "\t\t " + s
                     .getVolumeOrdered() + "\n");
@@ -69,4 +69,11 @@ public class UserCartAction {
         }
         return totalPrice;
     }
+
+//    public int countSingleSalePrice(Sale s) {
+//        int priceMl = s.getOffer().getPricePerMl();
+//        int volumeOrdered = s.getVolumeOrdered();
+//        return priceMl * volumeOrdered;
+//    }
+
 }

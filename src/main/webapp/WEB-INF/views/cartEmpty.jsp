@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
+<%@ include file="menu.jsp" %>
 <h3>Your cart is empty...add something and smell good)))</h3>
 
 </body>

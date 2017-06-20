@@ -18,6 +18,15 @@ public class Sale {
 //    @JoinColumn(name = "id", nullable = false)
     private Cart cart;
 
+    private int singleSalePrice;
+
+    public int getSingleSalePrice() {
+        return (volumeOrdered*offer.getPricePerMl());
+    }
+
+    public void setSingleSalePrice(int singleSalePrice) {
+        this.singleSalePrice = singleSalePrice;
+    }
 
     public int getId() {
         return id;

@@ -26,11 +26,11 @@
 <body>
 <header>
     <h1>Perfume Fair</h1>
-    <ul class="hr">
+    <ul " class="hr">
         <li><a href="/index.jsp">[Home]</a></li>
         <li id="about"><a href="/brands">[All Brands]</a></li>
         <li><a href="/offers">[All Offers]</a></li>
-        <li><a href="/cart">[Cart]</a></li>
+        <li><a href="/sales">[Cart]</a></li>
     </ul>
 </header>
 
@@ -40,7 +40,7 @@
 </center></strong>
 
 <div>
-    <center><img src="http://dummyimage.com/600x120/9d96a1/111111.jpg"></center>
+    <center><img src="https://i.ytimg.com/vi/V16hd5icmrw/hqdefault.jpg"></center>
 </div>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi rhoncus blandit mi ultricies scelerisque. Donec
     fermentum feugiat diam. Integer a neque neque. Nam sit amet sagittis sapien. Curabitur a justo imperdiet, vestibulum

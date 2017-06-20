@@ -17,6 +17,8 @@
 
 </head>
 <body>
+<%@ include file="menu.jsp" %>
+
 <p>ALL OFFERS</p>
 
 

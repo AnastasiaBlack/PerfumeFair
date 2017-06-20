@@ -5,6 +5,7 @@ import com.softserve.edu.entity.Sale;
 import com.softserve.edu.perspective.seller.SellerOfferOperation;
 import com.softserve.edu.perspective.user.UserCartAction;
 import com.softserve.edu.perspective.user.UserSearchMode;
+import com.softserve.edu.service.SaleService;
 
 
 public class App {
@@ -12,19 +13,21 @@ public class App {
 
         UserSearchMode usearch = new UserSearchMode();
         SellerOfferOperation sellerOffer = new SellerOfferOperation();
-        Offer offer1 = sellerOffer.createOffer("Lalique", "Commedia", "60",
-                "26");
-        Offer offer2 = sellerOffer.createOffer("Givenchy", "Ange ou Demon",
-                "60",
-                "10");
-        usearch.showOffers();
+//        Offer offer1 = sellerOffer.createOffer("Lalique", "Commedia", "60",
+//                "26");
+//        Offer offer2 = sellerOffer.createOffer("Givenchy", "Ange ou Demon",
+//                "60",
+//                "10");
+//        usearch.showOffers();
 //
 //
-//        UserCartAction userCartAction = new UserCartAction();
+        UserCartAction userCartAction = new UserCartAction();
+
 //        Sale sale1 = userCartAction.addToCart(offer1, "15");
 //        Sale sale2 = userCartAction.addToCart(offer2, "10");
+        SaleService saleService = new SaleService();
 
-//        userCartAction.showCartContent();
+           userCartAction.showCartContent();
 //userCartAction.orderSalesFromCart();
 
 //        usearch.showOffersByBrand("sergio lutens");
