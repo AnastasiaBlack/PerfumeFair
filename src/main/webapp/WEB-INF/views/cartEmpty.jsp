@@ -9,6 +9,9 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/resources/AllElementsTableStyle.css"/>
+
 </head>
 <body>
 <%@ include file="menu.jsp" %>

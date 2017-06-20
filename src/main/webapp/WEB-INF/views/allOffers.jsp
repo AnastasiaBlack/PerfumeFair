@@ -19,22 +19,24 @@
 <body>
 <%@ include file="menu.jsp" %>
 
-<p>ALL OFFERS</p>
+<p style="text-align: center">ALL OFFERS</p>
 
 
 <table class="center">
-    <tr>
+    <tr style="margin-bottom: 10px; text-align: left">
         <th>Perfume</th>
         <th>Brand</th>
         <th>Volume Available</th>
         <th>Price per Ml</th>
     </tr>
     <c:forEach items="${offers}" var="offer" varStatus="status">
-        <tr>
+        <tr style="margin-left: auto">
             <td>${offer.perfume.name}</td>
             <td>${offer.perfume.brand.name}</td>
             <td>${offer.volumeForSale}</td>
             <td>${offer.pricePerMl}</td>
+            <td><form action="${pageContext.request.contextPath}/seeDetails?id=${offer.id}" method="post">
+                <button class="menuButton">Деталі</button></form></td>
         </tr>
     </c:forEach>
 </table>

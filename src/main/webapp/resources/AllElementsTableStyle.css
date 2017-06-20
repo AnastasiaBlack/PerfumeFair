@@ -18,7 +18,7 @@ button.new {
 }
 
 button:hover {
-    color: #7a4671;
+    color: #f1c737;
     transition: color 2s;
     background: radial-gradient(#cb5cbc, #72396c);
 }
@@ -26,7 +26,7 @@ button:hover {
 button:active {
     background-color: #c321b4;
     box-shadow: 10px 10px 10px #684B1D;
-    transform: translateX(5px) translateY(5px);
+    transform: translateX(3px) translateY(3px);
 }
 
 button.menuButton {
@@ -47,7 +47,7 @@ button.menuButton {
 }
 
 button.menuButton:hover {
-    color: #7a4671;
+    color: #f1c737;
     transition: color 2s;
     background: radial-gradient(#cb5cbc, #72396c);
 }
@@ -55,7 +55,29 @@ button.menuButton:hover {
 button.menuButton:active {
     background-color: #c321b4;
     box-shadow: 10px 10px 10px #684B1D;
-    transform: translateX(5px) translateY(5px);
+    transform: translateX(3px) translateY(3px);
+}
+button.register {
+    background-color: #77BE5B;
+    border: 2px solid #77BE5B;
+    border-radius: 10px 40px;
+    box-shadow: 4px 4px 4px gray;
+    margin: auto;
+    padding: 13px 130px;
+    color: white;
+    font-size: 20pt;
+    text-font: Aerial;
+}
+
+button.register:hover {
+    color: yellow;
+    background-color: #53C328;
+    cursor: pointer;}
+
+button.register:active {
+    background: radial-gradient(#e250dc, #963c90);
+    box-shadow: 10px 10px 10px #684B1D;
+    transform: translateX(3px) translateY(3px);
 }
 
 table.center {

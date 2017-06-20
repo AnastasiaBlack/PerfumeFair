@@ -58,4 +58,16 @@ public class TableViewController {
         userCartAction.deletefromCart(saleToDelete);
         return showCart(model);
     }
+
+
+    @RequestMapping("/seeDetails")
+    public String seeDetails(@RequestParam(value = "id") Integer id, Model
+            model) {
+        Offer offer = offerService.getOfferById(id);
+        model.addAttribute("offer", offer);
+
+        return "offerDetail";
+    }
+
+
 }

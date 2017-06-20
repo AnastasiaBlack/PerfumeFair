@@ -10,7 +10,9 @@
 <head>
     <meta charset="utf-8">
 
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/PageStyle.css" charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/PageStyle.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/AllElementsTableStyle.css.css"/>
+
 
 </head>
 <body>
@@ -18,7 +20,7 @@
     <h1>Perfume Fair</h1>
     <ul class="hr">
         <li><a href="/index.jsp"><button class="menuButton">Home</button></a></li>
-        <li id="about"><a href="/brands"><button class="menuButton">All Brands</button></a></li>
+        <li><a href="/brands"><button class="menuButton">All Brands</button></a></li>
         <li><a href="/offers"><button class="menuButton">All Offers</button></a></li>
         <li><a href="/sales"><button class="menuButton">Cart</button></a></li>
     </ul>

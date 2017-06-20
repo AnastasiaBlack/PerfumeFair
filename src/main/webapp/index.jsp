@@ -5,8 +5,8 @@
   Time: 11:09
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%--<%@ page language="java" contentType="text/html;charset=UTF-8"--%>
+<%--pageEncoding="UTF-8" %>--%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <%--<html>--%>
@@ -19,25 +19,18 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/resources/AllElementsTableStyle.css"/>
 
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/PageStyle.css" charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/PageStyle.css"/>
 
 </head>
 <body>
-<header>
-    <h1>Perfume Fair</h1>
-    <ul " class="hr">
-        <li><a href="/index.jsp">[Home]</a></li>
-        <li id="about"><a href="/brands">[All Brands]</a></li>
-        <li><a href="/offers">[All Offers]</a></li>
-        <li><a href="/sales">[Cart]</a></li>
-    </ul>
-</header>
-
+<%@ include file="/WEB-INF/views/menu.jsp" %>
 <h2>
-    <center><strong>Здесь Вы можете купить отливант и продать часть своего парфюма.
+    <center><strong>Здесь Вы можете купить отливант и продать часть своего парфюма.</strong></center>
 </h2>
-</center></strong>
+
 
 <div>
     <center><img src="https://i.ytimg.com/vi/V16hd5icmrw/hqdefault.jpg"></center>
@@ -52,7 +45,7 @@
     hendrerit.</p>
 
 <center>
-    <button>Duis pretium dolor quis!</button>
+    <button class="register">Duis pretium dolor quis!</button>
 </center>
 <p>Phasellus diam felis, varius volutpat sollicitudin non, vulputate cursus erat. Integer eu justo sapien. Etiam
     pretium, mauris sit amet suscipit accumsan, purus turpis fermentum nibh, at fermentum odio velit semper tellus.
