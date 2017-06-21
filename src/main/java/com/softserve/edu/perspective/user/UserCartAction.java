@@ -17,7 +17,7 @@ public class UserCartAction {
     public Sale addToCart(Offer offer, String volumeOrdered) {
         Sale sale = new Sale();
         sale.setOffer(offer);
-        int volume = Integer.parseInt(volumeOrdered);
+        int volume = isVolumeValid(offer,volumeOrdered);
         sale.setVolumeOrdered(volume);
         SaleService saleService = new SaleService();
         saleService.addSale(sale);
@@ -68,6 +68,20 @@ public class UserCartAction {
             totalPrice += (priceMl * volumeOrdered);
         }
         return totalPrice;
+    }
+
+    private int isVolumeValid(Offer offer, String volume){
+        int volumeInt=0;
+        if(!volume.matches("[1-9]\\d*")){
+            throw new IllegalArgumentException("Please, enter the whole positive numbers only");
+        }
+        volumeInt=Integer.valueOf(volume);
+        if(volumeInt>offer.getVolumeForSale()){
+            throw new IllegalArgumentException("This offer has " + offer.getVolumeForSale()+" ml left");
+
+        }
+
+        return volumeInt;
     }
 
 //    public int countSingleSalePrice(Sale s) {

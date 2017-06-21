@@ -1,3 +1,4 @@
+<%--@elvariable id="pageMessage" type="java"--%>
 <%--
   Created by IntelliJ IDEA.
   User: adminaccount
@@ -15,7 +16,6 @@
 </head>
 <body>
 <%@ include file="menu.jsp" %>
-<h3>Your cart is empty...add something and smell good)))</h3>
-
+<h3>${pageMessage}</h3>
 </body>
 </html>

@@ -1,16 +1,13 @@
 package com.softserve.edu.controller;
 
-import com.softserve.edu.entity.Brand;
-import com.softserve.edu.entity.Offer;
-import com.softserve.edu.entity.Sale;
+import com.softserve.edu.entity.*;
 import com.softserve.edu.perspective.user.UserCartAction;
 import com.softserve.edu.service.BrandService;
+import com.softserve.edu.service.CartService;
 import com.softserve.edu.service.OfferService;
 import com.softserve.edu.service.SaleService;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +22,7 @@ import java.util.Set;
 public class TableViewController {
     OfferService offerService = new OfferService();
     BrandService brandService = new BrandService();
+    CartService cartService= new CartService();
     UserCartAction userCartAction = new UserCartAction();
     private Integer salePrice;
 
@@ -48,7 +46,9 @@ public class TableViewController {
         this.salePrice = salePrice;
         List<Sale> cartContent = userCartAction.showCartContent();
         if (cartContent.size() == 0) {
-            return "/cartEmpty";
+            String message = "Your cart is empty...add something and smell good)))";
+            model.addAttribute("pageMessage", message);
+            return "stringMessage";
         }
 
         model.addAttribute("sales", cartContent);
@@ -76,11 +76,13 @@ public class TableViewController {
 
     @RequestMapping(value="/addToCart", method = RequestMethod.POST)
     public String addToCart(@ModelAttribute("offer") CMDBean cmd, BindingResult result,
-                            ModelMap model) {
+                            Model model) {
         Offer offer1 = offerService.getOfferById(cmd.getId());
         model.addAttribute("volumeOrdered", cmd.getVolumeOrdered());
         userCartAction.addToCart(offer1, cmd.getVolumeOrdered());
-        return "/cartContent";
+        String message = "Ваша покупка успішно додана до кошика.";
+        model.addAttribute("pageMessage",message);
+        return "stringMessage";
     }
 
     @RequestMapping(value="/offerDetail")
@@ -89,6 +91,21 @@ public class TableViewController {
         model.addAttribute("offer", offer);
         return "offerDetail";
 
+    }
+
+    @RequestMapping("/makeOrder")
+    public String makeOrder(@RequestParam(value="id") String id, Model model){
+        Cart cart = cartService.getCartById(Integer.valueOf(id));
+        model.addAttribute("cart", cart);
+        return "Order";
+    }
+
+    @RequestMapping("/submitOrder")
+    public String submitOrder(@ModelAttribute ("userInfo") User user, @RequestParam(value="cart") Cart cart, Model model){
+        cart.setUser(user);
+        model.addAttribute("cart", cart);
+        model.addAttribute("user", user);
+        return "SubmittedOrder";
     }
 
 
