@@ -9,6 +9,8 @@ import com.softserve.edu.service.OfferService;
 import com.softserve.edu.service.SaleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -68,6 +70,14 @@ public class TableViewController {
 
         return "offerDetail";
     }
+
+//    @RequestMapping("/addToCart")
+//    public String addToCart(@RequestParam(value = "id") Integer id, @RequestParam(value = "volumeOrdered") String volumeOrdered, ModelMap model) {
+//       Offer offer = offerService.getOfferById(id);
+//        model.addAttribute("volumeOrdered",volumeOrdered);
+//        userCartAction.addToCart(offer, volumeOrdered);
+//       return "/cartContent";
+//    }
 
 
 }

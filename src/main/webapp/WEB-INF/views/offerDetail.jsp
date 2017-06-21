@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: Анастасія
@@ -10,25 +11,36 @@
 <head>
     <meta charset="utf-8">
 
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/AllElementsTableStyle.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/resources/AllElementsTableStyle.css"/>
 
 </head>
 <body>
 <%@ include file="menu.jsp" %>
 <table style="margin-top: 40px" class="center">
-<title>Brands</title>
-<div style="margin-top: 20px">${offer.perfume.name} by ${offer.perfume.brand.name}</div>
+    <title>Brands</title>
+    <div style="margin-top: 20px">${offer.perfume.name} by ${offer.perfume.brand.name}</div>
     <tr>
-        <td>Назва</td><td>${offer.perfume.name} by ${offer.perfume.brand.name}</td>
+        <td>Назва</td>
+        <td>${offer.perfume.name} by ${offer.perfume.brand.name}</td>
     </tr>
     <tr>
-        <td>Всього до продажу</td><td>${offer.volumeForSale} мл</td>
+        <td>Всього до продажу</td>
+        <td>${offer.volumeForSale} мл</td>
     </tr>
     <tr>
-        <td>Ціна за мл</td><td>${offer.pricePerMl}</td>
+        <td>Ціна за мл</td>
+        <td>${offer.pricePerMl}</td>
+    </tr>
+    <tr>
+        <form:form method="post">
+            Замовити:
+            <input type="text" name="volumeOrdered" placeholder="введіть кількість мілілітрів для замовлення"/>
+            <br/>
+                <button class="menuButton">Покласти до кошика</button>
+        </form:form>
     </tr>
 
 </table>
-<button class="menuButton" style="margin-top: 10px">Додати до кошика</button>
 </body>
 </html>
