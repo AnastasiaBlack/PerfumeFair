@@ -7,11 +7,14 @@ import com.softserve.edu.perspective.user.UserCartAction;
 import com.softserve.edu.service.BrandService;
 import com.softserve.edu.service.OfferService;
 import com.softserve.edu.service.SaleService;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -71,13 +74,23 @@ public class TableViewController {
         return "offerDetail";
     }
 
-//    @RequestMapping("/addToCart")
-//    public String addToCart(@RequestParam(value = "id") Integer id, @RequestParam(value = "volumeOrdered") String volumeOrdered, ModelMap model) {
-//       Offer offer = offerService.getOfferById(id);
-//        model.addAttribute("volumeOrdered",volumeOrdered);
-//        userCartAction.addToCart(offer, volumeOrdered);
-//       return "/cartContent";
-//    }
+    @RequestMapping(value="/addToCart", method = RequestMethod.POST)
+    public String addToCart(@ModelAttribute("offer") CMDBean cmd, BindingResult result,
+                            ModelMap model) {
+        Offer offer1 = offerService.getOfferById(cmd.getId());
+        model.addAttribute("volumeOrdered", cmd.getVolumeOrdered());
+        userCartAction.addToCart(offer1, cmd.getVolumeOrdered());
+        return "/cartContent";
+    }
+
+    @RequestMapping(value="/offerDetail")
+    public String renderCMDBean(Model model){
+        CMDBean offer = new CMDBean();
+        model.addAttribute("offer", offer);
+        return "offerDetail";
+
+    }
+
 
 
 }
