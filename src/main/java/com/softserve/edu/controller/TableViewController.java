@@ -1,9 +1,6 @@
 package com.softserve.edu.controller;
 
-import com.softserve.edu.entity.Brand;
-import com.softserve.edu.entity.Cart;
-import com.softserve.edu.entity.Offer;
-import com.softserve.edu.entity.Sale;
+import com.softserve.edu.entity.*;
 import com.softserve.edu.perspective.user.UserCartAction;
 import com.softserve.edu.service.BrandService;
 import com.softserve.edu.service.CartService;
@@ -28,6 +25,7 @@ public class TableViewController {
     private UserCartAction userCartAction = new UserCartAction();
     private SaleService saleService = new SaleService();
     private Cart cart = userCartAction.getUserCart();
+    CartService cartService = new CartService();
 
 
     @RequestMapping("/brands")
@@ -46,14 +44,15 @@ public class TableViewController {
 
     @RequestMapping("/sales")
     public String showCart(Model model) {
+        Cart cart = userCartAction.getUserCart();
         List<Sale> cartContent = userCartAction.showCartContent();
         if (cartContent.size() == 0) {
-            String message = "Your cart is empty...add something and smell good)))";
+            String message = "Your cart is empty...add something and smell " +
+                    "good)))";
             model.addAttribute("pageMessage", message);
             return "stringMessage";
         }
-//        model.addAttribute("cart", cart);
-        model.addAttribute("sales", cartContent);
+        model.addAttribute("cart", cart);
         return "cartContent";
     }
 
@@ -76,8 +75,9 @@ public class TableViewController {
         return "offerDetail";
     }
 
-    @RequestMapping(value="/addToCart", method = RequestMethod.POST)
-    public String addToCart(@ModelAttribute("offer") CMDBean cmd, BindingResult result,
+    @RequestMapping(value = "/addToCart", method = RequestMethod.POST)
+    public String addToCart(@ModelAttribute("offer") CMDBean cmd,
+                            BindingResult result,
                             Model model) {
         Offer offer1 = offerService.getOfferById(cmd.getId());
         model.addAttribute("volumeOrdered", cmd.getVolumeOrdered());
@@ -88,14 +88,44 @@ public class TableViewController {
         return "/stringMessage";
     }
 
-    @RequestMapping(value="/offerDetail")
-    public String renderCMDBean(Model model){
-        CMDBean offer = new CMDBean();
-        model.addAttribute("offer", offer);
-        return "offerDetail";
+//    @RequestMapping(value="/offerDetail")
+//    public String renderCMDBean(Model model){
+//        CMDBean offer = new CMDBean();
+//        model.addAttribute("offer", offer);
+//        return "offerDetail";
+//    }
 
+
+    @RequestMapping("/makeOrder")
+    public String makeOrder(@RequestParam(value = "id") Integer id, Model
+            model) {
+        Cart cart = cartService.getCartById(id);
+        model.addAttribute("cart", cart);
+
+        return "Order";
     }
 
+
+    @RequestMapping(value = "/submitOrder", method = RequestMethod.POST)
+    public String submitOrder(@ModelAttribute("user") User user,
+                              BindingResult result,
+                              Model model) {
+
+        model.addAttribute("userNickname", user.getNickname());
+        cart.setUser(user);
+        String pageMessage = "Дякуємо, ви успішно оформили замовлення " +
+                "Загальною сумою " + userCartAction.countTotalPrice() + " UAH";
+        model.addAttribute("pageMessage", pageMessage);
+        return "/stringMessage";
+    }
+
+//    @RequestMapping(value="/userInfo")
+//    public String renderUserInfo(Model model){
+//        CMDBean offer = new CMDBean();
+//        model.addAttribute("offer", offer);
+//        return "offerDetail";
+//
+//    }
 
 
 }
