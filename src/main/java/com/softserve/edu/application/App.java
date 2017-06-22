@@ -1,16 +1,19 @@
 package com.softserve.edu.application;
 
+import com.softserve.edu.entity.Cart;
 import com.softserve.edu.entity.Offer;
 import com.softserve.edu.entity.Sale;
 import com.softserve.edu.perspective.seller.SellerOfferOperation;
 import com.softserve.edu.perspective.user.UserCartAction;
 import com.softserve.edu.perspective.user.UserSearchMode;
+import com.softserve.edu.service.CartService;
 import com.softserve.edu.service.SaleService;
+
+import java.util.List;
 
 
 public class App {
     public static void main(String[] args) {
-
 //        UserSearchMode usearch = new UserSearchMode();
 //        SellerOfferOperation sellerOffer = new SellerOfferOperation();
 //        Offer offer1 = sellerOffer.createOffer("Lalique", "Commedia", "60",
@@ -22,12 +25,31 @@ public class App {
 //
 //
 //        UserCartAction userCartAction = new UserCartAction();
+//
+//        Sale sale1 = userCartAction.addToCart(offer1, "1");
+//        Sale sale2 = userCartAction.addToCart(offer2, "1");
+//        Sale sale3 = userCartAction.addToCart(offer2, "1");
 
-//        Sale sale1 = userCartAction.addToCart(offer1, "15");
-//        Sale sale2 = userCartAction.addToCart(offer2, "10");
 //        SaleService saleService = new SaleService();
+//
+//
+//        System.out.println("CARTS NUMBER");
+//        CartService cartService= new CartService();
+//        List<Cart> carts = cartService.getAllCarts();
+//        System.out.println(carts.size());
+//        userCartAction.showCartContent();
+//
+//        userCartAction.deletefromCart(sale1);
+//
+//        userCartAction.showCartContent();
+//        System.out.println("carts: "+carts.size());
+//        System.out.println("Sales in " +userCartAction.getUserCart().getId()+" cart:"+
+//                userCartAction.getUserCart().getSales().size());
 
-//           userCartAction.showCartContent();
+
+//
+
+
 //userCartAction.orderSalesFromCart();
 
 //        usearch.showOffersByBrand("sergio lutens");

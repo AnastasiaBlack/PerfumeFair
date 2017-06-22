@@ -15,8 +15,9 @@ public class Sale {
     private Offer offer;
 
     @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "id_cart", nullable = false)
     private Cart cart;
+
 
     private int singleSalePrice;
 

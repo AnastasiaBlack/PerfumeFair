@@ -15,8 +15,9 @@ public class Cart {
 
     @OneToOne
     private User user;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cart")
-    private List<Sale> sales = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cart", cascade =
+            CascadeType.ALL)
+    private List<Sale> sales;
 
     public List<Sale> getSales() {
         return sales;
@@ -29,10 +30,13 @@ public class Cart {
     public int getId() {
         return id;
     }
+
     public void addSaleToCart(Sale sale){
         sales.add(sale);
     }
-
+    public void removeSale(Sale sale){
+        sales.remove(sale);
+    }
     public void setId(int id) {
         this.id = id;
     }

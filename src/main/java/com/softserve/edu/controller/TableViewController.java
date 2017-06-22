@@ -1,6 +1,9 @@
 package com.softserve.edu.controller;
 
-import com.softserve.edu.entity.*;
+import com.softserve.edu.entity.Brand;
+import com.softserve.edu.entity.Cart;
+import com.softserve.edu.entity.Offer;
+import com.softserve.edu.entity.Sale;
 import com.softserve.edu.perspective.user.UserCartAction;
 import com.softserve.edu.service.BrandService;
 import com.softserve.edu.service.CartService;
@@ -20,11 +23,11 @@ import java.util.Set;
 
 @Controller
 public class TableViewController {
-    OfferService offerService = new OfferService();
-    BrandService brandService = new BrandService();
-    CartService cartService= new CartService();
-    UserCartAction userCartAction = new UserCartAction();
-    private Integer salePrice;
+    private OfferService offerService = new OfferService();
+    private BrandService brandService = new BrandService();
+    private UserCartAction userCartAction = new UserCartAction();
+    private SaleService saleService = new SaleService();
+    private Cart cart = userCartAction.getUserCart();
 
 
     @RequestMapping("/brands")
@@ -43,25 +46,24 @@ public class TableViewController {
 
     @RequestMapping("/sales")
     public String showCart(Model model) {
-        this.salePrice = salePrice;
         List<Sale> cartContent = userCartAction.showCartContent();
         if (cartContent.size() == 0) {
             String message = "Your cart is empty...add something and smell good)))";
             model.addAttribute("pageMessage", message);
             return "stringMessage";
         }
-
+//        model.addAttribute("cart", cart);
         model.addAttribute("sales", cartContent);
-        return "/cartContent";
+        return "cartContent";
     }
 
     @RequestMapping("/deleteSaleFromCart")
     public String deleteSale(@RequestParam(value = "id") Integer id, Model
             model) {
-        SaleService saleService = new SaleService();
         Sale saleToDelete = saleService.getSaleById(id);
         userCartAction.deletefromCart(saleToDelete);
-        return showCart(model);
+        cart.getSales().remove(saleToDelete);
+        return "cartContent";
     }
 
 
@@ -80,9 +82,10 @@ public class TableViewController {
         Offer offer1 = offerService.getOfferById(cmd.getId());
         model.addAttribute("volumeOrdered", cmd.getVolumeOrdered());
         userCartAction.addToCart(offer1, cmd.getVolumeOrdered());
-        String message = "Ваша покупка успішно додана до кошика.";
-        model.addAttribute("pageMessage",message);
-        return "stringMessage";
+
+        String pageMessage = "Added new item to the cart";
+        model.addAttribute("pageMessage", pageMessage);
+        return "/stringMessage";
     }
 
     @RequestMapping(value="/offerDetail")
@@ -91,21 +94,6 @@ public class TableViewController {
         model.addAttribute("offer", offer);
         return "offerDetail";
 
-    }
-
-    @RequestMapping("/makeOrder")
-    public String makeOrder(@RequestParam(value="id") String id, Model model){
-        Cart cart = cartService.getCartById(Integer.valueOf(id));
-        model.addAttribute("cart", cart);
-        return "Order";
-    }
-
-    @RequestMapping("/submitOrder")
-    public String submitOrder(@ModelAttribute ("userInfo") User user, @RequestParam(value="cart") Cart cart, Model model){
-        cart.setUser(user);
-        model.addAttribute("cart", cart);
-        model.addAttribute("user", user);
-        return "SubmittedOrder";
     }
 
 

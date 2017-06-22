@@ -28,14 +28,14 @@
         <th>Ml</th>
         <th>Price for the perfume</th>
     </tr>
-    <c:forEach items="${cart.sales}" var="sale" varStatus="status">
+    <c:forEach items="${sales}" var="sale" varStatus="status">
         <tr style="text-align:center">
             <td>${sale.offer.perfume.name}</td>
             <td>${sale.offer.perfume.brand.name}</td>
             <td>${sale.volumeOrdered}</td>
             <td>${sale.singleSalePrice}</td>
             <td>
-                <form action="${pageContext.request.contextPath}/deleteSaleFromCart?id=${cart.id}" method="post">
+               <form action="${pageContext.request.contextPath}/deleteSaleFromCart?id=${sale.id}" method="post">
                     <input type="submit" value="Delete"/>
                 </form>
             </td>

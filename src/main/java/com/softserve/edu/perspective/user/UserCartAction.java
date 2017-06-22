@@ -10,32 +10,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserCartAction {
-    private Cart userCart = new Cart();
+    private final Cart userCart;
     private List<Sale> allSalesInCart;
+    private CartService cartService = new CartService();
+
+    public UserCartAction() {
+        userCart = new Cart();
+        allSalesInCart = new ArrayList<Sale>();
+        userCart.setSales(allSalesInCart);
+
+        cartService.addCart(userCart);
+    }
 
 
     public Sale addToCart(Offer offer, String volumeOrdered) {
         Sale sale = new Sale();
         sale.setOffer(offer);
-        int volume = isVolumeValid(offer,volumeOrdered);
+        int volume = Integer.parseInt(volumeOrdered);
         sale.setVolumeOrdered(volume);
+        sale.setCart(userCart);
         SaleService saleService = new SaleService();
         saleService.addSale(sale);
         userCart.addSaleToCart(sale);
-        CartService cartService = new CartService();
-        cartService.addCart(userCart);
         return sale;
     }
 
     public List<Sale> showCartContent() {
 
         SaleService saleService = new SaleService();
-        List<Sale> currentSalesList = saleService.getAllSales();
+
+        List<Sale> currentSalesList = userCart.getSales();
         System.out.println("-------------------------------------------------" +
-                "\nID\t\tPerfume\t\t Brand\t\t Price per ml \t Volume Bought\n" +
+                "\nID\t\tPerfume\t\t Brand\t\t Price per ml \t Volume " +
+                "Bought\n" +
                 "-------------------------------------------------");
         for (Sale s : currentSalesList) {
-            System.out.print(s.getId()+"\t"+s.getOffer().getPerfume().getName() + "\t " + s
+            System.out.print(s.getId() + "\t" + s.getOffer().getPerfume()
+                    .getName() + "\t " + s
                     .getOffer().getPerfume().getBrand().getName() + "\t " +
                     s.getOffer().getPricePerMl() + "\t\t " + s
                     .getVolumeOrdered() + "\n");
@@ -54,9 +65,9 @@ public class UserCartAction {
     }
 
     public void deletefromCart(Sale sale) {
+        sale.getCart().removeSale(sale);
         SaleService saleService = new SaleService();
         saleService.deleteSale(sale);
-
     }
 
     public int countTotalPrice() {
@@ -70,21 +81,14 @@ public class UserCartAction {
         return totalPrice;
     }
 
-    private int isVolumeValid(Offer offer, String volume){
-        int volumeInt=0;
-        if(!volume.matches("[1-9]\\d*")){
-            throw new IllegalArgumentException("Please, enter the whole positive numbers only");
-        }
-        volumeInt=Integer.valueOf(volume);
-        if(volumeInt>offer.getVolumeForSale()){
-            throw new IllegalArgumentException("This offer has " + offer.getVolumeForSale()+" ml left");
-
-        }
-
-        return volumeInt;
+    public Cart getUserCart() {
+        return userCart;
     }
 
-//    public int countSingleSalePrice(Sale s) {
+    public List<Sale> getAllSalesInCart() {
+        return allSalesInCart;
+    }
+    //    public int countSingleSalePrice(Sale s) {
 //        int priceMl = s.getOffer().getPricePerMl();
 //        int volumeOrdered = s.getVolumeOrdered();
 //        return priceMl * volumeOrdered;
