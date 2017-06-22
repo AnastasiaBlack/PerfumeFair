@@ -63,7 +63,7 @@ public class TableViewController {
         Sale saleToDelete = saleService.getSaleById(id);
         userCartAction.deletefromCart(saleToDelete);
         cart.getSales().remove(saleToDelete);
-        return "cartContent";
+        return showCart(model);
     }
 
 
