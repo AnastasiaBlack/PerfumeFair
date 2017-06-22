@@ -1,5 +1,8 @@
 package com.softserve.edu.entity;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,6 +21,26 @@ public class Sale {
     @JoinColumn(name = "id_cart", nullable = false)
     private Cart cart;
 
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(7,
+                77). // two randomly chosen prime numbers
+                append(id).
+                toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Sale))
+            return false;
+        if (obj == this)
+            return true;
+
+        Sale sale = (Sale) obj;
+        return new EqualsBuilder().
+                append(id, sale.id).
+                isEquals();
+    }
 
     private int singleSalePrice;
 
