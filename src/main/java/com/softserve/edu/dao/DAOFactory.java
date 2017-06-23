@@ -54,6 +54,11 @@ public class DAOFactory {
     }
 
     @Autowired
+    public UserDAO getUserDAO() {
+        return userDAO;
+    }
+
+    @Autowired
     public SaleDAO getSaleDAO() {
         return saleDAO;
     }
@@ -62,4 +67,4 @@ public class DAOFactory {
     public SubmittedOrderDAO getSubmittedOrderDAO() {
         return submittedOrderDAO;
     }
-    }
+}

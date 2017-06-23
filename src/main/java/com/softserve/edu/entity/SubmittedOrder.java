@@ -22,6 +22,13 @@ public class SubmittedOrder {
             CascadeType.ALL)
     private List<Sale> sales;
 
+    public void addSaleToOrder(Sale sale){
+        sales.add(sale);
+    }
+    public void removeSaleFromOrder(Sale sale){
+        sales.remove(sale);
+    }
+
     public List<Sale> getSales() {
         return sales;
     }

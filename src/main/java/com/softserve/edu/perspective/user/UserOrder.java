@@ -44,7 +44,7 @@ public class UserOrder {
         List<Sale> salesToSubmit = cart.getSales();
 
         for(Sale s: salesToSubmit){
-            s.setSubmittedOrder(newOrder);
+            s.setSubmittedOrders(newOrder);
             saleService.updateSale(s);
             decreaseOfferVolumeBySale(s);
         }

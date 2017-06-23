@@ -17,13 +17,22 @@ public class Sale {
     @OneToOne
     private Offer offer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_cart", nullable = false)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_cart", nullable = true)
     private Cart cart;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_submittedOrder", nullable = false)
-    private SubmittedOrder submittedOrder;
+
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_submittedOrder", nullable = true)
+    private SubmittedOrder submittedOrders;
+
+    public SubmittedOrder getSubmittedOrders() {
+        return submittedOrders;
+    }
+
+    public void setSubmittedOrders(SubmittedOrder submittedOrders) {
+        this.submittedOrders = submittedOrders;
+    }
 
     @Override
     public int hashCode() {
@@ -88,22 +97,4 @@ public class Sale {
         this.cart = cart;
     }
 
-    public SubmittedOrder getSubmittedOrder() {
-        return submittedOrder;
-    }
-
-    public void setSubmittedOrder(SubmittedOrder submittedOrder) {
-        this.submittedOrder = submittedOrder;
-    }
-
-    @ManyToOne(optional = false)
-    private SubmittedOrder submittedOrders;
-
-    public SubmittedOrder getSubmittedOrders() {
-        return submittedOrders;
-    }
-
-    public void setSubmittedOrders(SubmittedOrder submittedOrders) {
-        this.submittedOrders = submittedOrders;
-    }
 }
