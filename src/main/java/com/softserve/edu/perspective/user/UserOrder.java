@@ -4,6 +4,7 @@ import com.softserve.edu.entity.*;
 import com.softserve.edu.service.OfferService;
 import com.softserve.edu.service.SaleService;
 import com.softserve.edu.service.SubmittedOrderService;
+import com.softserve.edu.service.UserService;
 
 import java.security.InvalidParameterException;
 import java.util.List;
@@ -15,6 +16,7 @@ public class UserOrder {
     private SubmittedOrder submittedOrder;
     private SaleService saleService = new SaleService();
     private UserCartAction userCartAction = new UserCartAction();
+    private UserService userService = new UserService();
 
 
     public void decreaseOfferVolumeBySale(Sale sale) {
@@ -34,23 +36,29 @@ public class UserOrder {
     }
 
     public void order(Cart cart){
+        SubmittedOrderService submittedOrderService = new SubmittedOrderService();
         SubmittedOrder newOrder = new SubmittedOrder();
         User user = cart.getUser();
-        newOrder.setUser(user);
+        userService.addUser(user);
+
         int price = userCartAction.countTotalPrice();
-        newOrder.setTotalPrice(price);
-        SubmittedOrderService submittedOrderService = new SubmittedOrderService();
-        submittedOrderService.addSubmittedOrder(newOrder);
         List<Sale> salesToSubmit = cart.getSales();
 
+        newOrder.setUser(user);
+        newOrder.setTotalPrice(price);
+
+
+        newOrder.setSales(salesToSubmit);
+        submittedOrderService.addSubmittedOrder(newOrder);
+
+        submittedOrderService.updateSubmittedOrder(newOrder);
         for(Sale s: salesToSubmit){
             s.setSubmittedOrders(newOrder);
             saleService.updateSale(s);
             decreaseOfferVolumeBySale(s);
         }
-        newOrder.setSales(salesToSubmit);
-        submittedOrderService.updateSubmittedOrder(newOrder);
-
+        user.addOrder(newOrder);
+        userService.updateUser(user);
         emptyCart(cart);
     }
 

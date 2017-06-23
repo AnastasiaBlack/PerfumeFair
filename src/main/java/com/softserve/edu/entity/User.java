@@ -2,6 +2,7 @@ package com.softserve.edu.entity;
 
 import javax.annotation.Generated;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,7 +20,15 @@ public class User {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade =
             CascadeType.ALL)
-    private List<SubmittedOrder> userOrdersList;
+    private List<SubmittedOrder> userOrdersList = new ArrayList<>();
+
+
+    public void addOrder(SubmittedOrder submittedOrder){
+        userOrdersList.add(submittedOrder);
+    }
+    public void removeOrder(SubmittedOrder submittedOrder){
+        userOrdersList.remove(submittedOrder);
+    }
 
 
     public int getId() {

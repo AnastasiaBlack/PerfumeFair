@@ -117,6 +117,7 @@ public class TableViewController {
 
         model.addAttribute("userNickname", user.getNickname());
         cart.setUser(user);
+        userOrder.order(cart);
         cartService.updateCart(cart);
 
         userOrder.order(cart);
