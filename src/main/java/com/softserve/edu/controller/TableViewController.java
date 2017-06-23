@@ -119,8 +119,6 @@ public class TableViewController {
         cart.setUser(user);
         userOrder.order(cart);
         cartService.updateCart(cart);
-
-        userOrder.order(cart);
         List<SubmittedOrder> allOrders = user.getUserOrdersList();
 
         model.addAttribute("allOrders", allOrders);

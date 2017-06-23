@@ -1,10 +1,7 @@
 package com.softserve.edu.perspective.user;
 
 import com.softserve.edu.entity.*;
-import com.softserve.edu.service.OfferService;
-import com.softserve.edu.service.SaleService;
-import com.softserve.edu.service.SubmittedOrderService;
-import com.softserve.edu.service.UserService;
+import com.softserve.edu.service.*;
 
 import java.security.InvalidParameterException;
 import java.util.List;
@@ -17,6 +14,7 @@ public class UserOrder {
     private SaleService saleService = new SaleService();
     private UserCartAction userCartAction = new UserCartAction();
     private UserService userService = new UserService();
+    private CartService cartService = new CartService();
 
 
     public void decreaseOfferVolumeBySale(Sale sale) {
@@ -35,8 +33,9 @@ public class UserOrder {
         offerService.updateOffer(offer);
     }
 
-    public void order(Cart cart){
-        SubmittedOrderService submittedOrderService = new SubmittedOrderService();
+    public void order(Cart cart) {
+        SubmittedOrderService submittedOrderService = new
+                SubmittedOrderService();
         SubmittedOrder newOrder = new SubmittedOrder();
         User user = cart.getUser();
         userService.addUser(user);
@@ -52,25 +51,24 @@ public class UserOrder {
         submittedOrderService.addSubmittedOrder(newOrder);
 
         submittedOrderService.updateSubmittedOrder(newOrder);
-        for(Sale s: salesToSubmit){
-            s.setSubmittedOrders(newOrder);
-            saleService.updateSale(s);
-            decreaseOfferVolumeBySale(s);
-        }
+        salesTransfer(cart, newOrder);
         user.addOrder(newOrder);
         userService.updateUser(user);
-        emptyCart(cart);
+
     }
 
-    public void emptyCart(Cart cart){
+    public void salesTransfer(Cart cart, SubmittedOrder newOrder) {
         List<Sale> salesToSubmit = cart.getSales();
-        for(Sale s: salesToSubmit){
+        for (Sale s : salesToSubmit) {
+            s.setSubmittedOrders(newOrder);
             s.setCart(null);
             saleService.updateSale(s);
+            newOrder.getSales().add(s);
+            decreaseOfferVolumeBySale(s);
         }
         salesToSubmit.clear();
+        cartService.updateCart(cart);
     }
-
 
 
 }

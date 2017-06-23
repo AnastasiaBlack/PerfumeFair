@@ -10,16 +10,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserCartAction {
-    private final Cart userCart;
+    private static final Cart userCart;
     private List<Sale> allSalesInCart;
     private CartService cartService = new CartService();
 
-    public UserCartAction() {
-        userCart = new Cart();
-        allSalesInCart = new ArrayList<Sale>();
-        userCart.setSales(allSalesInCart);
 
+    //Temporary, because we are going to create a cart
+    //at the user registration point
+    static{
+        userCart = new Cart();
+        CartService cartService = new CartService();
         cartService.addCart(userCart);
+    }
+
+    public UserCartAction() {
     }
 
 
@@ -32,6 +36,7 @@ public class UserCartAction {
         SaleService saleService = new SaleService();
         saleService.addSale(sale);
         userCart.addSaleToCart(sale);
+        cartService.updateCart(userCart);
         return sale;
     }
 
@@ -71,6 +76,7 @@ public class UserCartAction {
     }
 
     public int countTotalPrice() {
+
         allSalesInCart = userCart.getSales();
         int totalPrice = 0;
         for (Sale s : allSalesInCart) {

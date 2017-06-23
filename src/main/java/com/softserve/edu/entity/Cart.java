@@ -17,7 +17,7 @@ public class Cart {
     private User user;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "cart", cascade =
             CascadeType.ALL)
-    private List<Sale> sales;
+    private List<Sale> sales= new ArrayList<>();
 
     public List<Sale> getSales() {
         return sales;
