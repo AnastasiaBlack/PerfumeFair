@@ -85,18 +85,31 @@ CREATE TABLE IF NOT EXISTS `PerfumeDB`.`Offers` (
     ON UPDATE NO ACTION)
   ENGINE = InnoDB;
 
-
+CREATE TABLE IF NOT EXISTS `PerfumeDB`.`submittedOrders` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `total_price` INT NULL,
+  `id_user` INT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `id_user_idx` (`id_user` ASC),
+  CONSTRAINT `id_userOrders`
+  FOREIGN KEY (`id_user`)
+  REFERENCES `PerfumeDB`.`Users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+  ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `PerfumeDB`.`Sales`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PerfumeDB`.`Sales` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `volume_ordered_ml` INT NULL,
   `id_cart` INT NULL,
   `id_offer` INT NULL,
-  `volume_ordered_ml` INT NULL,
+  `id_submittedOrder` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `id_cart_idx` (`id_cart` ASC),
   INDEX `id_offer_idx` (`id_offer` ASC),
+  INDEX `id_submittedOrder_idx` (`id_submittedOrder` ASC),
   CONSTRAINT `id_cart`
   FOREIGN KEY (`id_cart`)
   REFERENCES `PerfumeDB`.`Cart` (`id`)
@@ -105,6 +118,11 @@ CREATE TABLE IF NOT EXISTS `PerfumeDB`.`Sales` (
   CONSTRAINT `id_offer`
   FOREIGN KEY (`id_offer`)
   REFERENCES `PerfumeDB`.`Offers` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    CONSTRAINT `id_submittedOrder`
+    FOREIGN KEY (`id_submittedOrder`)
+  REFERENCES `PerfumeDB`.`submittedOrders` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
   ENGINE = InnoDB;

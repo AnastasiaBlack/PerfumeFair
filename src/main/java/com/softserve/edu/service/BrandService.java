@@ -32,10 +32,6 @@ public class BrandService {
         DAOFactory.getInstance().getBrandDAO().deleteElement(brand);
     }
 
-//    @Transactional
-//    public List<Brand> getAllBrands() {
-//        return DAOFactory.getInstance().getBrandDAO().getAllElements();
-//    }
 
     @Transactional
     public HashSet<Brand> getAllBrands() {

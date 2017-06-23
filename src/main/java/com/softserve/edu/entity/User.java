@@ -2,6 +2,7 @@ package com.softserve.edu.entity;
 
 import javax.annotation.Generated;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="Users")
@@ -15,6 +16,10 @@ public class User {
     private String phone;
     @Column(name="email")
     private String email;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade =
+            CascadeType.ALL)
+    private List<SubmittedOrder> userOrdersList;
 
 
     public int getId() {
@@ -47,5 +52,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<SubmittedOrder> getUserOrdersList() {
+        return userOrdersList;
+    }
+
+    public void setUserOrdersList(List<SubmittedOrder> userOrdersList) {
+        this.userOrdersList = userOrdersList;
     }
 }

@@ -2,6 +2,7 @@ package com.softserve.edu.controller;
 
 import com.softserve.edu.entity.*;
 import com.softserve.edu.perspective.user.UserCartAction;
+import com.softserve.edu.perspective.user.UserOrder;
 import com.softserve.edu.service.BrandService;
 import com.softserve.edu.service.CartService;
 import com.softserve.edu.service.OfferService;
@@ -25,7 +26,8 @@ public class TableViewController {
     private UserCartAction userCartAction = new UserCartAction();
     private SaleService saleService = new SaleService();
     private Cart cart = userCartAction.getUserCart();
-    CartService cartService = new CartService();
+    private CartService cartService = new CartService();
+    private UserOrder userOrder = new UserOrder();
 
 
     @RequestMapping("/brands")
@@ -111,13 +113,24 @@ public class TableViewController {
                               BindingResult result,
                               Model model) {
 
+        int priceCurrent = userCartAction.countTotalPrice();
+
         model.addAttribute("userNickname", user.getNickname());
         cart.setUser(user);
+        cartService.updateCart(cart);
+
+        userOrder.order(cart);
+        List<SubmittedOrder> allOrders = user.getUserOrdersList();
+
+        model.addAttribute("allOrders", allOrders);
+
+
         String pageMessage = "Дякуємо, ви успішно оформили замовлення " +
-                "Загальною сумою " + userCartAction.countTotalPrice() + " UAH";
+                "Загальною сумою " + priceCurrent + " UAH";
         model.addAttribute("pageMessage", pageMessage);
-        return "/stringMessage";
+        return "SubmittedOrder";
     }
+
 
 //    @RequestMapping(value="/userInfo")
 //    public String renderUserInfo(Model model){

@@ -21,6 +21,10 @@ public class Sale {
     @JoinColumn(name = "id_cart", nullable = false)
     private Cart cart;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_submittedOrder", nullable = false)
+    private SubmittedOrder submittedOrder;
+
     @Override
     public int hashCode() {
         return new HashCodeBuilder(7,
@@ -82,5 +86,24 @@ public class Sale {
 
     public void setCart(Cart cart) {
         this.cart = cart;
+    }
+
+    public SubmittedOrder getSubmittedOrder() {
+        return submittedOrder;
+    }
+
+    public void setSubmittedOrder(SubmittedOrder submittedOrder) {
+        this.submittedOrder = submittedOrder;
+    }
+
+    @ManyToOne(optional = false)
+    private SubmittedOrder submittedOrders;
+
+    public SubmittedOrder getSubmittedOrders() {
+        return submittedOrders;
+    }
+
+    public void setSubmittedOrders(SubmittedOrder submittedOrders) {
+        this.submittedOrders = submittedOrders;
     }
 }

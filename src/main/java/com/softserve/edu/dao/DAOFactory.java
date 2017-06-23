@@ -12,6 +12,7 @@ public class DAOFactory {
     private PerfumeDAO perfumeDAO;
     private SaleDAO saleDAO;
     private UserDAO userDAO;
+    private SubmittedOrderDAO submittedOrderDAO;
 
     private static DAOFactory instance;
 
@@ -22,6 +23,7 @@ public class DAOFactory {
         perfumeDAO = new PerfumeDAO();
         saleDAO = new SaleDAO();
         userDAO = new UserDAO();
+        submittedOrderDAO = new SubmittedOrderDAO();
     }
 
     public static DAOFactory getInstance() {
@@ -57,7 +59,7 @@ public class DAOFactory {
     }
 
     @Autowired
-    public UserDAO getUserDAO() {
-        return userDAO;
+    public SubmittedOrderDAO getSubmittedOrderDAO() {
+        return submittedOrderDAO;
     }
-}
+    }
