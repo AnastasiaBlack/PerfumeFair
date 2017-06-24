@@ -17,7 +17,7 @@
 
 
 <c:forEach items="${allOrders}" var="order" varStatus="status">
-    <table><c:forEach items="order" var="sale" varStatus="status">
+    <table><c:forEach items="${order.sales}" var="sale" varStatus="status">
         <tr style="text-align:center">
             <td>${sale.offer.perfume.name}</td>
             <td>${sale.offer.perfume.brand.name}</td>

@@ -22,7 +22,7 @@ public class Sale {
     private Cart cart;
 
 
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_submittedOrder", nullable = true)
     private SubmittedOrder submittedOrders;
 

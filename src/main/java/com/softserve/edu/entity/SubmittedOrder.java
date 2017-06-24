@@ -18,9 +18,9 @@ public class SubmittedOrder {
     @ManyToOne
     private User user;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "submittedOrders", cascade =
-            CascadeType.ALL)
-    private List<Sale> sales;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "submittedOrders", cascade =
+            CascadeType.REFRESH)
+    private List<Sale> sales = new ArrayList<>();
 
     public void addSaleToOrder(Sale sale){
         sales.add(sale);

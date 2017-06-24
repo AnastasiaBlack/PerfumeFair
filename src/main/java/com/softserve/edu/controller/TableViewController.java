@@ -3,10 +3,7 @@ package com.softserve.edu.controller;
 import com.softserve.edu.entity.*;
 import com.softserve.edu.perspective.user.UserCartAction;
 import com.softserve.edu.perspective.user.UserOrder;
-import com.softserve.edu.service.BrandService;
-import com.softserve.edu.service.CartService;
-import com.softserve.edu.service.OfferService;
-import com.softserve.edu.service.SaleService;
+import com.softserve.edu.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -27,6 +25,7 @@ public class TableViewController {
     private SaleService saleService = new SaleService();
     private Cart cart = userCartAction.getUserCart();
     private CartService cartService = new CartService();
+    private UserService userService = new UserService();
     private UserOrder userOrder = new UserOrder();
 
 
@@ -116,13 +115,20 @@ public class TableViewController {
         int priceCurrent = userCartAction.countTotalPrice();
 
         model.addAttribute("userNickname", user.getNickname());
+        userService.addUser(user);
         cart.setUser(user);
+
         userOrder.order(cart);
+
         cartService.updateCart(cart);
+
         List<SubmittedOrder> allOrders = user.getUserOrdersList();
 
         model.addAttribute("allOrders", allOrders);
 
+        ArrayList<Sale> arr = (ArrayList<Sale>) cart.getSales();
+        arr= new ArrayList<>();
+     //   cart.getSales().clear();
 
         String pageMessage = "Дякуємо, ви успішно оформили замовлення " +
                 "Загальною сумою " + priceCurrent + " UAH";

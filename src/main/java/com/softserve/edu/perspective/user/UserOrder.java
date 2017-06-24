@@ -4,6 +4,7 @@ import com.softserve.edu.entity.*;
 import com.softserve.edu.service.*;
 
 import java.security.InvalidParameterException;
+import java.util.Iterator;
 import java.util.List;
 
 public class UserOrder {
@@ -11,6 +12,7 @@ public class UserOrder {
     private Sale sale;
     private Offer offer;
     private SubmittedOrder submittedOrder;
+    private SubmittedOrderService submittedOrderService = new SubmittedOrderService();
     private SaleService saleService = new SaleService();
     private UserCartAction userCartAction = new UserCartAction();
     private UserService userService = new UserService();
@@ -38,7 +40,7 @@ public class UserOrder {
                 SubmittedOrderService();
         SubmittedOrder newOrder = new SubmittedOrder();
         User user = cart.getUser();
-        userService.addUser(user);
+
 
         int price = userCartAction.countTotalPrice();
         List<Sale> salesToSubmit = cart.getSales();
@@ -50,23 +52,25 @@ public class UserOrder {
         newOrder.setSales(salesToSubmit);
         submittedOrderService.addSubmittedOrder(newOrder);
 
-        submittedOrderService.updateSubmittedOrder(newOrder);
-        salesTransfer(cart, newOrder);
+//        submittedOrderService.updateSubmittedOrder(newOrder);
         user.addOrder(newOrder);
+        userService.updateUser(user);
+        salesTransfer(cart, newOrder);
         userService.updateUser(user);
 
     }
 
     public void salesTransfer(Cart cart, SubmittedOrder newOrder) {
         List<Sale> salesToSubmit = cart.getSales();
-        for (Sale s : salesToSubmit) {
+        Iterator<Sale> iterator = salesToSubmit.iterator();
+        while(iterator.hasNext()){
+            Sale s = iterator.next();
             s.setSubmittedOrders(newOrder);
             s.setCart(null);
             saleService.updateSale(s);
-            newOrder.getSales().add(s);
             decreaseOfferVolumeBySale(s);
         }
-        salesToSubmit.clear();
+        submittedOrderService.updateSubmittedOrder(newOrder);
         cartService.updateCart(cart);
     }
 

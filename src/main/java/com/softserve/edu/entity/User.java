@@ -19,7 +19,7 @@ public class User {
     private String email;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade =
-            CascadeType.ALL)
+            CascadeType.REFRESH)
     private List<SubmittedOrder> userOrdersList = new ArrayList<>();
 
 
