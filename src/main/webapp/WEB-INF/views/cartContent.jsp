@@ -28,7 +28,7 @@
         <th>Ml</th>
         <th>Price for the perfume</th>
     </tr>
-    <c:forEach items="${cart.sales}" var="sale" varStatus="status">
+    <c:forEach items="${cartContent}" var="sale" varStatus="status">
         <tr style="text-align:center">
             <td>${sale.offer.perfume.name}</td>
             <td>${sale.offer.perfume.brand.name}</td>

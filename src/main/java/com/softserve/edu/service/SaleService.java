@@ -1,6 +1,7 @@
 package com.softserve.edu.service;
 
 import com.softserve.edu.dao.DAOFactory;
+import com.softserve.edu.entity.Cart;
 import com.softserve.edu.entity.Sale;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +32,11 @@ public class SaleService {
     @Transactional
     public List<Sale> getAllSales() {
         return DAOFactory.getInstance().getSaleDAO().getAllElements();
+    }
+
+    @Transactional
+    public List<Sale> getAllSalesFromCart(Cart cart) {
+        int cartId = cart.getId();
+        return DAOFactory.getInstance().getSaleDAO().getAllSalesFromCart(cartId);
     }
 }

@@ -46,7 +46,7 @@ public class TableViewController {
     @RequestMapping("/sales")
     public String showCart(Model model) {
         Cart cart = userCartAction.getUserCart();
-        List<Sale> cartContent = userCartAction.showCartContent();
+        List<Sale> cartContent = saleService.getAllSalesFromCart(cart);
         if (cartContent.size() == 0) {
             String message = "Your cart is empty...add something and smell " +
                     "good)))";
@@ -54,6 +54,7 @@ public class TableViewController {
             return "stringMessage";
         }
         model.addAttribute("cart", cart);
+        model.addAttribute("cartContent", cartContent);
         return "cartContent";
     }
 
@@ -126,24 +127,13 @@ public class TableViewController {
 
         model.addAttribute("allOrders", allOrders);
 
-        ArrayList<Sale> arr = (ArrayList<Sale>) cart.getSales();
-        arr= new ArrayList<>();
-     //   cart.getSales().clear();
+//        cart.getSales().clear();
 
         String pageMessage = "Дякуємо, ви успішно оформили замовлення " +
                 "Загальною сумою " + priceCurrent + " UAH";
         model.addAttribute("pageMessage", pageMessage);
         return "SubmittedOrder";
     }
-
-
-//    @RequestMapping(value="/userInfo")
-//    public String renderUserInfo(Model model){
-//        CMDBean offer = new CMDBean();
-//        model.addAttribute("offer", offer);
-//        return "offerDetail";
-//
-//    }
 
 
 }
