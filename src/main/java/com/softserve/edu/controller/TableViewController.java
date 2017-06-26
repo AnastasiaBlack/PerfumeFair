@@ -1,5 +1,6 @@
 package com.softserve.edu.controller;
 
+import com.softserve.edu.controller.auxiliary.TempOfferIdVolumeOrdered;
 import com.softserve.edu.entity.*;
 import com.softserve.edu.perspective.user.UserCartAction;
 import com.softserve.edu.perspective.user.UserOrder;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -78,12 +78,12 @@ public class TableViewController {
     }
 
     @RequestMapping(value = "/addToCart", method = RequestMethod.POST)
-    public String addToCart(@ModelAttribute("offer") CMDBean cmd,
+    public String addToCart(@ModelAttribute("offer") TempOfferIdVolumeOrdered temp,
                             BindingResult result,
                             Model model) {
-        Offer offer1 = offerService.getOfferById(cmd.getId());
-        model.addAttribute("volumeOrdered", cmd.getVolumeOrdered());
-        userCartAction.addToCart(offer1, cmd.getVolumeOrdered());
+        Offer offer1 = offerService.getOfferById(temp.getId());
+        model.addAttribute("volumeOrdered", temp.getVolumeOrdered());
+        userCartAction.addToCart(offer1, temp.getVolumeOrdered());
 
         String pageMessage = "Added new item to the cart";
         model.addAttribute("pageMessage", pageMessage);
@@ -127,7 +127,11 @@ public class TableViewController {
 
         model.addAttribute("allOrders", allOrders);
 
-//        cart.getSales().clear();
+        //doubtful
+        cart.getSales().clear();
+        cartService.updateCart(cart);
+        //doubtful
+
 
         String pageMessage = "Дякуємо, ви успішно оформили замовлення " +
                 "Загальною сумою " + priceCurrent + " UAH";

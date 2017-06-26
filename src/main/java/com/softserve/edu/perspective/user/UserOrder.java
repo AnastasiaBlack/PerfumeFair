@@ -4,14 +4,11 @@ import com.softserve.edu.entity.*;
 import com.softserve.edu.service.*;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class UserOrder {
-    private Cart cart;
-    private Sale sale;
-    private Offer offer;
-    private SubmittedOrder submittedOrder;
     private SubmittedOrderService submittedOrderService = new SubmittedOrderService();
     private SaleService saleService = new SaleService();
     private UserCartAction userCartAction = new UserCartAction();
@@ -43,7 +40,7 @@ public class UserOrder {
 
 
         int price = userCartAction.countTotalPrice();
-        List<Sale> salesToSubmit = cart.getSales();
+        List<Sale> salesToSubmit = new ArrayList<>(cart.getSales());
 
         newOrder.setUser(user);
         newOrder.setTotalPrice(price);

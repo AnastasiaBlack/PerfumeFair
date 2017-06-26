@@ -28,7 +28,7 @@
 <body>
 <%@ include file="/WEB-INF/views/menu.jsp" %>
 <h2>
-    <center><strong>Здесь Вы можете купить отливант и продать часть своего парфюма.</strong></center>
+    <center><strong>Платформа для продажу та купівлі парфуму по мілілітрах.</strong></center>
 </h2>
 
 

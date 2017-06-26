@@ -12,6 +12,8 @@
     <title>Submitted Order</title>
 </head>
 <body>
+<%@ include file="menu.jsp" %>
+
 <p>...User ${userNickname} has submitted an order...</p>
 <p> ${pageMessage}</p>
 
@@ -30,8 +32,14 @@
         </tr>
         <hr>
     </table>
+    <hr>
 </c:forEach>
-<div>Total price</div>
+
+<p>
+<div style="text-align: end;"><a href="/index.jsp">
+    <button class="new"><b>Homepage:)</b></button>
+</a></div>
+</p>
 
 </body>
 </html>

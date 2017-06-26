@@ -1,7 +1,7 @@
-package com.softserve.edu.controller;
+package com.softserve.edu.controller.auxiliary;
 
 
-public class CMDBean {
+public class TempOfferIdVolumeOrdered {
     private int id;
 
     private String volumeOrdered;
