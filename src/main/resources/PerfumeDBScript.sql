@@ -21,8 +21,25 @@ CREATE TABLE IF NOT EXISTS `PerfumeDB`.`Users` (
   `nickname` VARCHAR(45) NOT NULL DEFAULT 'Unknown',
   `phone` VARCHAR(45) NULL,
   `email` VARCHAR(45) NULL,
+  `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`))
   ENGINE = InnoDB;
+
+CREATE TABLE 'roles' (
+  'id' int(11) NOT NULL AUTO_INCREMENT,
+  'role' varchar(255) DEFAULT NULL,
+  PRIMARY KEY ('id')
+)
+
+
+CREATE TABLE 'user_roles' (
+  'role_id' int(11) NOT NULL DEFAULT '0',
+  'user_id' int(11) NOT NULL,
+  PRIMARY KEY ('role_id','user_id'),
+  UNIQUE KEY 'UK_g1u2' ('user_id'),
+  CONSTRAINT 'FK_5q4r' FOREIGN KEY ('role_id') REFERENCES 'roles' ('id'),
+  CONSTRAINT 'FK_g1ue' FOREIGN KEY ('user_id') REFERENCES 'Users' ('id')
+
 
 
 -- -----------------------------------------------------

@@ -1,9 +1,9 @@
 package com.softserve.edu.entity;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.annotation.Generated;
 import javax.persistence.*;
 import java.util.*;
 
@@ -20,7 +20,17 @@ public class User implements UserDetails {
     @Column(name="email")
     private String email;
 
-    private Set<UserRole> userRoles = new HashSet<UserRole>();
+
+    private String password;
+
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinTable(name="user_roles",
+            joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")},
+            inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")})
+    private Role role;
+
+
+
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade =
             CascadeType.REFRESH)
@@ -77,6 +87,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<SimpleGrantedAuthority> results = new ArrayList<>();
         return null;
     }
 
