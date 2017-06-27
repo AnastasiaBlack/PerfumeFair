@@ -62,34 +62,26 @@ public class SecurityServiceImpl implements SecurityService {
         UserService userService = new UserService();
         String phone;
         User user = userService.findByUsername(findLoggedInUsername());
-        phone = user.getPhone();
-
-        return phone;
+        return user.getPhone();
     }
 
     public String getLoggedUserEmail() {
         UserService userService = new UserService();
         String email;
         User user = userService.findByUsername(findLoggedInUsername());
-        email = user.getEmail();
-
-        return email;
+        return user.getEmail();
     }
 
     public List<SubmittedOrder> getLoggedUserOrdersList() {
         UserService userService = new UserService();
         User user = userService.findByUsername(findLoggedInUsername());
-        List<SubmittedOrder> userOrdersList = user.getUserOrdersList();
-
-        return userOrdersList;
+        return user.getUserOrdersList();
     }
 
     public int getLoggedUserId() {
         UserService userService = new UserService();
         User user = userService.findByUsername(findLoggedInUsername());
-        int userId = user.getId();
-
-        return userId;
+        return user.getId();
     }
 
 
