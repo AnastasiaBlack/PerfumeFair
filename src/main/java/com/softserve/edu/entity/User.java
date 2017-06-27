@@ -1,40 +1,39 @@
 package com.softserve.edu.entity;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
-@Table(name="Users")
-public class User implements UserDetails {
+@Table(name="users")
+public class User {
     @Id @GeneratedValue
     @Column(name = "id", insertable = false, updatable = false, nullable = false)
     private int id;
-    @Column(name="nickname")
-    private String nickname;
+    @Column(name="username")
+    private String userName;
     @Column(name="phone")
     private String phone;
     @Column(name="email")
     private String email;
 
-
+    @Column(name = "password")
     private String password;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinTable(name="user_roles",
-            joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")},
-            inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")})
-    private Role role;
+    @Transient
+    private String confirmPassword;
 
-
+    @ManyToMany
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade =
             CascadeType.REFRESH)
     private List<SubmittedOrder> userOrdersList = new ArrayList<>();
+
+    public User() {
+    }
 
 
     public void addOrder(SubmittedOrder submittedOrder){
@@ -53,12 +52,12 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setUserName(String nickname) {
+        this.userName = nickname;
     }
 
     public String getPhone() {
@@ -85,39 +84,29 @@ public class User implements UserDetails {
         this.userOrdersList = userOrdersList;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<SimpleGrantedAuthority> results = new ArrayList<>();
-        return null;
-    }
-
-    @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
-    @Override
-    public String getUsername() {
-        return nickname;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    @Override
-    public boolean isEnabled() {
-        return false;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
+
+

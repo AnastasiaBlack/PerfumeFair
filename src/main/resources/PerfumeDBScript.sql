@@ -16,30 +16,32 @@ USE `PerfumeDB` ;
 -- -----------------------------------------------------
 -- Table `PerfumeDB`.`Users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `PerfumeDB`.`Users` (
+CREATE TABLE IF NOT EXISTS `PerfumeDB`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `nickname` VARCHAR(45) NOT NULL DEFAULT 'Unknown',
+  `username` VARCHAR(45) NOT NULL DEFAULT 'Unknown',
   `phone` VARCHAR(45) NULL,
   `email` VARCHAR(45) NULL,
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`))
   ENGINE = InnoDB;
 
-CREATE TABLE 'roles' (
-  'id' int(11) NOT NULL AUTO_INCREMENT,
-  'role' varchar(255) DEFAULT NULL,
-  PRIMARY KEY ('id')
+CREATE TABLE IF NOT EXISTS `PerfumeDB`.`roles` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) DEFAULT NULL,
+  PRIMARY KEY (`id`))
+  ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `PerfumeDB`.`user_roles` (
+  `user_id` INT NOT NULL,
+  `role_id` INT NOT NULL,
+
+  FOREIGN KEY (`user_id`) REFERENCES `PerfumeDB`.`users`(`id`),
+  FOREIGN KEY (`role_id`) REFERENCES `PerfumeDB`.`roles`(`id`),
+
+  UNIQUE (user_id, role_id)
 )
-
-
-CREATE TABLE 'user_roles' (
-  'role_id' int(11) NOT NULL DEFAULT '0',
-  'user_id' int(11) NOT NULL,
-  PRIMARY KEY ('role_id','user_id'),
-  UNIQUE KEY 'UK_g1u2' ('user_id'),
-  CONSTRAINT 'FK_5q4r' FOREIGN KEY ('role_id') REFERENCES 'roles' ('id'),
-  CONSTRAINT 'FK_g1ue' FOREIGN KEY ('user_id') REFERENCES 'Users' ('id')
-
+  ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------

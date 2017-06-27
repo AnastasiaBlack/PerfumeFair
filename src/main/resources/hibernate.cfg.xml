@@ -33,6 +33,8 @@
         <mapping class="com.softserve.edu.entity.Sale"/>
         <mapping class="com.softserve.edu.entity.User"/>
         <mapping class="com.softserve.edu.entity.SubmittedOrder"/>
+        <mapping class="com.softserve.edu.entity.Role"/>
+
 
 
     </session-factory>

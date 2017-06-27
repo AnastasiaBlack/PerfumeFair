@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:beans xmlns="http://www.springframework.org/schema/security"
+         xmlns:b="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <http auto-config="true" use-expressions="true" pattern="/css/**">
+        <access-denied-handler error-page="/403" />
+        <intercept-url pattern="/login" access="permitAll"/>
+        <form-login login-page="/login"
+                    login-processing-url="/j_spring_security_check"
+                    default-target-url = "/people"/>
+        <logout logout-url="/j_spring_security_logout"/>
+    </http>
+    <http security="none"/>
+    <authentication-manager>
+        <authentication-provider user-service-ref="CustomUserDetailsService">
+            <password-encoder hash="plaintext"> </password-encoder>
+        </authentication-provider>
+    </authentication-manager>
+
+
+
+    <user-service>
+        <user name="user" password="password" authorities="ROLE_USER" />
+    </user-service>
+</b:beans>
