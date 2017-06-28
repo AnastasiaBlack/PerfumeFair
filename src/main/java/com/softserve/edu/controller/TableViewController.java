@@ -115,7 +115,7 @@ public class TableViewController {
 
         int priceCurrent = userCartAction.countTotalPrice();
 
-        model.addAttribute("userNickname", user.getUserName());
+        model.addAttribute("userNickname", user.getUsername());
         userService.addUser(user);
         cart.setUser(user);
 

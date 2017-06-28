@@ -10,7 +10,7 @@ public class User {
     @Column(name = "id", insertable = false, updatable = false, nullable = false)
     private int id;
     @Column(name="username")
-    private String userName;
+    private String username;
     @Column(name="phone")
     private String phone;
     @Column(name="email")
@@ -52,12 +52,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String nickname) {
-        this.userName = nickname;
+    public void setUsername(String userName) {
+        this.username = userName;
     }
 
     public String getPhone() {

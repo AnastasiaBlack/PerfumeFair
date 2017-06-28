@@ -10,7 +10,6 @@ import javax.transaction.Transactional;
 @Repository
 @Transactional
 public class BrandDAO extends ElementDAOImpl<Brand> {
-    @Autowired
     public BrandDAO() {
         super(Brand.class);
     }

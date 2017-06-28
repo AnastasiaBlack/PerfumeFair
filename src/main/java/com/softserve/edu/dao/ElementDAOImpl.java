@@ -15,11 +15,10 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
-@Transactional
+
 public class ElementDAOImpl<E> implements ElementDAO<E> {
     private Class<E> elementClass;
-    @Autowired
+
     private SessionFactory sessionFactory;
 
     public ElementDAOImpl(Class<E> elementClass) {

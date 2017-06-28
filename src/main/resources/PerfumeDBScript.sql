@@ -5,12 +5,12 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema PerfumeDB
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `PerfumeDB` ;
+-- DROP SCHEMA IF EXISTS `PerfumeDB` ;
 
 -- -----------------------------------------------------
 -- Schema PerfumeDB
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `PerfumeDB` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA `PerfumeDB` DEFAULT CHARACTER SET utf8 ;
 USE `PerfumeDB` ;
 
 -- -----------------------------------------------------
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `PerfumeDB`.`Cart` (
   INDEX `id_user_idx` (`id_user` ASC),
   CONSTRAINT `id_user`
   FOREIGN KEY (`id_user`)
-  REFERENCES `PerfumeDB`.`Users` (`id`)
+  REFERENCES `PerfumeDB`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
   ENGINE = InnoDB;
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `PerfumeDB`.`submittedOrders` (
   INDEX `id_user_idx` (`id_user` ASC),
   CONSTRAINT `id_userOrders`
   FOREIGN KEY (`id_user`)
-  REFERENCES `PerfumeDB`.`Users` (`id`)
+  REFERENCES `PerfumeDB`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
   ENGINE = InnoDB;

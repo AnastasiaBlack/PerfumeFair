@@ -31,6 +31,7 @@ public class UserService {
         User user = DAOFactory.getInstance().getUserDAO().getElementById(id);
         return user;
     }
+
     @Transactional
     public void deleteUser(User user) {
         DAOFactory.getInstance().getUserDAO().deleteElement(user);
@@ -55,7 +56,7 @@ public class UserService {
         Set<Role> roles = new HashSet<>();
         roles.add(roleDao.getElementById(1));
         user.setRoles(roles);
-        userDao.addElement(user);
+        addUser(user);
     }
 
     public User findByUsername(String username) {

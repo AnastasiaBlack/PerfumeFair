@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 
 public class DAOFactory {
+
     private BrandDAO brandDAO;
     private CartDAO cartDAO;
     private OfferDAO offerDAO;
