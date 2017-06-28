@@ -1,28 +1,34 @@
 package com.softserve.edu.perspective.user;
 
-import com.softserve.edu.entity.Cart;
-import com.softserve.edu.entity.Offer;
-import com.softserve.edu.entity.Sale;
-import com.softserve.edu.entity.User;
-import com.softserve.edu.service.CartService;
-import com.softserve.edu.service.SaleService;
-import com.softserve.edu.service.UserService;
+import com.softserve.edu.entity.*;
+import com.softserve.edu.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+@Component
 public class UserCartAction {
-    @Autowired
+    private ServiceFactory serviceFactory = new ServiceFactory();
+    private SubmittedOrderService submittedOrderService;
     private UserService userService;
-    @Autowired
+    private OfferService offerService;
     private CartService cartService;
+    private SaleService saleService;
     private List<Sale> allSalesInCart;
     private Cart userCart = new Cart();
     private User user = new User();
 
-    public UserCartAction() {
+    @Autowired
+    public UserCartAction(ServiceFactory serviceFactory) {
+        this.userService = serviceFactory.getUserService();
+        this.cartService = serviceFactory.getCartService();
+        this.saleService = serviceFactory.getSaleService();
+        this.submittedOrderService=serviceFactory.getSubmittedOrderService();
+        this.offerService=serviceFactory.getOfferService();
     }
 
 
@@ -32,7 +38,6 @@ public class UserCartAction {
         int volume = Integer.parseInt(volumeOrdered);
         sale.setVolumeOrdered(volume);
         sale.setCart(userCart);
-        SaleService saleService = new SaleService();
         saleService.addSale(sale);
         userCart.addSaleToCart(sale);
         cartService.updateCart(userCart);
@@ -40,9 +45,6 @@ public class UserCartAction {
     }
 
     public List<Sale> showCartContent() {
-
-        SaleService saleService = new SaleService();
-
         List<Sale> currentSalesList = userCart.getSales();
         System.out.println("-------------------------------------------------" +
                 "\nID\t\tPerfume\t\t Brand\t\t Price per ml \t Volume " +
@@ -62,15 +64,13 @@ public class UserCartAction {
     public List<Sale> orderSalesFromCart() {
         allSalesInCart = userCart.getSales();
         for (Sale sale : allSalesInCart) {
-            UserOrder userOrder = new UserOrder();
-            userOrder.decreaseOfferVolumeBySale(sale);
+           decreaseOfferVolumeBySale(sale);
         }
         return allSalesInCart;
     }
 
     public void deletefromCart(Sale sale) {
         sale.getCart().removeSale(sale);
-        SaleService saleService = new SaleService();
         saleService.deleteSale(sale);
     }
 
@@ -90,10 +90,62 @@ public class UserCartAction {
         return userCart;
     }
 
-    public void setUserAndCart(Principal principal){
+    public void setUserAndCart(Principal principal) {
         String name = principal.getName();
         user = userService.findByUsername(name);
         userCart = cartService.getCartByUser(user);
+    }
+
+    public void decreaseOfferVolumeBySale(Sale sale) {
+        Offer offer = sale.getOffer();
+        String updateVol;
+        int volumeOffer = offer.getVolumeForSale();
+        int volumeBought = sale.getVolumeOrdered();
+        int updateOfferVolume = volumeOffer - volumeBought;
+        if (volumeBought > volumeOffer) {
+            System.out.println("Sorry, but we have only " + volumeOffer + " " +
+                    "ml left.");
+            updateOfferVolume = volumeOffer;
+        }
+        offer.setVolumeForSale(String.valueOf(updateOfferVolume));
+        offerService.updateOffer(offer);
+    }
+
+    public void order(Cart cart) {
+        SubmittedOrder newOrder = new SubmittedOrder();
+        User user = cart.getUser();
+
+
+        int price = countTotalPrice();
+        List<Sale> salesToSubmit = new ArrayList<>(cart.getSales());
+
+        newOrder.setUser(user);
+        newOrder.setTotalPrice(price);
+
+
+        newOrder.setSales(salesToSubmit);
+        submittedOrderService.addSubmittedOrder(newOrder);
+
+//        submittedOrderService.updateSubmittedOrder(newOrder);
+        user.addOrder(newOrder);
+        userService.updateUser(user);
+        salesTransfer(cart, newOrder);
+        userService.updateUser(user);
+
+    }
+
+    public void salesTransfer(Cart cart, SubmittedOrder newOrder) {
+        List<Sale> salesToSubmit = cart.getSales();
+        Iterator<Sale> iterator = salesToSubmit.iterator();
+        while (iterator.hasNext()) {
+            Sale s = iterator.next();
+            s.setSubmittedOrders(newOrder);
+            s.setCart(null);
+            saleService.updateSale(s);
+            decreaseOfferVolumeBySale(s);
+        }
+        submittedOrderService.updateSubmittedOrder(newOrder);
+        cartService.updateCart(cart);
     }
 
 

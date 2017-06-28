@@ -2,9 +2,8 @@ package com.softserve.edu.dao;
 
 import com.softserve.edu.entity.SubmittedOrder;
 
-public class SubmittedOrderDAO extends ElementDAOImpl<SubmittedOrder> {
+import java.util.List;
 
-    SubmittedOrderDAO(){
-        super(SubmittedOrder.class);
-    }
+public interface SubmittedOrderDAO extends ElementDAO<SubmittedOrder> {
+    List<SubmittedOrder> getSubmittedOrdersByUserName(String userName);
 }

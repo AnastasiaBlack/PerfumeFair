@@ -1,16 +1,5 @@
 package com.softserve.edu.application;
 
-import com.softserve.edu.entity.Cart;
-import com.softserve.edu.entity.Offer;
-import com.softserve.edu.entity.Sale;
-import com.softserve.edu.perspective.seller.SellerOfferOperation;
-import com.softserve.edu.perspective.user.UserCartAction;
-import com.softserve.edu.perspective.user.UserSearchMode;
-import com.softserve.edu.service.CartService;
-import com.softserve.edu.service.SaleService;
-
-import java.util.List;
-
 
 public class App {
     public static void main(String[] args) {

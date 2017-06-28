@@ -1,12 +1,11 @@
-package com.softserve.edu.dao;
+package com.softserve.edu.dao.impl;
 
-import com.softserve.edu.entity.Offer;
+import com.softserve.edu.dao.ElementDAO;
+import com.softserve.edu.dao.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

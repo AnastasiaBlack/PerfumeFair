@@ -1,41 +1,21 @@
 package com.softserve.edu.service;
 
-import com.softserve.edu.dao.DAOFactory;
 import com.softserve.edu.entity.Cart;
 import com.softserve.edu.entity.User;
-import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
-@Service
-public class CartService {
-    @Transactional
-    public void addCart(Cart cart) {
-        DAOFactory.getInstance().getCartDAO().addElement(cart);
-    }
 
-    @Transactional
-    public void updateCart(Cart cart) {
-        DAOFactory.getInstance().getCartDAO().updateElement(cart);
-    }
+public interface CartService {
 
-    @Transactional
-    public Cart getCartById(int id) {
-        Cart cart = DAOFactory.getInstance().getCartDAO().getElementById(id);
-        return cart;
-    }
-    @Transactional
-    public void deleteCart(Cart cart) {
-        DAOFactory.getInstance().getCartDAO().deleteElement(cart);
-    }
+    void addCart(Cart cart);
 
-    @Transactional
-    public List<Cart> getAllCarts() {
-        return DAOFactory.getInstance().getCartDAO().getAllElements();
-    }
+    void updateCart(Cart cart);
 
-    @Transactional
-    public Cart getCartByUser(User user){
-        return DAOFactory.getInstance().getCartDAO().getCartByUserName(user.getUsername());
-    }
+    Cart getCartById(int id);
+
+    void deleteCart(Cart cart);
+
+    List<Cart> getAllCarts();
+
+    Cart getCartByUser(User user);
 }

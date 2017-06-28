@@ -11,7 +11,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            /WEB-INF/appconfig-root.xml
+            /WEB-INF/perfumes-servlet.xml
         </param-value>
     </context-param>
 

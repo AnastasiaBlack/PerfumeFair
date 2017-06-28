@@ -1,6 +1,6 @@
-package com.softserve.edu.service;
+package com.softserve.edu.service.impl;
 
-import com.softserve.edu.dao.UserDAO;
+import com.softserve.edu.dao.impl.UserDAOImpl;
 import com.softserve.edu.entity.Role;
 import com.softserve.edu.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.Set;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private UserDAO userDao;
+    private UserDAOImpl userDao;
 
     @Override
     @Transactional(readOnly = true)

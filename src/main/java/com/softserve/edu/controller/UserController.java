@@ -5,6 +5,7 @@ import com.softserve.edu.entity.User;
 import com.softserve.edu.perspective.user.UserCartAction;
 import com.softserve.edu.service.CartService;
 import com.softserve.edu.service.SecurityService;
+import com.softserve.edu.service.ServiceFactory;
 import com.softserve.edu.service.UserService;
 import com.softserve.edu.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +25,19 @@ import java.security.Principal;
 public class UserController {
     private Cart cart;
     private User user;
-    @Autowired
+    private ServiceFactory serviceFactory = new ServiceFactory();
     private UserService userService;
-    @Autowired
     private CartService cartService;
-
-    @Autowired
     private SecurityService securityService;
-
     @Autowired
     private UserValidator userValidator;
+
+    @Autowired
+    public UserController(ServiceFactory serviceFactory) {
+        this.userService=serviceFactory.getUserService();
+        this.cartService=serviceFactory.getCartService();
+        this.securityService=serviceFactory.getSecurityService();
+    }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -64,22 +68,20 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, String error, String logout){
-        if(error!=null){
+    public String login(Model model, String error, String logout) {
+        if (error != null) {
             model.addAttribute("error", "username or password is incorrect.");
         }
-        if(logout!=null){
+        if (logout != null) {
             model.addAttribute("message", "Logged out succesfully.");
         }
         return "login";
     }
 
-    @RequestMapping(value = {"/","/welcome"},method = RequestMethod.GET)
-    public String welcome(Principal principal, Model model){
-        UserCartAction act = new UserCartAction();
+    @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
+    public String welcome(Principal principal, Model model) {
+        UserCartAction act = new UserCartAction(serviceFactory);
         act.setUserAndCart(principal);
-
-
 
 
         return "welcome";
@@ -89,7 +91,6 @@ public class UserController {
     public String admin(Model model) {
         return "admin";
     }
-
 
 
 }

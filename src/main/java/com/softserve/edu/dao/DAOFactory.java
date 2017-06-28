@@ -1,30 +1,29 @@
 package com.softserve.edu.dao;
 
-import com.softserve.edu.entity.*;
+import com.softserve.edu.dao.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 
 public class DAOFactory {
 
-    private BrandDAO brandDAO;
-    private CartDAO cartDAO;
-    private OfferDAO offerDAO;
-    private PerfumeDAO perfumeDAO;
-    private SaleDAO saleDAO;
-    private UserDAO userDAO;
-    private SubmittedOrderDAO submittedOrderDAO;
+    private BrandDAOImpl brandDAOImpl;
+    private CartDAOImpl cartDAOImpl;
+    private OfferDAOImpl offerDAOImpl;
+    private PerfumeDAOImpl perfumeDAOImpl;
+    private SaleDAOImpl saleDAOImpl;
+    private UserDAOImpl userDAOImpl;
+    private SubmittedOrderDAOImpl submittedOrderDAOImpl;
 
     private static DAOFactory instance;
 
     private DAOFactory() {
-        brandDAO = new BrandDAO();
-        cartDAO = new CartDAO();
-        offerDAO = new OfferDAO();
-        perfumeDAO = new PerfumeDAO();
-        saleDAO = new SaleDAO();
-        userDAO = new UserDAO();
-        submittedOrderDAO = new SubmittedOrderDAO();
+        brandDAOImpl = new BrandDAOImpl();
+        cartDAOImpl = new CartDAOImpl();
+        offerDAOImpl = new OfferDAOImpl();
+        perfumeDAOImpl = new PerfumeDAOImpl();
+        saleDAOImpl = new SaleDAOImpl();
+        userDAOImpl = new UserDAOImpl();
+        submittedOrderDAOImpl = new SubmittedOrderDAOImpl();
     }
 
     public static DAOFactory getInstance() {
@@ -35,37 +34,37 @@ public class DAOFactory {
     }
 
     @Autowired
-    public BrandDAO getBrandDAO() {
-        return brandDAO;
+    public BrandDAOImpl getBrandDAOImpl() {
+        return brandDAOImpl;
     }
 
     @Autowired
-    public CartDAO getCartDAO() {
-        return cartDAO;
+    public CartDAOImpl getCartDAOImpl() {
+        return cartDAOImpl;
     }
 
     @Autowired
-    public OfferDAO getOfferDAO() {
-        return offerDAO;
+    public OfferDAOImpl getOfferDAOImpl() {
+        return offerDAOImpl;
     }
 
     @Autowired
-    public PerfumeDAO getPerfumeDAO() {
-        return perfumeDAO;
+    public PerfumeDAOImpl getPerfumeDAOImpl() {
+        return perfumeDAOImpl;
     }
 
     @Autowired
-    public UserDAO getUserDAO() {
-        return userDAO;
+    public UserDAOImpl getUserDAOImpl() {
+        return userDAOImpl;
     }
 
     @Autowired
-    public SaleDAO getSaleDAO() {
-        return saleDAO;
+    public SaleDAOImpl getSaleDAOImpl() {
+        return saleDAOImpl;
     }
 
     @Autowired
-    public SubmittedOrderDAO getSubmittedOrderDAO() {
-        return submittedOrderDAO;
+    public SubmittedOrderDAOImpl getSubmittedOrderDAOImpl() {
+        return submittedOrderDAOImpl;
     }
 }

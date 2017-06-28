@@ -3,16 +3,19 @@ package com.softserve.edu.perspective.user;
 import com.softserve.edu.entity.Offer;
 import com.softserve.edu.entity.Perfume;
 import com.softserve.edu.service.OfferService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class UserSearchMode {
+    @Autowired
     private OfferService offerService;
     private List<Offer> currentOffersList;
 
 
     public void showOffers() {
-        offerService = new OfferService();
         currentOffersList = offerService.getAllOffers();
         System.out.println("-------------------------------------------------" +
                 "\nPerfume\t\t Brand\t\t Price per ml \t Volume for Sale\n" +
@@ -24,7 +27,6 @@ public class UserSearchMode {
     }
 
     public List<Offer> showOffersByPerfume(String perfumeName) {
-        offerService = new OfferService();
         currentOffersList = offerService.getAllOffersByPerfumeFilter(perfumeName);
         System.out.println("-------------------------------------------------" +
                 "\nPerfume\t\t Brand\t\t Price per ml \t Volume for Sale\n" +
@@ -37,7 +39,6 @@ public class UserSearchMode {
     }
 
     public List<Offer> showOffersByBrand(String brandName) {
-        offerService = new OfferService();
         currentOffersList = offerService.getAllOffersByBrandFilter(brandName);
         System.out.println("-------------------------------------------------" +
                 "\nPerfume\t\t Brand\t\t Price per ml \t Volume for Sale\n" +

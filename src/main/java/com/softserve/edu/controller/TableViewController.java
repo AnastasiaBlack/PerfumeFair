@@ -3,8 +3,8 @@ package com.softserve.edu.controller;
 import com.softserve.edu.controller.auxiliary.TempOfferIdVolumeOrdered;
 import com.softserve.edu.entity.*;
 import com.softserve.edu.perspective.user.UserCartAction;
-import com.softserve.edu.perspective.user.UserOrder;
 import com.softserve.edu.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,14 +20,24 @@ import java.util.Set;
 
 @Controller
 public class TableViewController {
-    private OfferService offerService = new OfferService();
-    private BrandService brandService = new BrandService();
-    private UserCartAction userCartAction = new UserCartAction();
-    private SaleService saleService = new SaleService();
+    private ServiceFactory serviceFactory = new ServiceFactory();
+    private OfferService offerService;
+    private BrandService brandService;
+    private SaleService saleService;
+    private CartService cartService;
+    private UserService userService;
+    private UserCartAction userCartAction = new UserCartAction(serviceFactory);
     private Cart cart = userCartAction.getUserCart();
-    private CartService cartService = new CartService();
-    private UserService userService = new UserService();
-    private UserOrder userOrder = new UserOrder();
+
+    @Autowired
+    public TableViewController(ServiceFactory serviceFactory) {
+        this.offerService = serviceFactory.getOfferService();
+        this.brandService = serviceFactory.getBrandService();
+        this.saleService = serviceFactory.getSaleService();
+        this.cartService = serviceFactory.getCartService();
+        this.userService = serviceFactory.getUserService();
+
+    }
 
 
     @RequestMapping("/brands")
@@ -79,7 +89,8 @@ public class TableViewController {
     }
 
     @RequestMapping(value = "/addToCart", method = RequestMethod.POST)
-    public String addToCart(@ModelAttribute("offer") TempOfferIdVolumeOrdered temp,
+    public String addToCart(@ModelAttribute("offer") TempOfferIdVolumeOrdered
+                                    temp,
                             BindingResult result,
                             Model model) {
         Offer offer1 = offerService.getOfferById(temp.getId());
@@ -110,7 +121,8 @@ public class TableViewController {
 
 
     @RequestMapping(value = "/submitOrder", method = RequestMethod.POST)
-    public String submitOrder(@RequestParam(value = "id") Integer id, Principal principal,
+    public String submitOrder(@RequestParam(value = "id") Integer id,
+                              Principal principal,
                               Model model) {
 
         int priceCurrent = userCartAction.countTotalPrice();
@@ -118,7 +130,7 @@ public class TableViewController {
         User user = userService.findByUsername(principal.getName());
         cart.setUser(user);
 
-        userOrder.order(cart);
+        userCartAction.order(cart);
 
         cartService.updateCart(cart);
 

@@ -14,9 +14,9 @@
 <head>
     <meta charset="utf-8">
 
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/PageStyle.css"/>
+    <link rel="stylesheet" type="text/css" href="resources/PageStyle.css"/>
     <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/resources/AllElementsTableStyle.css"/>
+          href="resources/AllElementsTableStyle.css"/>
 
 
     <%--<link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">--%>
@@ -24,9 +24,6 @@
 <body>
 
 <header>
-    <%--<li><a href="/WEB-INF/views/homepage.jsp">--%>
-        <%--<button class="menuButton">Home</button>--%>
-    <%--</a></li>--%>
     <h1>Perfume Fair</h1>
     <ul class="hr">
     <li><a href="/brands">
@@ -35,19 +32,9 @@
     <li><a href="/offers">
         <button class="menuButton">All Offers</button>
     </a></li>
-    <%--<li>--%>
-        <%--<security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">--%>
-            <%--<a href="/sales"><button class="menuButton">Cart</button></a>--%>
-        <%--</security:authorize>--%>
-    <%--</li>--%>
-    <%--</a></li>--%>
     <li><a href="/login">
         <button class="menuButton">Login</button>
     </a></li>
-
-    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>--%>
-    <%--<script src="${contextPath}/resources/js/bootstrap.min.js"></script>--%>
-
 </ul>
 </header>
 <h2>

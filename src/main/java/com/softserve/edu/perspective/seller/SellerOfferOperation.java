@@ -3,12 +3,9 @@ package com.softserve.edu.perspective.seller;
 import com.softserve.edu.entity.Brand;
 import com.softserve.edu.entity.Offer;
 import com.softserve.edu.entity.Perfume;
-import com.softserve.edu.perspective.user.UserSearchMode;
-import com.softserve.edu.service.BrandService;
-import com.softserve.edu.service.OfferService;
-import com.softserve.edu.service.PerfumeService;
-
-import java.util.List;
+import com.softserve.edu.service.impl.BrandServiceImpl;
+import com.softserve.edu.service.impl.OfferServiceImpl;
+import com.softserve.edu.service.impl.PerfumeServiceImpl;
 
 public class SellerOfferOperation {
 
@@ -23,9 +20,9 @@ public class SellerOfferOperation {
         offer.setPerfume(perfume);
         offer.setVolumeForSale(volumeForSale);
         offer.setPricePerMl(pricePerMl);
-        PerfumeService perfumeService = new PerfumeService();
-        BrandService brandService = new BrandService();
-        OfferService offerService = new OfferService();
+        PerfumeServiceImpl perfumeService = new PerfumeServiceImpl();
+        BrandServiceImpl brandService = new BrandServiceImpl();
+        OfferServiceImpl offerService = new OfferServiceImpl();
         brandService.addBrand(brand);
         perfumeService.addPerfume(perfume);
         offerService.addOffer(offer);
@@ -33,7 +30,7 @@ public class SellerOfferOperation {
     }
 
     public void deleteOffer(Offer offer) {
-        OfferService offerService = new OfferService();
+        OfferServiceImpl offerService = new OfferServiceImpl();
         offerService.deleteOffer(offer);
     }
 
@@ -45,7 +42,7 @@ public class SellerOfferOperation {
             newBrandName = brandUpdate.getName();
         }
         brandUpdate.setName(newBrandName);
-        BrandService bs = new BrandService();
+        BrandServiceImpl bs = new BrandServiceImpl();
         bs.updateBrand(brandUpdate);
 
         Perfume perfumeUpdate = offer.getPerfume();
@@ -53,7 +50,7 @@ public class SellerOfferOperation {
             perfumeName = perfumeUpdate.getName();
         }
         perfumeUpdate.setName(perfumeName);
-        PerfumeService ps = new PerfumeService();
+        PerfumeServiceImpl ps = new PerfumeServiceImpl();
         ps.updatePerfume(perfumeUpdate);
 
         if (volumeForSale.equals("")) {
@@ -64,7 +61,7 @@ public class SellerOfferOperation {
         }
         offer.setVolumeForSale(volumeForSale);
         offer.setPricePerMl(pricePerMl);
-        OfferService os = new OfferService();
+        OfferServiceImpl os = new OfferServiceImpl();
         os.updateOffer(offer);
     }
 }
