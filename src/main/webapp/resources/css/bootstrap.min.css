@@ -3472,19 +3472,19 @@ a.btn.disabled, fieldset[disabled] a.btn {
 
 .btn-primary {
     color: #fff;
-    background-color: #337ab7;
-    border-color: #2e6da4
+    background-color: #ae36af;
+    border-color: #381c46
 }
 
 .btn-primary.focus, .btn-primary:focus {
     color: #fff;
-    background-color: #286090;
+    background-color: #44123d;
     border-color: #122b40
 }
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #286090;
+    background-color: #641a65;
     border-color: #204d74
 }
 

@@ -17,7 +17,7 @@ public class Sale {
     @OneToOne
     private Offer offer;
 
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_cart", nullable = true)
     private Cart cart;
 
