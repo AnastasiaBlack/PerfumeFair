@@ -36,7 +36,7 @@
 </c:forEach>
 
 <p>
-<div style="text-align: end;"><a href="/index.jsp">
+<div style="text-align: end;"><a href="/WEB-INF/views/homepage.jsp">
     <button class="new"><b>Homepage:)</b></button>
 </a></div>
 </p>

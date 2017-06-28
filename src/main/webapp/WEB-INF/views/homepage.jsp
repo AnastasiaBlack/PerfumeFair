@@ -1,55 +1,26 @@
 <%--
   Created by IntelliJ IDEA.
   User: Анастасія
-  Date: 28.06.2017
-  Time: 17:51
+  Date: 09.06.2017
+  Time: 11:09
   To change this template use File | Settings | File Templates.
 --%>
+<%--<%@ page language="java" contentType="text/html;charset=UTF-8"--%>
+<%--pageEncoding="UTF-8" %>--%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib prefix="security"
-           uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <meta charset="utf-8">
-
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/PageStyle.css"/>
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/resources/AllElementsTableStyle.css"/>
 
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/PageStyle.css"/>
 
-    <%--<link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">--%>
 </head>
 <body>
-
-<header>
-    <%--<li><a href="/WEB-INF/views/homepage.jsp">--%>
-        <%--<button class="menuButton">Home</button>--%>
-    <%--</a></li>--%>
-    <h1>Perfume Fair</h1>
-    <ul class="hr">
-    <li><a href="/brands">
-        <button class="menuButton">All Brands</button>
-    </a></li>
-    <li><a href="/offers">
-        <button class="menuButton">All Offers</button>
-    </a></li>
-    <%--<li>--%>
-        <%--<security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">--%>
-            <%--<a href="/sales"><button class="menuButton">Cart</button></a>--%>
-        <%--</security:authorize>--%>
-    <%--</li>--%>
-    <%--</a></li>--%>
-    <li><a href="/login">
-        <button class="menuButton">Login</button>
-    </a></li>
-
-    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>--%>
-    <%--<script src="${contextPath}/resources/js/bootstrap.min.js"></script>--%>
-
-</ul>
-</header>
+<%@ include file="/WEB-INF/views/menu.jsp" %>
 <h2>
     <center><strong>Платформа для продажу та купівлі парфуму по мілілітрах.</strong></center>
 </h2>

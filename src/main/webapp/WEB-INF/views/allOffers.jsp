@@ -6,6 +6,8 @@
   Time: 15:31
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="security"
+           uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -35,13 +37,14 @@
             <td>${offer.perfume.brand.name}</td>
             <td>${offer.volumeForSale}</td>
             <td>${offer.pricePerMl}</td>
-            <td><form action="${pageContext.request.contextPath}/seeDetails?id=${offer.id}" method="post">
-                <button class="menuButton">Деталі</button></form></td>
+            <security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"><td><form action="${pageContext.request.contextPath}/seeDetails?id=${offer.id}" method="post">
+                <button class="menuButton"><input type='hidden' value='${_csrf.token}' name='${_csrf.parameterName}'/>
+                    Деталі</button></form></td></security:authorize>
         </tr>
     </c:forEach>
 </table>
 <p>
-<div style="text-align: end;"><a href="/index.jsp">
+<div style="text-align: end;"><a href="/WEB-INF/views/homepage.jsp">
     <button class="new"><b>Homepage:)</b></button>
 </a></div>
 </p>

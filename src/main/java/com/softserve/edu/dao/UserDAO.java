@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -16,12 +17,20 @@ public class UserDAO extends ElementDAOImpl<User> {
     }
 
     public User getUserByUserName(String userName) {
-        User user;
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        User user = new User();
+        Session session = HibernateUtils.getSessionFactory()
+                .getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery("from User user where user.username=:userName");
+        Query query = session.createQuery("from User user where user" +
+                ".username=:userName");
         query.setParameter("userName", userName);
-        user = (User) query.getResultList().get(0);
+        List<User> userListResult = query.getResultList();
+        if (userListResult.size() != 0) {
+            user = (User) userListResult.get(0);
+            transaction.commit();
+            return user;
+        }
+
         transaction.commit();
         return user;
     }

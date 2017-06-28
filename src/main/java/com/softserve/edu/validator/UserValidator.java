@@ -29,7 +29,8 @@ public class UserValidator implements Validator{
         if(user.getUsername().length()<8||user.getUsername().length()>32) {
             errors.rejectValue("username", "Size.userForm.username");
         }
-        if(userService.findByUsername(user.getUsername())!=null){
+        User tempValidationUser = userService.findByUsername(user.getUsername());
+        if(tempValidationUser.getUsername()!=null){
             errors.rejectValue("username","Duplicate.userForm.username");
         }
 
@@ -37,7 +38,7 @@ public class UserValidator implements Validator{
         if(user.getPassword().length()<8||user.getPassword().length()>32){
             errors.rejectValue("password", "Size.userForm.password");
         }
-        if(user.getConfirmPassword().equals(user.getPassword())){
+        if(!user.getConfirmPassword().equals(user.getPassword())){
             errors.rejectValue("confirmPassword", "Different.userForm.password");
         }
 

@@ -22,7 +22,7 @@ http://www.springframework.org/schema/context/spring-context.xsd http://www.spri
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basenames">
             <list>
-                <value>validation</value>
+                <value>classpath:validation</value>
             </list>
         </property>
     </bean>

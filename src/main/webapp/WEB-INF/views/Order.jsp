@@ -28,6 +28,7 @@
     <input type="text" name="phone" placeholder="Тел.:"/>
     <br/>
     <input type="text" name="email" placeholder="E-mail:"/>
+    <input type='hidden' value='${_csrf.token}' name='${_csrf.parameterName}'/>
     <button class="menuButton">Оформити замовлення</button>
 </form:form>
 </body>
