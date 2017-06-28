@@ -1,6 +1,9 @@
 package com.softserve.edu.controller;
 
+import com.softserve.edu.entity.Cart;
 import com.softserve.edu.entity.User;
+import com.softserve.edu.perspective.user.UserCartAction;
+import com.softserve.edu.service.CartService;
 import com.softserve.edu.service.SecurityService;
 import com.softserve.edu.service.UserService;
 import com.softserve.edu.validator.UserValidator;
@@ -12,13 +15,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.security.Principal;
+
 /**
  * Controller for User's pages
  */
 @Controller
 public class UserController {
+    private Cart cart;
+    private User user;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CartService cartService;
 
     @Autowired
     private SecurityService securityService;
@@ -43,6 +52,10 @@ public class UserController {
             return "registration";
         }
         userService.save(userForm);
+        Cart userCart = new Cart();
+        userCart.setUser(userForm);
+        cartService.addCart(userCart);
+
 
         securityService.autoLogin(userForm.getUsername(), userForm
                 .getConfirmPassword());
@@ -62,7 +75,13 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/","/welcome"},method = RequestMethod.GET)
-    public String welcome(Model model){
+    public String welcome(Principal principal, Model model){
+        UserCartAction act = new UserCartAction();
+        act.setUserAndCart(principal);
+
+
+
+
         return "welcome";
     }
 
@@ -70,4 +89,7 @@ public class UserController {
     public String admin(Model model) {
         return "admin";
     }
+
+
+
 }

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--@elvariable id="sale" type="com.softserve.edu.entity.Sale"--%>
 <%--
@@ -42,7 +43,7 @@
         </tr>
     </c:forEach>
     <tr><td style="align-items: flex-end"><%--@elvariable id="sale" type="com.softserve.edu.entity.Sale"--%>
-    <form:form action="${pageContext.request.contextPath}/makeOrder?id=${cart.id}" method="post">
+    <form:form action="${pageContext.request.contextPath}/submitOrder?id=${cart.id}" method="post">
         <button class="new">Замовити</button></form:form></td></tr>
 </table>
 

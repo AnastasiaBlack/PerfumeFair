@@ -15,7 +15,7 @@
 
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/PageStyle.css"/>
     <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/resources/AllElementsTableStyle.css.css"/>
+          href="${pageContext.request.contextPath}/resources/AllElementsTableStyle.css"/>
 
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@
 <header>
     <h1>Perfume Fair</h1>
     <ul class="hr">
-        <li><a href="/WEB-INF/views/homepage.jsp">
+        <li><a href="homepage.jsp">
             <button class="menuButton">Home</button>
         </a></li>
         <li><a href="/brands">
@@ -41,7 +41,6 @@
 
 <li>
 <security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
-        <div class="container">
 
             <c:if test="${pageContext.request.userPrincipal.name != null}">
                 <form id="logoutForm" method="POST" action="${contextPath}/logout">
@@ -49,11 +48,9 @@
                 </form>
 
                 <a onclick="document.forms['logoutForm'].submit()"><button class="menuButton">Logout</button></a>
-                </h2>
 
             </c:if>
-
-        </div> </security:authorize>
+ </security:authorize>
 </li>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="${contextPath}/resources/js/bootstrap.min.js"></script>

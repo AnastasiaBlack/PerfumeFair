@@ -3,25 +3,24 @@ package com.softserve.edu.perspective.user;
 import com.softserve.edu.entity.Cart;
 import com.softserve.edu.entity.Offer;
 import com.softserve.edu.entity.Sale;
+import com.softserve.edu.entity.User;
 import com.softserve.edu.service.CartService;
 import com.softserve.edu.service.SaleService;
+import com.softserve.edu.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserCartAction {
-    private static final Cart userCart;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private CartService cartService;
     private List<Sale> allSalesInCart;
-    private CartService cartService = new CartService();
-
-
-    //Temporary, because we are going to create a cart
-    //at the user registration point
-    static{
-        userCart = new Cart();
-        CartService cartService = new CartService();
-        cartService.addCart(userCart);
-    }
+    private Cart userCart = new Cart();
+    private User user = new User();
 
     public UserCartAction() {
     }
@@ -91,13 +90,11 @@ public class UserCartAction {
         return userCart;
     }
 
-    public List<Sale> getAllSalesInCart() {
-        return allSalesInCart;
+    public void setUserAndCart(Principal principal){
+        String name = principal.getName();
+        user = userService.findByUsername(name);
+        userCart = cartService.getCartByUser(user);
     }
-    //    public int countSingleSalePrice(Sale s) {
-//        int priceMl = s.getOffer().getPricePerMl();
-//        int volumeOrdered = s.getVolumeOrdered();
-//        return priceMl * volumeOrdered;
-//    }
+
 
 }

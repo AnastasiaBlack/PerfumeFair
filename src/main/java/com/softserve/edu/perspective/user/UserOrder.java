@@ -2,6 +2,7 @@ package com.softserve.edu.perspective.user;
 
 import com.softserve.edu.entity.*;
 import com.softserve.edu.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
@@ -9,11 +10,16 @@ import java.util.Iterator;
 import java.util.List;
 
 public class UserOrder {
-    private SubmittedOrderService submittedOrderService = new SubmittedOrderService();
-    private SaleService saleService = new SaleService();
-    private UserCartAction userCartAction = new UserCartAction();
-    private UserService userService = new UserService();
-    private CartService cartService = new CartService();
+    @Autowired
+    private SubmittedOrderService submittedOrderService;
+    @Autowired
+    private SaleService saleService;
+    @Autowired
+    private UserCartAction userCartAction;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private CartService cartService;
 
 
     public void decreaseOfferVolumeBySale(Sale sale) {
