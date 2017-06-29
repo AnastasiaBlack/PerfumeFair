@@ -37,7 +37,8 @@
             <td>${sale.singleSalePrice}</td>
             <td>
                <form action="${pageContext.request.contextPath}/deleteSaleFromCart?id=${sale.id}" method="post">
-                    <input type="submit" value="Delete"/>
+                   <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+                   <input type="submit" value="Delete"/>
                 </form>
             </td>
         </tr>

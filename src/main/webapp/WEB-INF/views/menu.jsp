@@ -17,14 +17,26 @@
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/resources/AllElementsTableStyle.css"/>
 
+    <style>#second {
+        left: -105px;
+        top: 400px;
+        background-color: #333;
+        color: white;
+        position: absolute;
+        font-size: 18pt;
+        transition: 1s;
+    }
 
-    <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+    #second:hover {
+        left: 0px;
+    }</style>
+    <%--<link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">--%>
 </head>
 <body>
 <header>
     <h1>Perfume Fair</h1>
     <ul class="hr">
-        <li><a href="homepage.jsp">
+        <li><a href="/homepage">
             <button class="menuButton">Home</button>
         </a></li>
         <li><a href="/brands">
@@ -47,7 +59,7 @@
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </form>
 
-                <a onclick="document.forms['logoutForm'].submit()"><button class="menuButton">Logout</button></a>
+                <a onclick="document.forms['logoutForm'].submit()"><button class="menuButton">ВИХІД</button></a>
 
             </c:if>
  </security:authorize>
@@ -57,5 +69,17 @@
 
     </ul>
 </header>
+<security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
+
+    <c:if test="${pageContext.request.userPrincipal.name != null}">
+        <form id="logoutForm" method="POST" action="${contextPath}/logout">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
+
+        <a id="second" onclick="document.forms['logoutForm'].submit()">ВИХІД&harr;</a>
+
+    </c:if>
+</security:authorize>
+
 </body>
 </html>

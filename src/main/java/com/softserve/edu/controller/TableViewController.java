@@ -54,6 +54,12 @@ public class TableViewController {
         return "/allOffers";
     }
 
+    @RequestMapping("/homepage")
+    public String goHome(Model model) {
+
+        return "/homepage";
+    }
+
     @RequestMapping("/sales")
     public String showCart(Model model) {
         Cart cart = userCartAction.getUserCart();

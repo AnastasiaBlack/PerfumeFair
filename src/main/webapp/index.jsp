@@ -26,21 +26,22 @@
 <header>
     <h1>Perfume Fair</h1>
     <ul class="hr">
-    <li><a href="/brands">
-        <button class="menuButton">All Brands</button>
-    </a></li>
-    <li><a href="/offers">
-        <button class="menuButton">All Offers</button>
-    </a></li>
-    <li><a href="/login">
-        <button class="menuButton">Login</button>
-    </a></li>
-</ul>
+        <li><a href="/brands">
+            <button class="menuButton">All Brands</button>
+        </a></li>
+        <li><a href="/offers">
+            <button class="menuButton">All Offers</button>
+        </a></li>
+        <li><a href="/login">
+            <button class="menuButton">Login</button>
+        </a></li>
+    </ul>
 </header>
+
+
 <h2>
     <center><strong>Платформа для продажу та купівлі парфуму по мілілітрах.</strong></center>
 </h2>
-
 
 <div>
     <center><img src="https://i.ytimg.com/vi/V16hd5icmrw/hqdefault.jpg"></center>

@@ -14,7 +14,6 @@
 <body>
 <%@ include file="menu.jsp" %>
 
-<p>...User ${userNickname} has submitted an order...</p>
 <p> ${pageMessage}</p>
 
 
@@ -35,11 +34,9 @@
     <hr>
 </c:forEach>
 
-<p>
-<div style="text-align: end;"><a href="/WEB-INF/views/homepage.jsp">
+<div style="text-align: end;"><a href="/homepage">
     <button class="new"><b>Homepage:)</b></button>
 </a></div>
-</p>
 
 </body>
 </html>

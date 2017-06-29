@@ -15,7 +15,9 @@
         <intercept-url pattern="views/offerDetail.jsp" access="permitAll" />
         <intercept-url pattern="/submitOrder" access="permitAll" />
         <intercept-url pattern="/makeOrder" access="permitAll" />
-
+        <intercept-url pattern="deleteSaleFromCart*" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
+        <intercept-url pattern="/deleteSaleFromCart" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
+        <intercept-url pattern="/homepage" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
         <!--hasRole('ANONYMOUS')-->
 
         <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error"

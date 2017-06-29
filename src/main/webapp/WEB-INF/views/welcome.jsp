@@ -54,14 +54,37 @@
           href="${pageContext.request.contextPath}/resources/AllElementsTableStyle.css"/>
 
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/PageStyle.css"/>
+    <style>#second {
+        left: -105px;
+        top: 400px;
+        background-color: #333;
+        color: white;
+        position: absolute;
+        font-size: 18pt;
+        transition: 1s;
+    }
 
+    #second:hover {
+        left: 0px;
+    }</style>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/menu.jsp" %>
+<%@ include file="menu.jsp" %>
 <h2>
     <center><strong>Платформа для продажу та купівлі парфуму по мілілітрах.</strong></center>
 </h2>
 
+<security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
+
+    <c:if test="${pageContext.request.userPrincipal.name != null}">
+        <form id="logoutForm" method="POST" action="${contextPath}/logout">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
+
+        <a onclick="document.forms['logoutForm'].submit()"><div id="second">ВИХІД&harr;</div></a>
+
+    </c:if>
+</security:authorize>
 
 <div>
     <center><img src="https://i.ytimg.com/vi/V16hd5icmrw/hqdefault.jpg"></center>

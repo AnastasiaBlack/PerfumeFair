@@ -20,10 +20,11 @@
 
 </head>
 <body>
-<%@ include file="/WEB-INF/views/menu.jsp" %>
+<%@ include file="menu.jsp" %>
 <h2>
     <center><strong>Платформа для продажу та купівлі парфуму по мілілітрах.</strong></center>
 </h2>
+
 
 
 <div>
