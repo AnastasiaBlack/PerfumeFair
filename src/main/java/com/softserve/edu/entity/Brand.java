@@ -5,25 +5,19 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 
 @Entity
 @Table(name = "brands")
 public class Brand {
+    private int id;
+    private String name;
+    private List<Perfume> perfumes;
+
     @Id
     @GeneratedValue
     @Column(name = "id", insertable = false, updatable = false, nullable =
             false)
-    private int id;
-    @Column(name = "name")
-    private String name;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "brand", cascade =
-            CascadeType.ALL)
-    private List<Perfume> perfumes;
-
-
     public int getId() {
         return id;
     }
@@ -32,6 +26,7 @@ public class Brand {
         this.id = id;
     }
 
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -40,6 +35,8 @@ public class Brand {
         this.name = name;
     }
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "brand", cascade =
+            CascadeType.ALL)
     public List<Perfume> getPerfumes() {
         return perfumes;
     }

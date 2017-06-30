@@ -1,16 +1,15 @@
 package com.softserve.edu.dao.impl;
 
 import com.softserve.edu.dao.ElementDAO;
-import com.softserve.edu.dao.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,36 +19,41 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
 
     private SessionFactory sessionFactory;
 
-    public ElementDAOImpl(Class<E> elementClass) {
+
+    public ElementDAOImpl(Class<E> elementClass,SessionFactory sessionFactory) {
         this.elementClass = elementClass;
+        this.sessionFactory = sessionFactory;
     }
 
     @Transactional
     @Override
     public void addElement(E element) {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(element);
-        transaction.commit();
-        //This should have worked with the annotation @transactional and @autowired
-        // sessionFactory.getCurrentSession().save(element);
+//        Session session = HibernateUtils.getSessionFactory()
+// .getCurrentSession();
+//        Transaction transaction = session.beginTransaction();
+//        session.save(element);
+//        transaction.commit();
+        sessionFactory.getCurrentSession().save(element);
     }
 
     @Transactional
     @Override
     public void updateElement(E element) {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        Transaction transaction = session.beginTransaction();
-        session.update(element);
-        transaction.commit();
-        // sessionFactory.getCurrentSession().update(element);
+//        Session session = HibernateUtils.getSessionFactory()
+// .getCurrentSession();
+//        Transaction transaction = session.beginTransaction();
+//        session.update(element);
+//        transaction.commit();
+        sessionFactory.getCurrentSession().update(element);
 
     }
 
-    @Transactional
     @Override
+    @Transactional
     public List<E> getAllElements() {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        Session session = sessionFactory.getCurrentSession();
+//        Session session = HibernateUtils.getSessionFactory()
+// .getCurrentSession();
         Transaction transaction = session.beginTransaction();
         List<E> allElements = new ArrayList<E>();
         CriteriaBuilder cb = session.getCriteriaBuilder();
@@ -63,25 +67,28 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
     }
 
 
-    @Transactional
     @Override
+    @Transactional
     public E getElementById(int elementId) {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        Transaction transaction = session.beginTransaction();
-        E element = session.get(elementClass, elementId);
-        transaction.commit();
-        // E element = sessionFactory.getCurrentSession().get(elementClass, elementId);
-        return element;
+//        Session session = HibernateUtils.getSessionFactory()
+// .getCurrentSession();
+//        Transaction transaction = session.beginTransaction();
+//        E element = session.get(elementClass, elementId);
+//        transaction.commit();
+//        return element;
+
+        return sessionFactory.getCurrentSession().get(elementClass, elementId);
     }
 
     @Transactional
     @Override
     public void deleteElement(E element) {
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        Transaction transaction = session.beginTransaction();
-        session.delete(element);
-        transaction.commit();
-        // sessionFactory.getCurrentSession().delete(element);
+//        Session session = HibernateUtils.getSessionFactory()
+//                .getCurrentSession();
+//        Transaction transaction = session.beginTransaction();
+//        session.delete(element);
+//        transaction.commit();
+        sessionFactory.getCurrentSession().delete(element);
     }
 
 
