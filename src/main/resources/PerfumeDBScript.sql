@@ -5,7 +5,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema PerfumeDB
 -- -----------------------------------------------------
--- DROP SCHEMA IF EXISTS `PerfumeDB` ;
+DROP SCHEMA IF EXISTS `PerfumeDB` ;
 
 -- -----------------------------------------------------
 -- Schema PerfumeDB

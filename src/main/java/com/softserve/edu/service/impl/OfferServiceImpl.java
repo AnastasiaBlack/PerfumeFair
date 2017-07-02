@@ -5,8 +5,8 @@ import com.softserve.edu.entity.Offer;
 import com.softserve.edu.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -18,23 +18,23 @@ public class OfferServiceImpl implements OfferService {
         this.offerDAO = offerDAO;
     }
 
-    @Transactional
     @Override
+    @Transactional
     public void addOffer(Offer offer) {
         offerDAO.addElement(offer);
 
 //        DAOFactory.getInstance().getOfferDAOImpl().addElement(offer);
     }
 
-    @Transactional
     @Override
+    @Transactional
     public void updateOffer(Offer offer) {
         offerDAO.updateElement(offer);
 //        DAOFactory.getInstance().getOfferDAOImpl().updateElement(offer);
     }
 
-    @Transactional
     @Override
+    @Transactional
     public Offer getOfferById(int id) {
         return offerDAO.getElementById(id);
 //        Offer offer = DAOFactory.getInstance().getOfferDAOImpl()
@@ -42,30 +42,30 @@ public class OfferServiceImpl implements OfferService {
 //        return offer;
     }
 
-    @Transactional
     @Override
+    @Transactional
     public void deleteOffer(Offer offer) {
         offerDAO.deleteElement(offer);
 //        DAOFactory.getInstance().getOfferDAOImpl().deleteElement(offer);
     }
 
-    @Transactional
     @Override
+    @Transactional
     public List<Offer> getAllOffers() {
         return offerDAO.getAllElements();
 //        return DAOFactory.getInstance().getOfferDAOImpl().getAllElements();
     }
 
-    @Transactional
     @Override
+    @Transactional
     public List<Offer> getAllOffersByPerfumeFilter(String perfumeName) {
         return offerDAO.getAllOffersByPerfumeFilter(perfumeName);
 //        return DAOFactory.getInstance().getOfferDAOImpl()
 // .getAllOffersByPerfumeFilter(perfumeName);
     }
 
-    @Transactional
     @Override
+    @Transactional
     public List<Offer> getAllOffersByBrandFilter(String brandName) {
         return offerDAO.getAllOffersByBrandFilter(brandName);
 //        return DAOFactory.getInstance().getOfferDAOImpl()

@@ -12,7 +12,7 @@ public class Perfume {
     @Column(name="name")
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_brand", nullable = false)
     private Brand brand;
 

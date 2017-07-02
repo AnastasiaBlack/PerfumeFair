@@ -8,13 +8,14 @@ import com.softserve.edu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private UserDAO userDAO;
@@ -25,10 +26,11 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public void setUserRoleDAOs(UserDAO userDAO, RoleDAO roleDAO){
-        this.userDAO=userDAO;
-        this.roleDAO=roleDAO;
+    public void setUserRoleDAOs(UserDAO userDAO, RoleDAO roleDAO) {
+        this.userDAO = userDAO;
+        this.roleDAO = roleDAO;
     }
+
     @Transactional
     @Override
     public void addUser(User user) {
@@ -47,7 +49,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(int id) {
         return userDAO.getElementById(id);
-//        User user = DAOFactory.getInstance().getUserDAOImpl().getElementById(id);
+//        User user = DAOFactory.getInstance().getUserDAOImpl()
+// .getElementById(id);
 //        return user;
     }
 
@@ -67,6 +70,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    @Transactional
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         Set<Role> roles = new HashSet<>();
@@ -76,8 +80,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public User findByUsername(String username) {
-       return userDAO.getUserByUserName(username);
+        return userDAO.getUserByUserName(username);
     }
 
 }

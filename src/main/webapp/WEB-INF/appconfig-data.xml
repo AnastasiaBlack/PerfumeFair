@@ -8,7 +8,9 @@
     http://www.springframework.org/schema/data/jpa
     http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
     http://www.springframework.org/schema/tx
-    http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
     <context:annotation-config/>
 
 
@@ -24,11 +26,8 @@
         <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
     </bean>
 
-    <tx:annotation-driven/>
-    <bean id="transactionManager"
-          class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
+
+
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
@@ -39,35 +38,18 @@
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-                <prop key="hibernate.show_sql">true</prop>
+                <!--<prop key="hibernate.show_sql">true</prop>-->
             </props>
         </property>
     </bean>
 
-    <!--<bean id="userDao" class="com.softserve.edu.dao.impl.UserDAOImpl">-->
-        <!--<constructor-arg ref="sessionFactory"/>-->
-    <!--</bean>-->
-    <!--<bean id="brandDAO" class="com.softserve.edu.dao.impl.BrandDAOImpl">-->
-        <!--<constructor-arg ref="sessionFactory"/>-->
-    <!--</bean>-->
-    <!--<bean id="offerDAO" class="com.softserve.edu.dao.impl.OfferDAOImpl">-->
-        <!--<constructor-arg ref="sessionFactory"/>-->
-    <!--</bean>-->
-    <!--<bean id="cartDAO" class="com.softserve.edu.dao.impl.CartDAOImpl">-->
-        <!--<constructor-arg ref="sessionFactory"/>-->
-    <!--</bean>-->
-    <!--<bean id="perfumeDAO" class="com.softserve.edu.dao.impl.PerfumeDAOImpl">-->
-        <!--<constructor-arg ref="sessionFactory"/>-->
-    <!--</bean>-->
-    <!--<bean id="roleDAO" class="com.softserve.edu.dao.impl.RoleDAOImpl">-->
-        <!--<constructor-arg ref="sessionFactory"/>-->
-    <!--</bean>-->
-    <!--<bean id="saleDAO" class="com.softserve.edu.dao.impl.SaleDAOImpl">-->
-        <!--<constructor-arg ref="sessionFactory"/>-->
-    <!--</bean>-->
-    <!--<bean id="submittedOrderDAO" class="com.softserve.edu.dao.impl.SubmittedOrderDAOImpl">-->
-        <!--<constructor-arg ref="sessionFactory"/>-->
-    <!--</bean>-->
 
-    <jpa:repositories base-package="com.softserve.edu.dao"/>
+    <!--<jpa:repositories base-package="com.softserve.edu.dao"/>-->
+
+    <tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager"/>
+
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 </beans>

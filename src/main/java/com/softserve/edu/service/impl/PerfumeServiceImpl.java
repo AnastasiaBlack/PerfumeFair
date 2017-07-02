@@ -5,8 +5,8 @@ import com.softserve.edu.entity.Perfume;
 import com.softserve.edu.service.PerfumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 @Service
 public class PerfumeServiceImpl implements PerfumeService {

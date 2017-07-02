@@ -1,12 +1,10 @@
 package com.softserve.edu.dao.impl;
 
 
-import com.softserve.edu.dao.HibernateUtils;
 import com.softserve.edu.dao.SaleDAO;
 import com.softserve.edu.entity.Sale;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,12 +23,13 @@ public class SaleDAOImpl extends ElementDAOImpl<Sale> implements SaleDAO {
     @Transactional
     public List<Sale> getAllSalesFromCart(int cartId) {
         List<Sale> salesInCart = new ArrayList<Sale>();
-        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        Transaction transaction = session.beginTransaction();
+        Session session = sessionFactory.getCurrentSession();
+//        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+//        Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("from Sale sale where sale.cart.id=:cartId");
         query.setParameter("cartId", cartId);
         salesInCart = query.getResultList();
-        transaction.commit();
+//        transaction.commit();
 
         return salesInCart;
     }

@@ -4,7 +4,6 @@ import com.softserve.edu.dao.OfferDAO;
 import com.softserve.edu.entity.Offer;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,13 +28,13 @@ public class OfferDAOImpl extends ElementDAOImpl<Offer> implements OfferDAO {
         Session session = sessionFactory.getCurrentSession();
 //        Session session = HibernateUtils.getSessionFactory()
 //                .getCurrentSession();
-        Transaction transaction = session.beginTransaction();
+//        Transaction transaction = session.beginTransaction();
         List<Offer> allElements = new ArrayList<>();
         Query query = session.createQuery("from Offer offer where offer" +
                 ".perfume.name=:perfumeName");
         query.setParameter("perfumeName", perfumeName);
         allElements = query.getResultList();
-        transaction.commit();
+//        transaction.commit();
         return allElements;
     }
 

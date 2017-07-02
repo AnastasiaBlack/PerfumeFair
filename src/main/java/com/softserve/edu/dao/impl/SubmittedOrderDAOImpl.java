@@ -1,11 +1,9 @@
 package com.softserve.edu.dao.impl;
 
-import com.softserve.edu.dao.HibernateUtils;
 import com.softserve.edu.dao.SubmittedOrderDAO;
 import com.softserve.edu.entity.SubmittedOrder;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@Transactional
 public class SubmittedOrderDAOImpl extends ElementDAOImpl<SubmittedOrder>
         implements SubmittedOrderDAO {
 
@@ -25,15 +24,16 @@ public class SubmittedOrderDAOImpl extends ElementDAOImpl<SubmittedOrder>
     @Override
     @Transactional
     public List<SubmittedOrder> getSubmittedOrdersByUserName(String userName) {
-        Session session = HibernateUtils.getSessionFactory()
-                .getCurrentSession();
-        Transaction transaction = session.beginTransaction();
+        Session session = sessionFactory.getCurrentSession();
+//        Session session = HibernateUtils.getSessionFactory()
+//                .getCurrentSession();
+//        Transaction transaction = session.beginTransaction();
         List<SubmittedOrder> allElements = new ArrayList<>();
         Query query = session.createQuery("from SubmittedOrder " +
                 "submittedOrders where submittedOrders.user.username=:name");
         query.setParameter("name", userName);
         allElements = query.getResultList();
-        transaction.commit();
+//        transaction.commit();
         return allElements;
     }
 }

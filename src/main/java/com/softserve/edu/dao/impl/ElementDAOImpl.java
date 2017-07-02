@@ -3,8 +3,9 @@ package com.softserve.edu.dao.impl;
 import com.softserve.edu.dao.ElementDAO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -13,20 +14,25 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class ElementDAOImpl<E> implements ElementDAO<E> {
+@Repository
+@Transactional
+public abstract class ElementDAOImpl<E> implements ElementDAO<E> {
     private Class<E> elementClass;
 
     private SessionFactory sessionFactory;
 
+    @Autowired
+    public void setSessionFactory(SessionFactory sessionFactory){
+        this.sessionFactory=sessionFactory;
+    }
 
     public ElementDAOImpl(Class<E> elementClass,SessionFactory sessionFactory) {
         this.elementClass = elementClass;
         this.sessionFactory = sessionFactory;
     }
 
-    @Transactional
     @Override
+    @Transactional
     public void addElement(E element) {
 //        Session session = HibernateUtils.getSessionFactory()
 // .getCurrentSession();
@@ -36,8 +42,8 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
         sessionFactory.getCurrentSession().save(element);
     }
 
-    @Transactional
     @Override
+    @Transactional
     public void updateElement(E element) {
 //        Session session = HibernateUtils.getSessionFactory()
 // .getCurrentSession();
@@ -54,7 +60,7 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
         Session session = sessionFactory.getCurrentSession();
 //        Session session = HibernateUtils.getSessionFactory()
 // .getCurrentSession();
-        Transaction transaction = session.beginTransaction();
+//        Transaction transaction = session.beginTransaction();
         List<E> allElements = new ArrayList<E>();
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<E> cq = cb.createQuery(elementClass);
@@ -62,7 +68,7 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
         cq.select(root);
         Query<E> q = session.createQuery(cq);
         allElements = q.getResultList();
-        transaction.commit();
+//        transaction.commit();
         return allElements;
     }
 
@@ -76,12 +82,12 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
 //        E element = session.get(elementClass, elementId);
 //        transaction.commit();
 //        return element;
-
-        return sessionFactory.getCurrentSession().get(elementClass, elementId);
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(elementClass, elementId);
     }
 
-    @Transactional
     @Override
+    @Transactional
     public void deleteElement(E element) {
 //        Session session = HibernateUtils.getSessionFactory()
 //                .getCurrentSession();

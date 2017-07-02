@@ -1,11 +1,9 @@
 package com.softserve.edu.dao.impl;
 
-import com.softserve.edu.dao.HibernateUtils;
 import com.softserve.edu.dao.UserDAO;
 import com.softserve.edu.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +12,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Repository
+@Transactional
 public class UserDAOImpl extends ElementDAOImpl<User> implements UserDAO {
     private SessionFactory sessionFactory;
 
@@ -27,20 +26,21 @@ public class UserDAOImpl extends ElementDAOImpl<User> implements UserDAO {
     @Transactional
     public User getUserByUserName(String userName) {
         User user = new User();
-        Session session = HibernateUtils.getSessionFactory()
-                .getCurrentSession();
-        Transaction transaction = session.beginTransaction();
+        Session session = sessionFactory.getCurrentSession();
+//        Session session = HibernateUtils.getSessionFactory()
+//                .getCurrentSession();
+//        Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("from User user where user" +
                 ".username=:userName");
         query.setParameter("userName", userName);
         List<User> userListResult = query.getResultList();
         if (userListResult.size() != 0) {
             user = (User) userListResult.get(0);
-            transaction.commit();
+//            transaction.commit();
             return user;
         }
 
-        transaction.commit();
+//        transaction.commit();
         return user;
     }
 }
