@@ -29,7 +29,7 @@
         <tr>
             Total price: ${order.totalPrice} UAH
         </tr>
-        <hr>
+        <%--<hr>--%>
     </table>
     <hr>
 </c:forEach>

@@ -80,7 +80,6 @@ public class TableViewController {
             model) {
         Sale saleToDelete = saleService.getSaleById(id);
         userCartAction.deletefromCart(saleToDelete);
-//        cart.getSales().remove(saleToDelete);
         return showCart(model);
     }
 
@@ -122,7 +121,6 @@ public class TableViewController {
             model) {
         Cart cart = cartService.getCartById(id);
         model.addAttribute("cart", cart);
-
         return "Order";
     }
 
@@ -131,26 +129,12 @@ public class TableViewController {
     public String submitOrder(@RequestParam(value = "id") Integer id,
                               Principal principal,
                               Model model) {
-
+        Cart cart = userCartAction.getUserCart();
         int priceCurrent = userCartAction.countTotalPrice();
-
-        User user = userService.findByUsername(principal.getName());
-        cart.setUser(user);
-
         userCartAction.order(cart);
-
-        cartService.updateCart(cart);
-
+        User user = userService.findByUsername(principal.getName());
         List<SubmittedOrder> allOrders = user.getUserOrdersList();
-
         model.addAttribute("allOrders", allOrders);
-
-        //doubtful
-        cart.getSales().clear();
-        cartService.updateCart(cart);
-        //doubtful
-
-
         String pageMessage = "Дякуємо, ви успішно оформили замовлення " +
                 "Загальною сумою " + priceCurrent + " UAH";
         model.addAttribute("pageMessage", pageMessage);

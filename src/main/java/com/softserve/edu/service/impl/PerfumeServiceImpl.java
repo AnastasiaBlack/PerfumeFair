@@ -21,28 +21,23 @@ public class PerfumeServiceImpl implements PerfumeService {
     @Override
     public void addPerfume(Perfume perfume) {
         perfumeDAO.addElement(perfume);
-//        DAOFactory.getInstance().getPerfumeDAOImpl().addElement(perfume);
     }
 
     @Transactional
     @Override
     public void updatePerfume(Perfume perfume) {
         perfumeDAO.updateElement(perfume);
-//        DAOFactory.getInstance().getPerfumeDAOImpl().updateElement(perfume);
     }
 
     @Transactional
     @Override
     public Perfume getPerfumeById(int id) {
       return perfumeDAO.getElementById(id);
-//        Perfume perfume = DAOFactory.getInstance().getPerfumeDAOImpl().getElementById(id);
-//        return perfume;
     }
     @Transactional
     @Override
     public void deletePerfume(Perfume perfume) {
         perfumeDAO.deleteElement(perfume);
-//        DAOFactory.getInstance().getPerfumeDAOImpl().deleteElement(perfume);
     }
 
 
@@ -50,6 +45,5 @@ public class PerfumeServiceImpl implements PerfumeService {
     @Override
     public List<Perfume> getAllPerfumes() {
         return perfumeDAO.getAllElements();
-//        return DAOFactory.getInstance().getPerfumeDAOImpl().getAllElements();
     }
 }

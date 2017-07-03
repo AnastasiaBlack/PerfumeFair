@@ -26,30 +26,22 @@ public class OfferDAOImpl extends ElementDAOImpl<Offer> implements OfferDAO {
     @Transactional
     public List<Offer> getAllOffersByPerfumeFilter(String perfumeName) {
         Session session = sessionFactory.getCurrentSession();
-//        Session session = HibernateUtils.getSessionFactory()
-//                .getCurrentSession();
-//        Transaction transaction = session.beginTransaction();
         List<Offer> allElements = new ArrayList<>();
         Query query = session.createQuery("from Offer offer where offer" +
                 ".perfume.name=:perfumeName");
         query.setParameter("perfumeName", perfumeName);
         allElements = query.getResultList();
-//        transaction.commit();
         return allElements;
     }
 
     @Transactional
     public List<Offer> getAllOffersByBrandFilter(String brandName) {
         Session session = sessionFactory.getCurrentSession();
-//        Session session = HibernateUtils.getSessionFactory()
-//                .getCurrentSession();
-//        Transaction transaction = session.beginTransaction();
         List<Offer> allElements = new ArrayList<>();
         Query query = session.createQuery("from Offer offer where offer" +
                 ".perfume.brand.name=:brandName");
         query.setParameter("brandName", brandName);
         allElements = query.getResultList();
-//        transaction.commit();
         return allElements;
     }
 

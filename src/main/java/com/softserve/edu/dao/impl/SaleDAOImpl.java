@@ -24,13 +24,9 @@ public class SaleDAOImpl extends ElementDAOImpl<Sale> implements SaleDAO {
     public List<Sale> getAllSalesFromCart(int cartId) {
         List<Sale> salesInCart = new ArrayList<Sale>();
         Session session = sessionFactory.getCurrentSession();
-//        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-//        Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("from Sale sale where sale.cart.id=:cartId");
         query.setParameter("cartId", cartId);
         salesInCart = query.getResultList();
-//        transaction.commit();
-
         return salesInCart;
     }
 

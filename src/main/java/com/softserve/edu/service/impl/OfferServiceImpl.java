@@ -22,53 +22,41 @@ public class OfferServiceImpl implements OfferService {
     @Transactional
     public void addOffer(Offer offer) {
         offerDAO.addElement(offer);
-
-//        DAOFactory.getInstance().getOfferDAOImpl().addElement(offer);
     }
 
     @Override
     @Transactional
     public void updateOffer(Offer offer) {
         offerDAO.updateElement(offer);
-//        DAOFactory.getInstance().getOfferDAOImpl().updateElement(offer);
     }
 
     @Override
     @Transactional
     public Offer getOfferById(int id) {
         return offerDAO.getElementById(id);
-//        Offer offer = DAOFactory.getInstance().getOfferDAOImpl()
-// .getElementById(id);
-//        return offer;
     }
 
     @Override
     @Transactional
     public void deleteOffer(Offer offer) {
         offerDAO.deleteElement(offer);
-//        DAOFactory.getInstance().getOfferDAOImpl().deleteElement(offer);
     }
 
     @Override
     @Transactional
     public List<Offer> getAllOffers() {
         return offerDAO.getAllElements();
-//        return DAOFactory.getInstance().getOfferDAOImpl().getAllElements();
     }
 
     @Override
     @Transactional
     public List<Offer> getAllOffersByPerfumeFilter(String perfumeName) {
         return offerDAO.getAllOffersByPerfumeFilter(perfumeName);
-//        return DAOFactory.getInstance().getOfferDAOImpl()
-// .getAllOffersByPerfumeFilter(perfumeName);
     }
 
     @Override
     @Transactional
     public List<Offer> getAllOffersByBrandFilter(String brandName) {
         return offerDAO.getAllOffersByBrandFilter(brandName);
-//        return DAOFactory.getInstance().getOfferDAOImpl()
-// .getAllOffersByBrandFilter(brandName);
     }
 }

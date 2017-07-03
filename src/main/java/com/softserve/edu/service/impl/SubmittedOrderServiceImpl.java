@@ -23,40 +23,30 @@ public class SubmittedOrderServiceImpl implements SubmittedOrderService {
     @Override
     public void addSubmittedOrder(SubmittedOrder submittedOrder) {
         submittedOrderDAO.addElement(submittedOrder);
-//        DAOFactory.getInstance().getSubmittedOrderDAOImpl().addElement
-//                (submittedOrder);
     }
 
     @Transactional
     @Override
     public void updateSubmittedOrder(SubmittedOrder submittedOrder) {
         submittedOrderDAO.updateElement(submittedOrder);
-//        DAOFactory.getInstance().getSubmittedOrderDAOImpl().updateElement
-//                (submittedOrder);
     }
 
     @Transactional
     @Override
     public SubmittedOrder getSubmittedOrderById(int id) {
         return submittedOrderDAO.getElementById(id);
-//        return DAOFactory.getInstance().getSubmittedOrderDAOImpl()
-// .getElementById(id);
     }
 
     @Transactional
     @Override
     public void deleteSubmittedOrder(SubmittedOrder submittedOrder) {
         submittedOrderDAO.deleteElement(submittedOrder);
-//        DAOFactory.getInstance().getSubmittedOrderDAOImpl().deleteElement
-// (submittedOrder);
     }
 
     @Transactional
     @Override
     public List<SubmittedOrder> getAllSubmittedOrders() {
         return submittedOrderDAO.getAllElements();
-//        return DAOFactory.getInstance().getSubmittedOrderDAOImpl()
-// .getAllElements();
     }
 
     @Override

@@ -25,15 +25,11 @@ public class SubmittedOrderDAOImpl extends ElementDAOImpl<SubmittedOrder>
     @Transactional
     public List<SubmittedOrder> getSubmittedOrdersByUserName(String userName) {
         Session session = sessionFactory.getCurrentSession();
-//        Session session = HibernateUtils.getSessionFactory()
-//                .getCurrentSession();
-//        Transaction transaction = session.beginTransaction();
         List<SubmittedOrder> allElements = new ArrayList<>();
         Query query = session.createQuery("from SubmittedOrder " +
                 "submittedOrders where submittedOrders.user.username=:name");
         query.setParameter("name", userName);
         allElements = query.getResultList();
-//        transaction.commit();
         return allElements;
     }
 }

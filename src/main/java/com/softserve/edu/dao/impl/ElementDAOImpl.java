@@ -34,22 +34,12 @@ public abstract class ElementDAOImpl<E> implements ElementDAO<E> {
     @Override
     @Transactional
     public void addElement(E element) {
-//        Session session = HibernateUtils.getSessionFactory()
-// .getCurrentSession();
-//        Transaction transaction = session.beginTransaction();
-//        session.save(element);
-//        transaction.commit();
         sessionFactory.getCurrentSession().save(element);
     }
 
     @Override
     @Transactional
     public void updateElement(E element) {
-//        Session session = HibernateUtils.getSessionFactory()
-// .getCurrentSession();
-//        Transaction transaction = session.beginTransaction();
-//        session.update(element);
-//        transaction.commit();
         sessionFactory.getCurrentSession().update(element);
 
     }
@@ -58,9 +48,6 @@ public abstract class ElementDAOImpl<E> implements ElementDAO<E> {
     @Transactional
     public List<E> getAllElements() {
         Session session = sessionFactory.getCurrentSession();
-//        Session session = HibernateUtils.getSessionFactory()
-// .getCurrentSession();
-//        Transaction transaction = session.beginTransaction();
         List<E> allElements = new ArrayList<E>();
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<E> cq = cb.createQuery(elementClass);
@@ -68,7 +55,6 @@ public abstract class ElementDAOImpl<E> implements ElementDAO<E> {
         cq.select(root);
         Query<E> q = session.createQuery(cq);
         allElements = q.getResultList();
-//        transaction.commit();
         return allElements;
     }
 
@@ -76,12 +62,6 @@ public abstract class ElementDAOImpl<E> implements ElementDAO<E> {
     @Override
     @Transactional
     public E getElementById(int elementId) {
-//        Session session = HibernateUtils.getSessionFactory()
-// .getCurrentSession();
-//        Transaction transaction = session.beginTransaction();
-//        E element = session.get(elementClass, elementId);
-//        transaction.commit();
-//        return element;
         Session session = sessionFactory.getCurrentSession();
         return session.get(elementClass, elementId);
     }
@@ -89,11 +69,6 @@ public abstract class ElementDAOImpl<E> implements ElementDAO<E> {
     @Override
     @Transactional
     public void deleteElement(E element) {
-//        Session session = HibernateUtils.getSessionFactory()
-//                .getCurrentSession();
-//        Transaction transaction = session.beginTransaction();
-//        session.delete(element);
-//        transaction.commit();
         sessionFactory.getCurrentSession().delete(element);
     }
 

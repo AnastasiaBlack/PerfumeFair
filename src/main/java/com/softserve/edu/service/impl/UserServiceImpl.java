@@ -35,37 +35,30 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addUser(User user) {
         userDAO.addElement(user);
-//        DAOFactory.getInstance().getUserDAOImpl().addElement(user);
     }
 
     @Transactional
     @Override
     public void updateUser(User user) {
         userDAO.updateElement(user);
-//        DAOFactory.getInstance().getUserDAOImpl().updateElement(user);
     }
 
     @Transactional
     @Override
     public User getUserById(int id) {
         return userDAO.getElementById(id);
-//        User user = DAOFactory.getInstance().getUserDAOImpl()
-// .getElementById(id);
-//        return user;
     }
 
     @Transactional
     @Override
     public void deleteUser(User user) {
         userDAO.deleteElement(user);
-//        DAOFactory.getInstance().getUserDAOImpl().deleteElement(user);
     }
 
     @Transactional
     @Override
     public List<User> getAllUsers() {
         return userDAO.getAllElements();
-//        return DAOFactory.getInstance().getUserDAOImpl().getAllElements();
     }
 
 

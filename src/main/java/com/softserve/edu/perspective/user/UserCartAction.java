@@ -101,7 +101,6 @@ public class UserCartAction {
         String name = principal.getName();
         user = userService.findByUsername(name);
         userCart = cartService.getCartByUser(user);
-        //temporary to check why it's not being initialized
         userCart.setSales(saleService.getAllSalesFromCart(userCart));
     }
 
@@ -120,6 +119,7 @@ public class UserCartAction {
         offerService.updateOffer(offer);
     }
 
+    @Transactional
     public void order(Cart cart) {
         SubmittedOrder newOrder = new SubmittedOrder();
         User user = cart.getUser();
@@ -137,9 +137,11 @@ public class UserCartAction {
 
 //        submittedOrderService.updateSubmittedOrder(newOrder);
         user.addOrder(newOrder);
-        userService.updateUser(user);
+        //delete next line
         salesTransfer(cart, newOrder);
         userService.updateUser(user);
+        cart.getSales().clear();
+        cartService.updateCart(cart);
 
     }
 
