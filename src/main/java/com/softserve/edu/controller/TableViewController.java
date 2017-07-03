@@ -80,7 +80,7 @@ public class TableViewController {
             model) {
         Sale saleToDelete = saleService.getSaleById(id);
         userCartAction.deletefromCart(saleToDelete);
-        cart.getSales().remove(saleToDelete);
+//        cart.getSales().remove(saleToDelete);
         return showCart(model);
     }
 
@@ -101,6 +101,7 @@ public class TableViewController {
                             Model model) {
         Offer offer1 = offerService.getOfferById(temp.getId());
         model.addAttribute("volumeOrdered", temp.getVolumeOrdered());
+
         userCartAction.addToCart(offer1, temp.getVolumeOrdered());
 
         String pageMessage = "Added new item to the cart";

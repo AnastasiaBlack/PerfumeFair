@@ -4,6 +4,7 @@ import com.softserve.edu.entity.*;
 import com.softserve.edu.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -19,8 +20,8 @@ public class UserCartAction {
     private CartService cartService;
     private SaleService saleService;
     private List<Sale> allSalesInCart;
-    private Cart userCart = new Cart();
-    private User user = new User();
+    private static Cart userCart = new Cart();
+    private static User user = new User();
 
     @Autowired
     public UserCartAction(ServiceFactory serviceFactory) {
@@ -32,6 +33,7 @@ public class UserCartAction {
     }
 
 
+    @Transactional
     public Sale addToCart(Offer offer, String volumeOrdered) {
         Sale sale = new Sale();
         sale.setOffer(offer);
@@ -39,6 +41,9 @@ public class UserCartAction {
         sale.setVolumeOrdered(volume);
         sale.setCart(userCart);
         saleService.addSale(sale);
+//        if(userCart.getSales().equals(null)) {
+//            userCart.setSales(new ArrayList<Sale>());
+//        }
         userCart.addSaleToCart(sale);
         cartService.updateCart(userCart);
         return sale;
@@ -69,8 +74,10 @@ public class UserCartAction {
         return allSalesInCart;
     }
 
+    @Transactional
     public void deletefromCart(Sale sale) {
-        sale.getCart().removeSale(sale);
+        userCart.removeSale(sale);
+        cartService.updateCart(userCart);
         saleService.deleteSale(sale);
     }
 
@@ -94,6 +101,8 @@ public class UserCartAction {
         String name = principal.getName();
         user = userService.findByUsername(name);
         userCart = cartService.getCartByUser(user);
+        //temporary to check why it's not being initialized
+        userCart.setSales(saleService.getAllSalesFromCart(userCart));
     }
 
     public void decreaseOfferVolumeBySale(Sale sale) {

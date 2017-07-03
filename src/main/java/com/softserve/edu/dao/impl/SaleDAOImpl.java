@@ -33,4 +33,5 @@ public class SaleDAOImpl extends ElementDAOImpl<Sale> implements SaleDAO {
 
         return salesInCart;
     }
+
 }

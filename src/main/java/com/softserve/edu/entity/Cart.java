@@ -11,7 +11,7 @@ public class Cart {
     private User user;
     private List<Sale> sales = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cart", cascade =
+    @OneToMany(mappedBy = "cart", cascade =
             CascadeType.ALL)
     public List<Sale> getSales() {
         return sales;
