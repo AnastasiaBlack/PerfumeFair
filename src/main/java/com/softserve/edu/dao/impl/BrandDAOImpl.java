@@ -11,7 +11,7 @@ public class BrandDAOImpl extends ElementDAOImpl<Brand> implements BrandDAO {
     private SessionFactory sessionFactory;
     @Autowired
     public BrandDAOImpl(SessionFactory sessionFactory) {
-        super(Brand.class,sessionFactory);
+        super(Brand.class);
         this.sessionFactory=sessionFactory;
     }
 

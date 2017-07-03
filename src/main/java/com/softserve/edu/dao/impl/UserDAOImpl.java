@@ -18,7 +18,7 @@ public class UserDAOImpl extends ElementDAOImpl<User> implements UserDAO {
 
     @Autowired
     public UserDAOImpl(SessionFactory sessionFactory) {
-        super(User.class, sessionFactory);
+        super(User.class);
         this.sessionFactory = sessionFactory;
     }
 

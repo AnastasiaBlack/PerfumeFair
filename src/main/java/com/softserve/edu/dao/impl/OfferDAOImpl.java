@@ -19,7 +19,7 @@ public class OfferDAOImpl extends ElementDAOImpl<Offer> implements OfferDAO {
 
     @Autowired
     public OfferDAOImpl(SessionFactory sessionFactory) {
-        super(Offer.class,sessionFactory);
+        super(Offer.class);
         this.sessionFactory = sessionFactory;
     }
 

@@ -3,6 +3,7 @@ package com.softserve.edu.controller;
 import com.softserve.edu.controller.auxiliary.TempOfferIdVolumeOrdered;
 import com.softserve.edu.entity.*;
 import com.softserve.edu.perspective.user.UserCartAction;
+import com.softserve.edu.perspective.user.UserSearchMode;
 import com.softserve.edu.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -139,6 +140,19 @@ public class TableViewController {
                 "Загальною сумою " + priceCurrent + " UAH";
         model.addAttribute("pageMessage", pageMessage);
         return "SubmittedOrder";
+    }
+
+    @RequestMapping(value = "/showOffersByBrand", method = RequestMethod.POST)
+    public String showOffersByBrand(@RequestParam(value = "brandName") String
+                                            brandName, Model model) {
+
+        UserSearchMode userSearchMode = new UserSearchMode(offerService);
+        List<Offer> allOffersByBrand = userSearchMode.showOffersByBrand
+                (brandName);
+
+        model.addAttribute("offers", allOffersByBrand);
+        model.addAttribute("brandName",brandName);
+        return "/ShowFilteredOffers";
     }
 
 

@@ -16,7 +16,7 @@ import java.util.List;
 public class SaleDAOImpl extends ElementDAOImpl<Sale> implements SaleDAO {
     private SessionFactory sessionFactory;
     public SaleDAOImpl(SessionFactory sessionFactory) {
-        super(Sale.class, sessionFactory);
+        super(Sale.class);
         this.sessionFactory=sessionFactory;
     }
     @Override

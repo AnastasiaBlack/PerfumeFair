@@ -1,7 +1,6 @@
 package com.softserve.edu.perspective.user;
 
 import com.softserve.edu.entity.Offer;
-import com.softserve.edu.entity.Perfume;
 import com.softserve.edu.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,9 +9,13 @@ import java.util.List;
 
 @Component
 public class UserSearchMode {
-    @Autowired
-    private OfferService offerService;
+    private final OfferService offerService;
     private List<Offer> currentOffersList;
+
+    @Autowired
+    public UserSearchMode(OfferService offerService) {
+        this.offerService = offerService;
+    }
 
 
     public void showOffers() {
@@ -50,9 +53,6 @@ public class UserSearchMode {
         return currentOffersList;
     }
 
-    public void showOffers(Perfume perfume) {
-
-    }
 
     public void sortByPrice() {
 

@@ -17,7 +17,7 @@ public class CartDAOImpl extends ElementDAOImpl<Cart> implements CartDAO {
     private SessionFactory sessionFactory;
     @Autowired
     public CartDAOImpl(SessionFactory sessionFactory) {
-        super(Cart.class,sessionFactory);
+        super(Cart.class);
         this.sessionFactory=sessionFactory;
     }
 

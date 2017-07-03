@@ -13,7 +13,7 @@ public class PerfumeDAOImpl extends ElementDAOImpl<Perfume> implements
 
     @Autowired
     public PerfumeDAOImpl(SessionFactory sessionFactory) {
-        super(Perfume.class, sessionFactory);
+        super(Perfume.class);
         this.sessionFactory=sessionFactory;
     }
 

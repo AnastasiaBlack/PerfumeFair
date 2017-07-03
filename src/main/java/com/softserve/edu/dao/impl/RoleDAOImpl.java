@@ -15,6 +15,6 @@ public class RoleDAOImpl extends ElementDAOImpl<Role> implements RoleDAO {
 
     @Autowired
     public RoleDAOImpl(SessionFactory sessionFactory) {
-        super(Role.class, sessionFactory);
+        super(Role.class);
         this.sessionFactory=sessionFactory;
     }}

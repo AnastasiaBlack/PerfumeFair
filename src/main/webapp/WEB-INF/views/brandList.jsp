@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: Анастасія
@@ -11,7 +12,8 @@
 <head>
     <meta charset="utf-8">
 
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/AllElementsTableStyle.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/resources/AllElementsTableStyle.css"/>
 
 </head>
 <body>
@@ -23,7 +25,10 @@
     <c:forEach items="${brands}" var="brand" varStatus="count">
         <tr>
             <td>
-                    ${brand.name}
+                <form action="${pageContext.request.contextPath}/showOffersByBrand?brandName=${brand.name}"
+                      method="post">
+                    <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+                    <input type="submit" value="${brand.name}"></form>
             </td>
         </tr>
     </c:forEach>

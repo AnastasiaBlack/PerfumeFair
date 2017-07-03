@@ -26,9 +26,9 @@ public abstract class ElementDAOImpl<E> implements ElementDAO<E> {
         this.sessionFactory=sessionFactory;
     }
 
-    public ElementDAOImpl(Class<E> elementClass,SessionFactory sessionFactory) {
+    public ElementDAOImpl(Class<E> elementClass) {
         this.elementClass = elementClass;
-        this.sessionFactory = sessionFactory;
+//        this.sessionFactory = sessionFactory;
     }
 
     @Override

@@ -18,7 +18,7 @@ public class SubmittedOrderDAOImpl extends ElementDAOImpl<SubmittedOrder>
 
     private SessionFactory sessionFactory;
     public SubmittedOrderDAOImpl(SessionFactory sessionFactory) {
-        super(SubmittedOrder.class, sessionFactory);
+        super(SubmittedOrder.class);
         this.sessionFactory=sessionFactory;
     }
     @Override
