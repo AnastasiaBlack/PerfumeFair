@@ -40,6 +40,9 @@
             <security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"><td><form action="${pageContext.request.contextPath}/seeDetails?id=${offer.id}" method="post">
                 <button class="menuButton"><input type='hidden' value='${_csrf.token}' name='${_csrf.parameterName}'/>
                     Деталі</button></form></td></security:authorize>
+            <security:authorize access="hasAnyRole(ROLE_ADMIN')"><td><form action="${pageContext.request.contextPath}/editOffer?id=${offer.id}" method="post">
+                <button class="menuButton"><input type='hidden' value='${_csrf.token}' name='${_csrf.parameterName}'/>
+                    Edit</button></form></td></security:authorize>
         </tr>
     </c:forEach>
 </table>
