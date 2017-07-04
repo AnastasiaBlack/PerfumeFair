@@ -33,12 +33,6 @@
         <td>${offer.pricePerMl}</td>
     </tr>
     <tr>
-            <%--<form:form>--%>
-            <%--Замовити:--%>
-            <%--<input type="text" name="volumeOrdered" placeholder="введіть кількість мілілітрів для замовлення"/>--%>
-            <%--<br/>--%>
-                <%--<button class="menuButton">Покласти до кошика</button>--%>
-        <%--</form:form>--%>
         <form:form action="/addToCart" method="post">
             Замовити:
             <input type="text" name="volumeOrdered" placeholder="введіть кількість мілілітрів для замовлення"/>

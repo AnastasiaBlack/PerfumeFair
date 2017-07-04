@@ -19,6 +19,7 @@ public class UserCartAction {
     private OfferService offerService;
     private CartService cartService;
     private SaleService saleService;
+
     private List<Sale> allSalesInCart;
     private static Cart userCart = new Cart();
     private static User user = new User();
@@ -34,16 +35,14 @@ public class UserCartAction {
 
 
     @Transactional
-    public Sale addToCart(Offer offer, String volumeOrdered) {
+    public Sale addToCart(int offerId, String volumeOrdered) {
+        Offer offer = offerService.getOfferById(offerId);
         Sale sale = new Sale();
         sale.setOffer(offer);
         int volume = Integer.parseInt(volumeOrdered);
         sale.setVolumeOrdered(volume);
         sale.setCart(userCart);
         saleService.addSale(sale);
-//        if(userCart.getSales().equals(null)) {
-//            userCart.setSales(new ArrayList<Sale>());
-//        }
         userCart.addSaleToCart(sale);
         cartService.updateCart(userCart);
         return sale;
@@ -75,7 +74,8 @@ public class UserCartAction {
     }
 
     @Transactional
-    public void deletefromCart(Sale sale) {
+    public void deletefromCart(int saleId) {
+        Sale sale = saleService.getSaleById(saleId);
         userCart.removeSale(sale);
         cartService.updateCart(userCart);
         saleService.deleteSale(sale);

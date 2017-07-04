@@ -8,6 +8,7 @@
 <%@ taglib prefix="security"
            uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -30,6 +31,9 @@
     #second:hover {
         left: 0px;
     }</style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
     <%--<link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">--%>
 </head>
 <body>
@@ -47,39 +51,31 @@
         </a></li>
         <li>
             <security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
-                <a href="/sales"><button class="menuButton">Cart</button></a>
+                <a href="/sales">
+                    <button class="menuButton">Cart</button>
+                </a>
             </security:authorize>
         </li>
+        <li>
+            <security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
 
-<li>
-<security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
+                <c:if test="${pageContext.request.userPrincipal.name != null}">
+                    <form id="logoutForm" method="POST" action="${contextPath}/logout">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-            <c:if test="${pageContext.request.userPrincipal.name != null}">
-                <form id="logoutForm" method="POST" action="${contextPath}/logout">
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                </form>
-
-                <a onclick="document.forms['logoutForm'].submit()"><button class="menuButton">ВИХІД</button></a>
-
-            </c:if>
- </security:authorize>
-</li>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+                        <a onclick="document.forms['logoutForm'].submit()">
+                            <button class="menuButton">ВИХІД</button>
+                        </a>
+                    </form>
+                </c:if>
+            </security:authorize>
+        </li>
+        <li><form:form action="/search">
+            <input class="search" type="search" placeholder="Пошук за назвою парфуму" name="searchString">
+        </form:form></li>
 
     </ul>
 </header>
-<security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
-
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
-
-        <a id="second" onclick="document.forms['logoutForm'].submit()">ВИХІД&harr;</a>
-
-    </c:if>
-</security:authorize>
 
 </body>
 </html>

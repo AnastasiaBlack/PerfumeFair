@@ -9,14 +9,23 @@
 <html>
 <head>
     <title>Filter Offers By Brand</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/AllElementsTableStyle.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/resources/AllElementsTableStyle.css"/>
 
 
 </head>
 <body>
 <%@ include file="menu.jsp" %>
 
-<p style="text-align: center">Усі пропозиції ${brandName}</p>
+<p style="text-align: center">Усі пропозиції ${searchName}</p>
+
+<%--<form action="${pageContext.request.contextPath}/sortByPrice" method="post">--%>
+    <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
+    <%--<input type="hidden" name="searchName" value="${searchName}">--%>
+    <%--<input type="hidden" name="offers" value="${offers}">--%>
+    <%--<input type="submit" value="Сортувати за ціною">--%>
+<%----%>
+<%--</form>--%>
 
 
 <table class="center">
@@ -32,9 +41,16 @@
             <td>${offer.perfume.brand.name}</td>
             <td>${offer.volumeForSale}</td>
             <td>${offer.pricePerMl}</td>
-            <security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"><td><form action="${pageContext.request.contextPath}/seeDetails?id=${offer.id}" method="post">
-                <button class="menuButton"><input type='hidden' value='${_csrf.token}' name='${_csrf.parameterName}'/>
-                    Деталі</button></form></td></security:authorize>
+            <security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
+                <td>
+                    <form action="${pageContext.request.contextPath}/seeDetails?id=${offer.id}" method="post">
+                        <button class="menuButton"><input type='hidden' value='${_csrf.token}'
+                                                          name='${_csrf.parameterName}'/>
+                            Деталі
+                        </button>
+                    </form>
+                </td>
+            </security:authorize>
         </tr>
     </c:forEach>
 </table>

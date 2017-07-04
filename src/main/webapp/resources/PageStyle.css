@@ -67,21 +67,30 @@ footer {
 }
 
 
-
 ul.hr {
-    /*background-color: #963c90;*/
-    text-align: right;
+    list-style-type: none;
     margin: 0;
-    margin-right: 20px;
-    padding-top: 45px; /* Значение полей */
+    padding: 0;
+    overflow: hidden;
+    background-color: #963c90;
 }
 
 ul.hr li {
+    float: right;
     display: inline;
-    /*border-radius: 4px;*/
-    /*!* Рамка вокруг текста *!*/
-    /*border: 2px solid #81337b;*/
-
-    /*padding: 3px; !* Поля вокруг текста *!*/
     background-color: #963c90;
+    padding-top: 45px;
+}
+
+input.search {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 12px;
+    background-color: white;
+    background-image: url('searchicon1.png');
+    background-position: 5px 5px;
+    background-repeat: no-repeat;
+    padding: 6px 12px 6px 40px;
 }
