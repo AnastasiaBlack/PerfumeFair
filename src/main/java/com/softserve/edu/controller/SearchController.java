@@ -54,7 +54,8 @@ public class SearchController {
         UserSearchMode userSearchMode = new UserSearchMode(offerService);
         List<Offer> allOffersByPerfume = userSearchMode.showOffersByPerfume
                 (searchString);
-        if(allOffersByPerfume.size()==0){String message = "Жодних збігів не знайдено";
+        if (allOffersByPerfume.size() == 0) {
+            String message = "Жодних збігів не знайдено";
             model.addAttribute("pageMessage", message);
             return "stringMessage";
         }
@@ -65,12 +66,16 @@ public class SearchController {
         return "/ShowFilteredOffers";
     }
 
-//    @RequestMapping(value="/sortByPrice", method=RequestMethod.POST)
-//    public String sortByPrice(@ModelAttribute()TransitOffer temp, @RequestParam String searchName, Model model){
-//        UserSearchMode userSearchMode = new UserSearchMode(offerService);
-//        userSearchMode.sortOffersByPrice(temp.getOffers());
-//        model.addAttribute("sortedOffers", temp.getOffers());
-//        model.addAttribute("searchName",searchName);
-//        return "/showSortedOffers";
-//    }
+    @RequestMapping("/filterByBrandAndPrice")
+    public String getByBrandAndPrice(@RequestParam(value = "brandName")
+                                             String brandName,
+                                     @RequestParam("price") Integer price,
+                                     Model model) {
+        List<Offer> offers = offerService.getAllOffersByBrandAndPriceFilter
+                (brandName, price);
+
+        model.addAttribute("offers", offers);
+        model.addAttribute("searchName", brandName);
+        return "ShowFilteredOrders";
+    }
 }

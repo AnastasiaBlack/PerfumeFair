@@ -68,4 +68,6 @@ public class TableViewController {
 
         return "offerDetail";
     }
+
+
 }

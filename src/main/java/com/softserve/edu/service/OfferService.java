@@ -18,4 +18,6 @@ public interface OfferService {
     List<Offer> getAllOffersByPerfumeFilter(String perfumeName);
 
     List<Offer> getAllOffersByBrandFilter(String brandName);
+
+    List<Offer> getAllOffersByBrandAndPriceFilter(String brandName, int price);
 }
