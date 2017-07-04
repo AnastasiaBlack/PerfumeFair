@@ -22,6 +22,10 @@
 <%@ include file="menu.jsp" %>
 
 <p style="text-align: center">ALL OFFERS</p>
+<security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"><td><form action="${pageContext.request.contextPath}/addNewOffer" method="get">
+    <button class="menuButton"><input type='hidden' value='${_csrf.token}' name='${_csrf.parameterName}'/>
+        Додати нову пропозицію</button></form></td></security:authorize>
+<security:authorize access="hasRole('ROLE_ADMIN')"/>
 
 
 <table class="center">
@@ -40,9 +44,10 @@
             <security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"><td><form action="${pageContext.request.contextPath}/seeDetails?id=${offer.id}" method="post">
                 <button class="menuButton"><input type='hidden' value='${_csrf.token}' name='${_csrf.parameterName}'/>
                     Деталі</button></form></td></security:authorize>
-            <security:authorize access="hasAnyRole(ROLE_ADMIN')"><td><form action="${pageContext.request.contextPath}/editOffer?id=${offer.id}" method="post">
+            <security:authorize access="hasRole('ROLE_ADMIN')"><td><form action="${pageContext.request.contextPath}/editOffer?id=${offer.id}" method="post">
                 <button class="menuButton"><input type='hidden' value='${_csrf.token}' name='${_csrf.parameterName}'/>
                     Edit</button></form></td></security:authorize>
+
         </tr>
     </c:forEach>
 </table>

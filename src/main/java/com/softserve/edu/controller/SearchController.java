@@ -66,7 +66,7 @@ public class SearchController {
     }
 
 //    @RequestMapping(value="/sortByPrice", method=RequestMethod.POST)
-//    public String sortByPrice(@ModelAttribute()TransitOfferSort temp, @RequestParam String searchName, Model model){
+//    public String sortByPrice(@ModelAttribute()TransitOffer temp, @RequestParam String searchName, Model model){
 //        UserSearchMode userSearchMode = new UserSearchMode(offerService);
 //        userSearchMode.sortOffersByPrice(temp.getOffers());
 //        model.addAttribute("sortedOffers", temp.getOffers());

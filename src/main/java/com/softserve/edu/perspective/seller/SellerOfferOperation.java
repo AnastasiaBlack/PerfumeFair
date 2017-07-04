@@ -3,12 +3,29 @@ package com.softserve.edu.perspective.seller;
 import com.softserve.edu.entity.Brand;
 import com.softserve.edu.entity.Offer;
 import com.softserve.edu.entity.Perfume;
-import com.softserve.edu.service.impl.BrandServiceImpl;
-import com.softserve.edu.service.impl.OfferServiceImpl;
-import com.softserve.edu.service.impl.PerfumeServiceImpl;
+import com.softserve.edu.service.BrandService;
+import com.softserve.edu.service.OfferService;
+import com.softserve.edu.service.PerfumeService;
+import com.softserve.edu.service.ServiceFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
+@Component
 public class SellerOfferOperation {
+    private ServiceFactory serviceFactory;
+    private OfferService offerService;
+    private BrandService brandService;
+    private PerfumeService perfumeService;
 
+    @Autowired
+    public SellerOfferOperation(ServiceFactory serviceFactory) {
+        this.brandService=serviceFactory.getBrandService();
+        this.perfumeService=serviceFactory.getPerfumeService();
+        this.offerService = serviceFactory.getOfferService();
+    }
+
+    @Transactional
     public Offer createOffer(String newBrandName, String perfumeName, String
             volumeForSale, String pricePerMl) {
         Brand brand = new Brand();
@@ -20,38 +37,35 @@ public class SellerOfferOperation {
         offer.setPerfume(perfume);
         offer.setVolumeForSale(volumeForSale);
         offer.setPricePerMl(pricePerMl);
-        PerfumeServiceImpl perfumeService = new PerfumeServiceImpl();
-        BrandServiceImpl brandService = new BrandServiceImpl();
-        OfferServiceImpl offerService = new OfferServiceImpl();
         brandService.addBrand(brand);
         perfumeService.addPerfume(perfume);
         offerService.addOffer(offer);
         return offer;
     }
 
-    public void deleteOffer(Offer offer) {
-        OfferServiceImpl offerService = new OfferServiceImpl();
+    @Transactional
+    public void deleteOffer(int offerId) {
+        Offer offer = offerService.getOfferById(offerId);
         offerService.deleteOffer(offer);
     }
 
-    public void updateOffer(Offer offer, String newBrandName, String
-            perfumeName, String
-            volumeForSale, String pricePerMl) {
+    @Transactional
+    public void updateOffer(int offerId, String newBrandName, String newPerfumeName, String volumeForSale, String pricePerMl) {
+        Offer offer = offerService.getOfferById(offerId);
         Brand brandUpdate = offer.getPerfume().getBrand();
         if (newBrandName.equals("")) {
             newBrandName = brandUpdate.getName();
         }
         brandUpdate.setName(newBrandName);
-        BrandServiceImpl bs = new BrandServiceImpl();
-        bs.updateBrand(brandUpdate);
+        brandService.updateBrand(brandUpdate);
 
         Perfume perfumeUpdate = offer.getPerfume();
-        if (perfumeUpdate.getName().equals("")) {
-            perfumeName = perfumeUpdate.getName();
+        if (newPerfumeName.equals("")) {
+            newPerfumeName = perfumeUpdate.getName();
         }
-        perfumeUpdate.setName(perfumeName);
-        PerfumeServiceImpl ps = new PerfumeServiceImpl();
-        ps.updatePerfume(perfumeUpdate);
+        perfumeUpdate.setName(newPerfumeName);
+        perfumeUpdate.setBrand(brandUpdate);
+        perfumeService.updatePerfume(perfumeUpdate);
 
         if (volumeForSale.equals("")) {
             volumeForSale = String.valueOf(offer.getVolumeForSale());
@@ -59,9 +73,9 @@ public class SellerOfferOperation {
         if (pricePerMl.equals("")) {
             pricePerMl = String.valueOf(offer.getPricePerMl());
         }
+        offer.setPerfume(perfumeUpdate);
         offer.setVolumeForSale(volumeForSale);
         offer.setPricePerMl(pricePerMl);
-        OfferServiceImpl os = new OfferServiceImpl();
-        os.updateOffer(offer);
+        offerService.updateOffer(offer);
     }
 }

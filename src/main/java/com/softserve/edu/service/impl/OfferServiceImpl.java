@@ -39,6 +39,8 @@ public class OfferServiceImpl implements OfferService {
     @Override
     @Transactional
     public void deleteOffer(Offer offer) {
+        //????
+       // offer.setPerfume(null);
         offerDAO.deleteElement(offer);
     }
 

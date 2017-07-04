@@ -12,10 +12,27 @@ public class Offer {
     private int pricePerMl;
     @Column(name="volume_ml")
     private int volumeForSale;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_perfume")
+    @OneToOne(optional=true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_perfume", nullable = true)
     private Perfume perfume;
 
+    transient private String brandName;
+
+    public void setPricePerMl(int pricePerMl) {
+        this.pricePerMl = pricePerMl;
+    }
+
+    public void setVolumeForSale(int volumeForSale) {
+        this.volumeForSale = volumeForSale;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
 
     public int getId() {
         return id;

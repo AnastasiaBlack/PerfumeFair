@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `PerfumeDB`.`Sales` (
   REFERENCES `PerfumeDB`.`Cart` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `id_offer`
+#   CONSTRAINT `id_offer`
   FOREIGN KEY (`id_offer`)
   REFERENCES `PerfumeDB`.`Offers` (`id`)
     ON DELETE NO ACTION
