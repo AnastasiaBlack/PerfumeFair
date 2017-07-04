@@ -91,6 +91,5 @@ public class UserCartController {
                 "Загальною сумою " + priceCurrent + " UAH";
         model.addAttribute("pageMessage", pageMessage);
         return "SubmittedOrder";
-
     }
 }
