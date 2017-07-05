@@ -97,9 +97,8 @@ public class UserCartAction {
         int volumeBought = sale.getVolumeOrdered();
         int updateOfferVolume = volumeOffer - volumeBought;
         if (volumeBought > volumeOffer) {
-            System.out.println("Sorry, but we have only " + volumeOffer + " " +
-                    "ml left.");
-            updateOfferVolume = volumeOffer;
+            updateOfferVolume = 0;
+            sale.setVolumeOrdered(volumeOffer);
         }
         offer.setVolumeForSale(String.valueOf(updateOfferVolume));
         offerService.updateOffer(offer);
@@ -136,8 +135,8 @@ public class UserCartAction {
             Sale s = iterator.next();
             s.setSubmittedOrders(newOrder);
             s.setCart(null);
-            saleService.updateSale(s);
             decreaseOfferVolumeBySale(s);
+            saleService.updateSale(s);
         }
         submittedOrderService.updateSubmittedOrder(newOrder);
         cartService.updateCart(cart);

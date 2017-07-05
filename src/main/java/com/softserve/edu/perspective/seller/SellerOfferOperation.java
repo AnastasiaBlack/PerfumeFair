@@ -26,7 +26,7 @@ public class SellerOfferOperation {
     }
 
     @Transactional
-    public Offer createOffer(String newBrandName, String perfumeName, String
+    public void createOffer(String newBrandName, String perfumeName, String
             volumeForSale, String pricePerMl) {
         Brand brand = new Brand();
         brand.setName(newBrandName);
@@ -40,7 +40,6 @@ public class SellerOfferOperation {
         brandService.addBrand(brand);
         perfumeService.addPerfume(perfume);
         offerService.addOffer(offer);
-        return offer;
     }
 
     @Transactional

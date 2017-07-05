@@ -45,6 +45,28 @@ public class UserCartActionTest {
     }
 
     @Test
+    public void testDecreaseOfferVolumeBySale_VolumeIsTooBig() {
+        //Arrange
+        MockitoAnnotations.initMocks(this);
+        userCartAction = new UserCartAction(serviceFactory);
+        userCartAction.setOfferService(offerService);
+        Offer offer = new Offer();
+        offer.setVolumeForSale(40);
+        Sale sale = new Sale();
+        sale.setVolumeOrdered(50);
+        sale.setOffer(offer);
+
+        //Act
+        Mockito.doNothing().when(offerService).updateOffer(offer);
+        userCartAction.decreaseOfferVolumeBySale(sale);
+        offer = sale.getOffer();
+        Integer expectedVolumeLeft = 0;
+        Integer actualVolumeLeft = offer.getVolumeForSale();
+        //Assert
+        Assert.assertEquals(expectedVolumeLeft, actualVolumeLeft);
+    }
+
+    @Test
     public void testCountTotalPrice() {
         //Arrange
         MockitoAnnotations.initMocks(this);

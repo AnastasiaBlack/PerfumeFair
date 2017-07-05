@@ -2,7 +2,6 @@ package test.pack;
 
 import com.softserve.edu.dao.OfferDAO;
 import com.softserve.edu.entity.Offer;
-import com.softserve.edu.service.ServiceFactory;
 import com.softserve.edu.service.impl.OfferServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,8 +15,6 @@ import java.util.List;
 public class OfferServiceImplTest {
     @Mock
     private OfferDAO offerDAO;
-    @Mock
-    private ServiceFactory serviceFactory;
 
     @Test
     public void testGetAllOffers_ExpectedSortedByPrice() {
@@ -54,4 +51,5 @@ public class OfferServiceImplTest {
         //Assert
         Assert.assertEquals(expectedList, actualList);
     }
+
 }
