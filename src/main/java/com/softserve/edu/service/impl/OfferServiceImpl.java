@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -39,15 +40,17 @@ public class OfferServiceImpl implements OfferService {
     @Override
     @Transactional
     public void deleteOffer(Offer offer) {
-        //????
-       // offer.setPerfume(null);
         offerDAO.deleteElement(offer);
     }
 
     @Override
     @Transactional
     public List<Offer> getAllOffers() {
-        return offerDAO.getAllElements();
+        List<Offer> allOffers = offerDAO.getAllElements();
+        allOffers.sort(Comparator.comparingInt(Offer::getPricePerMl));
+        return allOffers;
+
+
     }
 
     @Override
@@ -65,7 +68,7 @@ public class OfferServiceImpl implements OfferService {
     @Override
     public List<Offer> getAllOffersByBrandAndPriceFilter(String brandName,
                                                          int price) {
-        return offerDAO.getAllOffersByBrandAndPriceFilter(brandName,price);
+        return offerDAO.getAllOffersByBrandAndPriceFilter(brandName, price);
     }
 
 }

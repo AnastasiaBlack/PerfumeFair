@@ -46,25 +46,22 @@ public class UserCartActionTest {
 
     @Test
     public void testCountTotalPrice() {
+        //Arrange
         MockitoAnnotations.initMocks(this);
         userCartAction = new UserCartAction(serviceFactory);
-        //Arrange
         Offer offer1 = new Offer();
         offer1.setPricePerMl(10);
         Sale sale1 = new Sale();
         sale1.setOffer(offer1);
         sale1.setVolumeOrdered(10);
-
         Offer offer2 = new Offer();
         offer2.setPricePerMl(5);
         Sale sale2 = new Sale();
         sale2.setOffer(offer2);
         sale2.setVolumeOrdered(5);
-
         ArrayList<Sale> allSalesInCart = new ArrayList<>();
         allSalesInCart.add(sale1);
         allSalesInCart.add(sale2);
-
         Cart cart = new Cart();
         cart.setSales(allSalesInCart);
         UserCartAction.setUserCart(cart);
@@ -72,6 +69,7 @@ public class UserCartActionTest {
         //Act
         int actualPrice = userCartAction.countTotalPrice();
         int expectedPrice = 125;
+
         //Assert
         Assert.assertEquals(expectedPrice, actualPrice);
     }

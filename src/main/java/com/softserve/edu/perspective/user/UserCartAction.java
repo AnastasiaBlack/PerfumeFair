@@ -29,13 +29,13 @@ public class UserCartAction {
         this.userService = serviceFactory.getUserService();
         this.cartService = serviceFactory.getCartService();
         this.saleService = serviceFactory.getSaleService();
-        this.submittedOrderService=serviceFactory.getSubmittedOrderService();
-        this.offerService=serviceFactory.getOfferService();
+        this.submittedOrderService = serviceFactory.getSubmittedOrderService();
+        this.offerService = serviceFactory.getOfferService();
     }
 
 
     @Transactional
-    public Sale addToCart(int offerId, String volumeOrdered) {
+    public void addToCart(int offerId, String volumeOrdered) {
         Offer offer = offerService.getOfferById(offerId);
         Sale sale = new Sale();
         sale.setOffer(offer);
@@ -45,30 +45,16 @@ public class UserCartAction {
         saleService.addSale(sale);
         userCart.addSaleToCart(sale);
         cartService.updateCart(userCart);
-        return sale;
     }
 
     public List<Sale> showCartContent() {
-        List<Sale> currentSalesList = userCart.getSales();
-        System.out.println("-------------------------------------------------" +
-                "\nID\t\tPerfume\t\t Brand\t\t Price per ml \t Volume " +
-                "Bought\n" +
-                "-------------------------------------------------");
-        for (Sale s : currentSalesList) {
-            System.out.print(s.getId() + "\t" + s.getOffer().getPerfume()
-                    .getName() + "\t " + s
-                    .getOffer().getPerfume().getBrand().getName() + "\t " +
-                    s.getOffer().getPricePerMl() + "\t\t " + s
-                    .getVolumeOrdered() + "\n");
-        }
-        return currentSalesList;
-
+        return userCart.getSales();
     }
 
     public List<Sale> orderSalesFromCart() {
         allSalesInCart = userCart.getSales();
         for (Sale sale : allSalesInCart) {
-           decreaseOfferVolumeBySale(sale);
+            decreaseOfferVolumeBySale(sale);
         }
         return allSalesInCart;
     }
@@ -157,11 +143,12 @@ public class UserCartAction {
         cartService.updateCart(cart);
     }
 
+    //these are mostly needed while testing
     public static void setUserCart(Cart userCart) {
         UserCartAction.userCart = userCart;
     }
 
     public void setOfferService(OfferService offerService) {
-       this.offerService=offerService;
+        this.offerService = offerService;
     }
 }

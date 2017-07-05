@@ -50,7 +50,6 @@ public class TableViewController {
     public String getOffers(Model model) {
         model.addAttribute("tempData", new TransitSearchByBrandAndPriceData());
         List<Offer> allOffers = offerService.getAllOffers();
-        allOffers.sort(Comparator.comparingInt(Offer::getPricePerMl));
         model.addAttribute("offers", allOffers);
         return "/allOffers";
     }
