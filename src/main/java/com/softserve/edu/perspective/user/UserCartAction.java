@@ -135,9 +135,7 @@ public class UserCartAction {
         newOrder.setSales(salesToSubmit);
         submittedOrderService.addSubmittedOrder(newOrder);
 
-//        submittedOrderService.updateSubmittedOrder(newOrder);
         user.addOrder(newOrder);
-        //delete next line
         salesTransfer(cart, newOrder);
         userService.updateUser(user);
         cart.getSales().clear();
@@ -159,5 +157,7 @@ public class UserCartAction {
         cartService.updateCart(cart);
     }
 
-
+    public static void setUserCart(Cart userCart) {
+        UserCartAction.userCart = userCart;
+    }
 }
