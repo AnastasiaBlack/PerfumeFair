@@ -2,9 +2,11 @@ package com.softserve.edu.controller;
 
 import com.softserve.edu.controller.auxiliary.TransitOffer;
 import com.softserve.edu.entity.Offer;
+import com.softserve.edu.entity.SubmittedOrder;
 import com.softserve.edu.perspective.seller.SellerOfferOperation;
 import com.softserve.edu.service.OfferService;
 import com.softserve.edu.service.ServiceFactory;
+import com.softserve.edu.service.SubmittedOrderService;
 import com.softserve.edu.validator.InputValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,9 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class SellerController {
     private OfferService offerService;
+    private SubmittedOrderService submittedOrderService;
     private ServiceFactory serviceFactory = new ServiceFactory();
 
     private SellerOfferOperation sellerOfferOperation = new
@@ -26,6 +31,7 @@ public class SellerController {
     @Autowired
     public SellerController(ServiceFactory serviceFactory) {
         this.offerService = serviceFactory.getOfferService();
+        this.submittedOrderService=serviceFactory.getSubmittedOrderService();
     }
 
     @RequestMapping("/editOffer")
@@ -78,5 +84,13 @@ public class SellerController {
         return new TableViewController(serviceFactory).getOffers(model);
     }
 
+
+    @RequestMapping(value = "/showOrders", method = RequestMethod.GET)
+    public String showAllOrders(Model model) {
+        List<SubmittedOrder> allOrders = submittedOrderService.getAllSubmittedOrders();
+        model.addAttribute("allOrders", allOrders);
+
+        return "/ShowAllOrders";
+    }
 
 }

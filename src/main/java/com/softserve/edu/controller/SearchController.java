@@ -1,13 +1,17 @@
 package com.softserve.edu.controller;
 
+import com.softserve.edu.controller.auxiliary.TransitSearchByBrandAndPriceData;
 import com.softserve.edu.entity.Cart;
 import com.softserve.edu.entity.Offer;
 import com.softserve.edu.perspective.user.UserCartAction;
 import com.softserve.edu.perspective.user.UserSearchMode;
 import com.softserve.edu.service.*;
+import com.softserve.edu.validator.SearchValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,15 +71,21 @@ public class SearchController {
     }
 
     @RequestMapping("/filterByBrandAndPrice")
-    public String getByBrandAndPrice(@RequestParam(value = "brandName")
-                                             String brandName,
-                                     @RequestParam("price") Integer price,
+    public String getByBrandAndPrice(@ModelAttribute("tempData")                                     TransitSearchByBrandAndPriceData tempData,
+                                     BindingResult bindingResult,
                                      Model model) {
+        SearchValidator inputValidator = new SearchValidator();
+
+        inputValidator.validate(tempData, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return new TableViewController(serviceFactory).getOffers(model);
+        }
         List<Offer> offers = offerService.getAllOffersByBrandAndPriceFilter
-                (brandName, price);
+                (tempData.getBrandName(), Integer.valueOf(tempData.getMaxPrice()));
 
         model.addAttribute("offers", offers);
-        model.addAttribute("searchName", brandName);
-        return "ShowFilteredOrders";
+        model.addAttribute("searchName", tempData.getBrandName());
+        return "/ShowFilteredOffers";
     }
 }

@@ -50,7 +50,7 @@ public class OfferDAOImpl extends ElementDAOImpl<Offer> implements OfferDAO {
         Session session = sessionFactory.getCurrentSession();
         List<Offer> allElements = new ArrayList<>();
         Query query = session.createQuery("from Offer offer where offer" +
-                ".perfume.brand.name=:brandName and offer.pricePerMl<:price");
+                ".perfume.brand.name=:brandName and offer.pricePerMl<=:price");
         query.setParameter("brandName", brandName);
         query.setParameter("price", price);
 

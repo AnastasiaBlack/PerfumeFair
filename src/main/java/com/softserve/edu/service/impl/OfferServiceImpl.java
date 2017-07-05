@@ -61,4 +61,11 @@ public class OfferServiceImpl implements OfferService {
     public List<Offer> getAllOffersByBrandFilter(String brandName) {
         return offerDAO.getAllOffersByBrandFilter(brandName);
     }
+
+    @Override
+    public List<Offer> getAllOffersByBrandAndPriceFilter(String brandName,
+                                                         int price) {
+        return offerDAO.getAllOffersByBrandAndPriceFilter(brandName,price);
+    }
+
 }

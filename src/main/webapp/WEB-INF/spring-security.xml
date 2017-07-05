@@ -18,7 +18,10 @@
         <intercept-url pattern="deleteSaleFromCart*" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
         <intercept-url pattern="/deleteSaleFromCart" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
         <intercept-url pattern="/homepage" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
-        <intercept-url pattern="/ShowFilteredOffers" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
+        <intercept-url pattern="/WEB-INF/views/ShowFilteredOffers.jsp" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
+        <intercept-url pattern="/filterByBrandAndPrice" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
+        <intercept-url pattern="/addNewOffer" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/ShowAllOrders" access="hasRole('ROLE_ADMIN')" />
 
         <!--hasRole('ANONYMOUS')-->
 

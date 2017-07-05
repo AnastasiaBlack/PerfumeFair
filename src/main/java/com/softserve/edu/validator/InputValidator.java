@@ -7,7 +7,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 /**
- * Validator for User
+ * Validator for new Offer input data
  */
 @Component
 public class InputValidator implements Validator{
@@ -30,7 +30,12 @@ public class InputValidator implements Validator{
 //            errors.rejectValue("password", "Size.userForm.password");
 //        }
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "price", "Required");
+        if(!transitOffer.getPrice().matches("\\d*")){
+            errors.rejectValue("price","NumberRequired");
+        }
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "volumeForSale", "Required");
-
+        if(!transitOffer.getVolumeForSale().matches("\\d*")){
+            errors.rejectValue("volumeForSale","NumberRequired");
+        }
     }
 }

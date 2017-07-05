@@ -40,22 +40,6 @@
 <header>
     <h1>Perfume Fair</h1>
     <ul class="hr">
-        <li><a href="/homepage">
-            <button class="menuButton">Home</button>
-        </a></li>
-        <li><a href="/brands">
-            <button class="menuButton">All Brands</button>
-        </a></li>
-        <li><a href="/offers">
-            <button class="menuButton">All Offers</button>
-        </a></li>
-        <li>
-            <security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
-                <a href="/sales">
-                    <button class="menuButton">Cart</button>
-                </a>
-            </security:authorize>
-        </li>
         <li>
             <security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
 
@@ -70,6 +54,28 @@
                 </c:if>
             </security:authorize>
         </li>
+        <li><a href="/homepage">
+            <button class="menuButton">Home</button>
+        </a></li>
+        <li><security:authorize access="hasRole('ROLE_ADMIN')">
+            <a href="/showOrders">
+                <button class="menuButton">Orders</button>
+            </a>
+        </security:authorize></li>
+        <li><a href="/brands">
+            <button class="menuButton">All Brands</button>
+        </a></li>
+        <li><a href="/offers">
+            <button class="menuButton">All Offers</button>
+        </a></li>
+        <li>
+            <security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
+                <a href="/sales">
+                    <button class="menuButton">Cart</button>
+                </a>
+            </security:authorize>
+        </li>
+
         <li><form:form action="/search">
             <input class="search" type="search" placeholder="Пошук за назвою парфуму" name="searchString">
         </form:form></li>

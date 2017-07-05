@@ -1,5 +1,6 @@
 package com.softserve.edu.controller;
 
+import com.softserve.edu.controller.auxiliary.TransitSearchByBrandAndPriceData;
 import com.softserve.edu.entity.Brand;
 import com.softserve.edu.entity.Cart;
 import com.softserve.edu.entity.Offer;
@@ -47,6 +48,7 @@ public class TableViewController {
 
     @RequestMapping("/offers")
     public String getOffers(Model model) {
+        model.addAttribute("tempData", new TransitSearchByBrandAndPriceData());
         List<Offer> allOffers = offerService.getAllOffers();
         allOffers.sort(Comparator.comparingInt(Offer::getPricePerMl));
         model.addAttribute("offers", allOffers);
