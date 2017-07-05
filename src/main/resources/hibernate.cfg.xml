@@ -14,18 +14,13 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">1111</property>
         <property name="hibernate.connection.pool_size">100</property>
-        <!--<property name="show_sql">true</property>-->
-        <!--<property name="hibernate.connection.autocommit">true</property>-->
 
-        <!--&lt;!&ndash; Assume test is the database name &ndash;&gt;-->
-        <!--<property name="hibernate.connection.url">-->
-            <!--jdbc:mysql://localhost:3306/perfumedb-->
-        <!--</property>-->
         <!-- DB schema will be updated if needed -->
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <property name="hibernate.enable_lazy_load_no_trans">false</property>
-        <!--&lt;!&ndash; mappings for annotated classes &ndash;&gt;-->
+
+        <!--mappings for annotated classes-->
 
         <mapping class="com.softserve.edu.entity.Brand"/>
         <mapping class="com.softserve.edu.entity.Cart"/>
