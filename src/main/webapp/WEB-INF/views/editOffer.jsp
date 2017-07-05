@@ -15,14 +15,14 @@
 <body>
 <%@ include file="menu.jsp" %>
 <form:form action="/submitEditedOrder" method="post">
-<p>${title}:</p>
-<input type="text" name="perfumeName" placeholder="Perfume name"/>
+<p><center>${title}:</center></p>
+<input type="text" name="perfumeName" placeholder="${offer.perfume.name}"/>
 <br/>
-<input type="text" name="brandName" placeholder="Brand name"/>
+<input type="text" name="brandName" placeholder="${offer.perfume.brand.name}"/>
 <br/>
-<input type="number" name="price" placeholder="Price per Ml"/>
+<input type="number" name="price" placeholder="${offer.pricePerMl}"/>
 <br/>
-<input type="number" name="volumeForSale" placeholder="Volume for sale"/>
+<input type="number" name="volumeForSale" placeholder="${offer.volumeForSale}"/>
 <br/>
 <input type="hidden" name="id" value="${offer.id}"/>
 <button class="menuButton">Submit</button>
