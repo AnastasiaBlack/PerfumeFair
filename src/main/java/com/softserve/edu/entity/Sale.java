@@ -14,7 +14,7 @@ public class Sale {
     private int id;
     @Column(name = "volume_ordered_ml")
     private int volumeOrdered;
-    @OneToOne(optional = true, cascade = CascadeType.ALL)
+    @OneToOne(optional = true)
     private Offer offer;
 
     @ManyToOne(optional = true, fetch = FetchType.EAGER, cascade = CascadeType.MERGE)

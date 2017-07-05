@@ -160,4 +160,8 @@ public class UserCartAction {
     public static void setUserCart(Cart userCart) {
         UserCartAction.userCart = userCart;
     }
+
+    public void setOfferService(OfferService offerService) {
+       this.offerService=offerService;
+    }
 }

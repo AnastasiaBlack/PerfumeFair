@@ -27,6 +27,7 @@ public class UserCartActionTest {
         //Arrange
         MockitoAnnotations.initMocks(this);
         userCartAction = new UserCartAction(serviceFactory);
+        userCartAction.setOfferService(offerService);
         Offer offer = new Offer();
         offer.setVolumeForSale(40);
         Sale sale = new Sale();
