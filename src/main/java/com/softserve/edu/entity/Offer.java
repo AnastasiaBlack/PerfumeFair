@@ -76,4 +76,5 @@ public class Offer {
     public void setPerfume(Perfume perfume) {
         this.perfume = perfume;
     }
+
 }

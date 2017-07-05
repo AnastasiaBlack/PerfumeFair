@@ -49,8 +49,6 @@ public class OfferServiceImpl implements OfferService {
         List<Offer> allOffers = offerDAO.getAllElements();
         allOffers.sort(Comparator.comparingInt(Offer::getPricePerMl));
         return allOffers;
-
-
     }
 
     @Override
