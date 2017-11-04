@@ -84,6 +84,11 @@ public class SearchController {
         List<Offer> offers = offerService.getAllOffersByBrandAndPriceFilter
                 (tempData.getBrandName(), Integer.valueOf(tempData.getMaxPrice()));
 
+        if (offers.size() == 0) {
+            String message = "Жодних збігів не знайдено";
+            model.addAttribute("pageMessage", message);
+            return "stringMessage";
+        }
         model.addAttribute("offers", offers);
         model.addAttribute("searchName", tempData.getBrandName());
         return "/ShowFilteredOffers";
