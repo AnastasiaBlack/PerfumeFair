@@ -24,6 +24,13 @@ public class UserCartAction {
     private static Cart userCart = new Cart();
     private static User user = new User();
 
+    private MessageService emailMessageService;
+
+    @Autowired
+    public void setMessageService(MessageService messageService){
+        this.emailMessageService = messageService;
+    }
+
     @Autowired
     public UserCartAction(ServiceFactory serviceFactory) {
         this.userService = serviceFactory.getUserService();
@@ -126,6 +133,8 @@ public class UserCartAction {
         cart.getSales().clear();
         cartService.updateCart(cart);
 
+        String message = "Користувач " + user.getUsername() + ", " + user.getEmail() + " здійснив замовлення на сумму: " + newOrder.getTotalPrice();
+        emailMessageService.sendMessage("planet.of.translation@gmail.com", "Замовлення парфуму", message);
     }
 
     public void salesTransfer(Cart cart, SubmittedOrder newOrder) {

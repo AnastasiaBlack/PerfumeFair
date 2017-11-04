@@ -11,7 +11,7 @@ VALUES (NULL, 10, 50, 1), (NULL, 13, 30, 2), (NULL, 20, 50, 3), (NULL, 11, 70, 4
 
 -- Insert log-in data
 
-INSERT INTO users VALUES (1, 'ana', 'some phone number', 'some e-mail', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG');
+INSERT INTO users VALUES (1, 'ana', '+3807777777777', 'planet.of.translation@gmail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG');
 
 INSERT INTO roles VALUES (1, 'ROLE_USER');
 INSERT INTO roles VALUES (2, 'ROLE_ADMIN');

@@ -28,4 +28,22 @@ http://www.springframework.org/schema/context/spring-context.xsd http://www.spri
                   value="org.springframework.web.servlet.view.JstlView"/>
     </bean>
 
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com" />
+        <property name="port" value="578" />
+        <property name="username" value="planet.of.translation@gmail.com" />
+        <property name="password" value="proffessor2991" />
+        <property name="javaMailProperties">
+            <props>
+                <!-- Use SMTP transport protocol -->
+                <prop key="mail.transport.protocol">smtp</prop>
+                <!-- Use SMTP-AUTH to authenticate to SMTP server -->
+                <prop key="mail.smtp.auth">true</prop>
+                <!-- Use TLS to encrypt communication with SMTP server -->
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+    </bean>
+
 </beans>
